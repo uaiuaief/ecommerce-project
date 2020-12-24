@@ -2,20 +2,62 @@ import { Component } from "react";
 
 
 class UserProfileForm extends Component {
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = props.form_data;
+    }
 
+    async componentDidMount(){
+        console.log(this.props);
+    }
+
+    async submitUserProfileForm(e) {
+        e.preventDefault();
+        const token = localStorage.getItem("Token");
+        const user_id = localStorage.getItem("user_id");
+        let URL = `http://localhost:8000/users/${user_id}/`;
+        let res = await fetch(URL, { headers: { 'Authorization': `Token ${token}` } });
+        let data = await res.json();
+        URL = data.profile
+
+        let body = ""
+        body += `full_name=${this.state.full_name}`
+        body += `&gender=${this.state.gender}`
+
+        fetch(URL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Token ${token}`
+            },
+            body: body
+        }).then(res => res.json().then(data => {
+            console.log(data);
+        }))
+    }
+
+
+    render() {
         return (
             <div>
-                <form name="user-profile" className="user-profile-form">
+                <form onSubmit={e => this.submitUserProfileForm(e)}
+                    name="user-profile"
+                    className="user-profile-form">
                     <div>
                         <label htmlFor="nome">Nome completo</label>
                         <input id="nome"
-                            required
-                            pattern="^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$"></input>
+                            onChange={e => this.setState({ full_name: e.target.value })}
+                            maxLength="60"
+                            value={this.state.full_name}
+                            required ></input>
                     </div>
                     <div>
                         <label htmlFor="sexo">Sexo</label>
-                        <select id="sexo" type="selection">
+                        <select onChange={e => this.setState({ gender: e.target.value })}
+                            value={this.state.gender}
+                            required
+                            id="sexo"
+                            type="selection">
                             <option>Masculino</option>
                             <option>Feminino</option>
                         </select>
@@ -29,17 +71,10 @@ class UserProfileForm extends Component {
 
 
 class ChangeAddressForm extends Component {
-    state = {
-        cep: '',
-        address: '',
-        house_number: '',
-        state: '',
-        city: '',
-        district: '',
-        reference: '',
-        complement: '',
+    constructor(props) {
+        super(props);
+        this.state = props.form_data;
     }
-
     async searchCode() {
         let match = /\d{5}-\d{3}/.test(this.state.cep);
         if (!match) return;
@@ -71,13 +106,13 @@ class ChangeAddressForm extends Component {
         console.log(token);
         const user_id = localStorage.getItem("user_id");
         let URL = `http://localhost:8000/users/${user_id}/`;
-        let res = await fetch(URL, {headers: {'Authorization': `Token ${token}`}});
+        let res = await fetch(URL, { headers: { 'Authorization': `Token ${token}` } });
         let data = await res.json();
         URL = data.profile
-                
+
         let body = ""
         body += `state=${this.state.state}`
-        body += `&cep=${this.state.cep}`
+        body += `&zip_code=${this.state.zip_code}`
         body += `&address=${this.state.address}`
         body += `&house_number=${this.state.house_number}`
         body += `&city=${this.state.city}`
@@ -99,15 +134,17 @@ class ChangeAddressForm extends Component {
 
 
     render() {
+        console.log(this.state);
         return (
             <div>
                 <form onSubmit={e => this.submitAddressForm(e)} name="address" className="change-address-form">
                     <div className="small-input">
                         <label htmlFor="cep">Insira o CEP</label>
                         <input id="cep"
-                            onChange={e => this.setState({ cep: e.target.value })}
+                            onChange={e => this.setState({ zip_code: e.target.value })}
                             maxLength="9"
                             pattern="\d{5}-\d{3}"
+                            value={this.state.zip_code}
                             placeholder="00000-000">
                         </input>
                         <button onClick={() => this.searchCode()} type="button">Consultar meu CEP</button>
@@ -127,6 +164,7 @@ class ChangeAddressForm extends Component {
                             <label htmlFor="número">Número</label>
                             <input id="número"
                                 maxLength="20"
+                                value={this.state.house_number}
                                 onChange={e => this.setState({ house_number: e.target.value })}
                                 required >
                             </input>
@@ -137,6 +175,7 @@ class ChangeAddressForm extends Component {
                         <label htmlFor="complemento">Complemento</label>
                         <input id="complemento"
                             onChange={e => this.setState({ complement: e.target.value })}
+                            value={this.state.complement}
                             maxLength="120">
                         </input>
                     </div>
@@ -155,6 +194,7 @@ class ChangeAddressForm extends Component {
                             <label htmlFor="referencia">Referência</label>
                             <input id="referencia"
                                 onChange={e => this.setState({ reference: e.target.value })}
+                                value={this.state.reference}
                                 maxLength="120">
                             </input>
                         </div>
@@ -215,21 +255,67 @@ class ChangePasswordForm extends Component {
 
 
 class ChangeEmailForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = props.form_data;
+    }
+
+    async submitEmailForm(e) {
+        e.preventDefault();
+        if (this.state.new_email !== this.state.confirm_email) {
+            alert("Campos não são iguals")
+            return
+        }
+
+        const token = localStorage.getItem("Token");
+        const user_id = localStorage.getItem("user_id");
+        let URL = `http://localhost:8000/users/${user_id}/`;
+
+        let body = ""
+        body += `email=${this.state.new_email}`
+
+        fetch(URL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Token ${token}`
+            },
+            body: body
+        }).then(res => res.json().then(data => {
+            console.log(data);
+        }))
+    }
+
+
     render() {
+        console.log(this.state);
         return (
             <div>
-                <form>
+                <form onSubmit={e => this.submitEmailForm(e)}>
                     <div>
                         <label htmlFor="current-email">E-mail atual</label>
-                        <input id="current-email" type="email" placeholder=""></input>
+                        <input id="current-email"
+                            // onChange={e => this.setState({email: e.target.value})}
+                            readOnly
+                            value={this.state.email}
+                            type="email"
+                            placeholder=""></input>
                     </div>
                     <div>
                         <label htmlFor="new-email">Novo e-mail</label>
-                        <input id="new-email" type="email" placeholder=""></input>
+                        <input id="new-email"
+                            onChange={e => this.setState({ new_email: e.target.value })}
+                            required
+                            type="email"
+                            placeholder=""></input>
                     </div>
                     <div>
                         <label htmlFor="confirm-new-email">Confirme o novo e-mail</label>
-                        <input id="confirm-new-email" type="email" placeholder=""></input>
+                        <input id="confirm-new-email"
+                            onChange={e => this.setState({ confirm_email: e.target.value })}
+                            required
+                            type="email"
+                            placeholder=""></input>
                     </div>
                     <button type="submit">Salvar Alterações</button>
                 </form>
@@ -242,19 +328,65 @@ class ChangeEmailForm extends Component {
 
 class ProfilePage extends Component {
     state = {
-        form: 'address',
+        current_form: '',
+
+        // FORM DATA 
+        user_profile_form: {
+            full_name: "",
+            gender: ""
+        },
+        email_form: {
+            email: ""
+        },
+        address_form: {
+            zip_code: "",
+            address: "",
+            house_number: "",
+            state: "",
+            city: "",
+            district: "",
+            reference: "",
+            complement: "",
+        },
+    }
+
+    async componentDidMount() {
+        const token = localStorage.getItem("Token");
+        const user_id = localStorage.getItem("user_id");
+        let USER_URL = `http://localhost:8000/users/${user_id}/`;
+        let user_res = await fetch(USER_URL, { headers: { 'Authorization': `Token ${token}` } });
+        let user_data = await user_res.json();
+        let { email } = user_data;
+
+        let PROFILE_URL = user_data.profile;
+        let profile_res = await fetch(PROFILE_URL, { headers: { 'Authorization': `Token ${token}` } });
+        let profile_data = await profile_res.json();
+
+        let { full_name, gender, url, user, ...full_address } = profile_data;
+
+        this.setState({
+            current_form: 'user',
+            email_form: {
+                email: email
+            },
+            user_profile_form: {
+                full_name: full_name,
+                gender: gender,
+            },
+            address_form: full_address
+        })
     }
 
     renderForm() {
-        switch (this.state.form) {
+        switch (this.state.current_form) {
             case 'user':
                 return (
-                    <UserProfileForm />
+                    <UserProfileForm form_data={this.state.user_profile_form} />
                 )
 
             case 'address':
                 return (
-                    <ChangeAddressForm />
+                    <ChangeAddressForm form_data={this.state.address_form} />
                 )
 
             case 'password':
@@ -264,7 +396,7 @@ class ProfilePage extends Component {
 
             case 'email':
                 return (
-                    <ChangeEmailForm />
+                    <ChangeEmailForm form_data={this.state.email_form}/>
                 )
             default:
                 break;
@@ -279,17 +411,17 @@ class ProfilePage extends Component {
                 <h1>{localStorage.getItem('username')}</h1>
                 <div className="profile-tabs">
                     <button
-                        className={this.state.form === 'user' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ form: 'user' })}>Dados Pessoais</button>
+                        className={this.state.current_form === 'user' ? "highlighted-tab" : ""}
+                        onClick={e => this.setState({ current_form: 'user' })}>Dados Pessoais</button>
                     <button
-                        className={this.state.form === 'address' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ form: 'address' })}>Alterar Endereço</button>
+                        className={this.state.current_form === 'address' ? "highlighted-tab" : ""}
+                        onClick={e => this.setState({ current_form: 'address' })}>Alterar Endereço</button>
                     <button
-                        className={this.state.form === 'password' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ form: 'password' })}>Alterar Senha</button>
+                        className={this.state.current_form === 'password' ? "highlighted-tab" : ""}
+                        onClick={e => this.setState({ current_form: 'password' })}>Alterar Senha</button>
                     <button
-                        className={this.state.form === 'email' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ form: 'email' })}>Alterar E-mail</button>
+                        className={this.state.current_form === 'email' ? "highlighted-tab" : ""}
+                        onClick={e => this.setState({ current_form: 'email' })}>Alterar E-mail</button>
                 </div>
                 {this.renderForm()}
             </section>

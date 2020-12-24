@@ -6,6 +6,9 @@ from rest_framework.authtoken.models import Token
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    username = serializers.CharField(read_only=True)
+    profile = serializers.HyperlinkedRelatedField(read_only=True, view_name='profile-detail')
+
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'profile']
@@ -13,11 +16,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+    #user = UserSerializer(read_only=True)
+    user = serializers.HyperlinkedRelatedField(read_only=True, view_name='user-detail')
 
     class Meta:
         model = Profile
-        #fields = "__all__"
-        exclude = ["user"]
+        fields = "__all__"
+        #exclude = ["user"]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
