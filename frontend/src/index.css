@@ -5,7 +5,10 @@
 
 :root {
     --primary-color:#6d0b0b9f;
-    --secondary-color: rgb(33, 33, 224);
+    --primary-color-hover:#9922229f;
+    --secondary-color: rgb(13, 13, 97);
+    --secondary-color-hover: rgb(63, 63, 235);
+
 }
 
 * {
@@ -21,7 +24,7 @@
 body {
     position: relative;
     text-align: center;
-    background-color: #222333;
+    background-color: #ddd;
 
 }
 
@@ -601,12 +604,11 @@ p.product-price {
     align-items: center;
     width: 50%;
     height: 500px;
-    border: 1px solid #777;
 }
 
 .image-container > img{
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
@@ -614,6 +616,21 @@ p.product-price {
     padding-top: 1em;
     padding-left: 1em;
 
+}
+
+.description button {
+    margin-top: 1em;
+    color: white;
+    background-color: var(--primary-color);
+    padding: .6em 0.8em;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 4px;
+}
+
+.description button:hover {
+    cursor: pointer;
+    background-color: var(--primary-color-hover);
 }
 /* END PRODUCT DETAIL */
 
@@ -644,6 +661,8 @@ p.product-price {
 }
 
 .cart-items > .item {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     height: fit-content;
     margin: auto;
@@ -658,11 +677,18 @@ p.product-price {
     /* background-color: #c3c3c3; */
     align-self: flex-start;
     width: 350px;
-    height: 200px;
+    min-height: 200px;
+    text-align: left;
+}
+
+.item-description p {
+    font-size: .9em;
+    line-height: 1.5em;
+    padding: 0em 1em;
 }
 
 .item-title {
-    font-size: 1.0em;
+    font-size: 1.2em;
     /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     font-family: 'Andika New Basic', sans-serif;
     font-weight: 500;
@@ -682,7 +708,8 @@ p.product-price {
 }
 
 .cart-controls-container{
-    align-self: flex-start;
+    /* align-self: flex-start; */
+    align-self: center;
 }
 
 .cart-item-controls p{
@@ -701,6 +728,10 @@ p.product-price {
     text-decoration: underline; 
 }
 
+.remove-product-button:hover {
+    color: red;
+}
+
 p.info-text {
     font-size: 1.3em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -708,7 +739,9 @@ p.info-text {
 }
 
 .price-container {
-    align-self: flex-start;
+    /* align-self: flex-start; */
+    min-width: 170px;
+    align-self: center;
     margin-left: 4em;
 }
 

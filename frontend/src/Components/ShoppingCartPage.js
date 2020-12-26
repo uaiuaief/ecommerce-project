@@ -1,4 +1,5 @@
 import { Component } from "react"
+import { Link } from "react-router-dom";
 
 
 class CartItem extends Component {
@@ -55,7 +56,7 @@ class CartItem extends Component {
     render() {
         const { product } = this.props
         return (
-            <div className="item flex">
+            <div className="item">
                 <div className="flex ">
                     <div className="cart-image-wrapper">
                         <img src={product.image} alt='' />
@@ -69,8 +70,10 @@ class CartItem extends Component {
                         <p>
                             {product.description}
                         </p>
+                        <p>
+                            {/* R$ {product.price / 100},00 */}
+                        </p>
 
-                        R$ {product.price / 100},00
                     </div>
                 </div>
                 <div className="cart-controls-container">
@@ -90,8 +93,8 @@ class CartItem extends Component {
                     <small>Unidades</small>
                 </div>
                 <div className="price-container">
-                    <div className="light-container">
-                        Total
+                    <div className="">
+                        Total:
                     </div>
                     <div className="price">
                         R$ {product.price * product.amount / 100},00
@@ -117,10 +120,46 @@ class ShoppingCartPage extends Component {
         const [appState, setAppState] = this.props.appState
         const cart_items = appState.cart_items
 
+        let total_price = cart_items.length
+            ? cart_items.map(item => item.price * item.amount / 100).reduce((a, b) => a + b)
+            : 0;
+
         return (
             <div className="shopping-cart-section">
                 <h1 className="page-title">Produtos adicionados ao carrinho</h1>
-                <div className="cart-items" >
+
+                {cart_items.length
+                    ?
+                    <>
+                        <div className="cart-items" >
+                            {cart_items.map(item => {
+                                return (
+                                    <CartItem
+                                        addToCart={this.props.addToCart}
+                                        product={item}
+                                        appState={this.props.appState} />
+
+                                )
+                            })
+                            }
+
+                        </div>
+                        <div style={{ fontSize: "2em", padding: "1em 1em" }}>
+                            Total dos produtos: R$ {total_price},00
+                        </div>
+                        <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
+                        <button>Finalizar Compra</button>
+                    </>
+                    :
+                    <>
+                        <div style={{height: "300px", marginTop:"3em"}}>
+                            <h1> Seu carrinho está vazio </h1>
+                            <Link to="/">Ir para produtos</Link>
+                        </div>
+                    </>
+                }
+
+                {/* <div className="cart-items" >
                     {cart_items.map(item => {
                         return (
                             <CartItem
@@ -132,10 +171,13 @@ class ShoppingCartPage extends Component {
                     })
                     }
 
-                    <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
-                    <button>Finalizar Compra</button>
                 </div>
-            </div>
+                <div style={{ fontSize: "2em", padding: "1em 1em" }}>
+                    Total dos produtos: R$ {total_price},00
+                </div>
+                <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
+                <button>Finalizar Compra</button> */}
+            </div >
         )
     }
 

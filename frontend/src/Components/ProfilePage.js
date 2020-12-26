@@ -4,21 +4,13 @@ import { Component } from "react";
 class UserProfileForm extends Component {
     constructor(props) {
         super(props);
-        this.state = props.form_data;
-    }
-
-    async componentDidMount(){
-        console.log(this.props);
+        this.state = { ...props.form_data };
     }
 
     async submitUserProfileForm(e) {
         e.preventDefault();
         const token = localStorage.getItem("Token");
-        const user_id = localStorage.getItem("user_id");
-        let URL = `http://localhost:8000/users/${user_id}/`;
-        let res = await fetch(URL, { headers: { 'Authorization': `Token ${token}` } });
-        let data = await res.json();
-        URL = data.profile
+        let URL = this.props.profile_url
 
         let body = ""
         body += `full_name=${this.state.full_name}`
@@ -32,7 +24,8 @@ class UserProfileForm extends Component {
             },
             body: body
         }).then(res => res.json().then(data => {
-            console.log(data);
+            this.props.fetchData()
+            alert('Seus dados foram atualizados com sucesso')
         }))
     }
 
@@ -94,21 +87,15 @@ class ChangeAddressForm extends Component {
             })
         }
         else {
-            alert("CEP não encontrado")
+            alert('CEP não encontrado')
         }
-        // console.log(data);
 
     }
 
     async submitAddressForm(e) {
         e.preventDefault();
         const token = localStorage.getItem("Token");
-        console.log(token);
-        const user_id = localStorage.getItem("user_id");
-        let URL = `http://localhost:8000/users/${user_id}/`;
-        let res = await fetch(URL, { headers: { 'Authorization': `Token ${token}` } });
-        let data = await res.json();
-        URL = data.profile
+        let URL = this.props.profile_url;
 
         let body = ""
         body += `state=${this.state.state}`
@@ -128,13 +115,13 @@ class ChangeAddressForm extends Component {
             },
             body: body
         }).then(res => res.json().then(data => {
-            console.log(res);
+            this.props.fetchData('address')
+            alert('Seus dados foram atualizados com sucesso')
         }))
     }
 
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <form onSubmit={e => this.submitAddressForm(e)} name="address" className="change-address-form">
@@ -246,7 +233,7 @@ class ChangePasswordForm extends Component {
                         <label htmlFor="confirm-new-password">Confirme a nova senha</label>
                         <input id="confirm-new-password" type="password" placeholder=""></input>
                     </div>
-                    <button type="submit">Salvar alterações</button>
+                    <button type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )
@@ -263,7 +250,7 @@ class ChangeEmailForm extends Component {
     async submitEmailForm(e) {
         e.preventDefault();
         if (this.state.new_email !== this.state.confirm_email) {
-            alert("Campos não são iguals")
+            alert("Campos não são iguais")
             return
         }
 
@@ -282,13 +269,13 @@ class ChangeEmailForm extends Component {
             },
             body: body
         }).then(res => res.json().then(data => {
-            console.log(data);
+            this.props.fetchData('email')
+            alert('Seus dados foram alterados com sucesso')
         }))
     }
 
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <form onSubmit={e => this.submitEmailForm(e)}>
@@ -350,7 +337,7 @@ class ProfilePage extends Component {
         },
     }
 
-    async componentDidMount() {
+    async fetchData(current_form="user") {
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
         let USER_URL = `http://localhost:8000/users/${user_id}/`;
@@ -365,7 +352,8 @@ class ProfilePage extends Component {
         let { full_name, gender, url, user, ...full_address } = profile_data;
 
         this.setState({
-            current_form: 'user',
+            current_form: current_form,
+            profile_url: PROFILE_URL,
             email_form: {
                 email: email
             },
@@ -377,26 +365,41 @@ class ProfilePage extends Component {
         })
     }
 
+    async componentDidMount() {
+        this.fetchData();
+    }
+
     renderForm() {
         switch (this.state.current_form) {
             case 'user':
                 return (
-                    <UserProfileForm form_data={this.state.user_profile_form} />
+                    <UserProfileForm
+                        profile_url={this.state.profile_url}
+                        fetchData={(form) => this.fetchData(form)}
+                        form_data={this.state.user_profile_form} />
                 )
 
             case 'address':
                 return (
-                    <ChangeAddressForm form_data={this.state.address_form} />
+                    <ChangeAddressForm
+                        profile_url={this.state.profile_url}
+                        fetchData={(form) => this.fetchData(form)}
+                        form_data={this.state.address_form} />
                 )
 
             case 'password':
                 return (
-                    <ChangePasswordForm />
+                    <ChangePasswordForm
+                        fetchData={(form) => this.fetchData(form)}
+                     />
                 )
 
             case 'email':
                 return (
-                    <ChangeEmailForm form_data={this.state.email_form}/>
+                    <ChangeEmailForm
+                        profile_url={this.state.profile_url}
+                        fetchData={(form) => this.fetchData(form)}
+                        form_data={this.state.email_form} />
                 )
             default:
                 break;
