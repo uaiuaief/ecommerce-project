@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 
 class CartItem extends Component {
@@ -148,35 +148,26 @@ class ShoppingCartPage extends Component {
                             Total dos produtos: R$ {total_price},00
                         </div>
                         <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
-                        <button>Finalizar Compra</button>
+                        {localStorage.getItem('user_id') 
+                        ?
+                            <>
+                                <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link>
+                            </>
+                        :
+                            <>
+                                <Link to="/login">Finalizar compra</Link>
+                            </>
+                        }
+                        {/* <button onClick={e => this.finishBuying(e)}>Finalizar Compra</button> */}
                     </>
                     :
                     <>
-                        <div style={{height: "300px", marginTop:"3em"}}>
+                        <div style={{ height: "300px", marginTop: "3em" }}>
                             <h1> Seu carrinho está vazio </h1>
                             <Link to="/">Ir para produtos</Link>
                         </div>
                     </>
                 }
-
-                {/* <div className="cart-items" >
-                    {cart_items.map(item => {
-                        return (
-                            <CartItem
-                                addToCart={this.props.addToCart}
-                                product={item}
-                                appState={this.props.appState} />
-
-                        )
-                    })
-                    }
-
-                </div>
-                <div style={{ fontSize: "2em", padding: "1em 1em" }}>
-                    Total dos produtos: R$ {total_price},00
-                </div>
-                <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
-                <button>Finalizar Compra</button> */}
             </div >
         )
     }

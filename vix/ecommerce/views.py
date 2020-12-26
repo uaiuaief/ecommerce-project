@@ -19,34 +19,66 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        print(self.request.user.password)
+        if self.request.user.is_superuser:
+            return User.objects.all().order_by('-date_joined')
+        else:
+            return User.objects.filter(id=self.request.user.id)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action in ['list', 'update', 'retrieve']:
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+
 
 class ProfileViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows user profiles to be viewed or edited.
     """
-    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
-    #permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Profile.objects.all()
+        else:
+            return Profile.objects.filter(user=self.request.user.id)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action in ['list', 'update', 'retrieve']:
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAdminUser]
+        return [permission() for permission in permission_classes]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+#class GroupViewSet(viewsets.ModelViewSet):
+#    """
+#    API endpoint that allows groups to be viewed or edited.
+#    """
+#    queryset = Group.objects.all()
+#    serializer_class = GroupSerializer
+#    permission_classes = [permissions.IsAuthenticated]
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows products to be viewed or edited.
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.AllowAny]
 
-    image = ImageField(write_only=True)
+    #image = ImageField(write_only=True)
     
 

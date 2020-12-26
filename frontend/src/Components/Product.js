@@ -11,8 +11,8 @@ class Product extends Component {
             <div className="product">
                 <div className="overlay">
                     {/* <h1>Produto {this.props.preço}</h1> */}
-                    <h1>Adicionar ao Carrinho</h1>
-                    <img src="images/shopping-cart-icon.svg"/>
+                    <h1>Ver Produto</h1>
+                    {/* <img src="images/shopping-cart-icon.svg"/> */}
                 </div>
                 <div className="image-wrapper">
                     <img src={this.props.image} />

@@ -24,8 +24,12 @@ class UserProfileForm extends Component {
             },
             body: body
         }).then(res => res.json().then(data => {
+            console.log(res);
             this.props.fetchData()
-            alert('Seus dados foram atualizados com sucesso')
+            let response_status_type = res.status.toString().charAt(0);
+            if (response_status_type == '2') {
+                alert('Seus dados foram atualizados com sucesso')
+            }
         }))
     }
 
@@ -337,7 +341,7 @@ class ProfilePage extends Component {
         },
     }
 
-    async fetchData(current_form="user") {
+    async fetchData(current_form = "user") {
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
         let USER_URL = `http://localhost:8000/users/${user_id}/`;
@@ -391,7 +395,7 @@ class ProfilePage extends Component {
                 return (
                     <ChangePasswordForm
                         fetchData={(form) => this.fetchData(form)}
-                     />
+                    />
                 )
 
             case 'email':

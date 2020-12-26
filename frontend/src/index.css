@@ -435,7 +435,8 @@ p.product-price {
     font-size: x-large;
     color: white;
     text-align: center;
-    padding-top: 40%;
+    margin-top: 60%;
+    /* padding-top: 50%; */
 }
 
 /* END SHOWCASE */

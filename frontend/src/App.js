@@ -19,8 +19,6 @@ import { Component } from 'react';
 let local_cart = JSON.parse(localStorage.getItem('cart'));
 let local_cart_amount = localStorage.getItem('cart_amount');
 
-console.log(local_cart);
-
 class App extends Component {
   state = {
     logged_in: false,
