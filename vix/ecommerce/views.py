@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, Group
-from .models import Product
+from .models import Product, PurchaseOrder
 from users.models import Profile
 from django.contrib.auth import authenticate, login
 
 from rest_framework import viewsets, permissions, renderers
-from .serializers import UserSerializer, GroupSerializer, ProductSerializer, ProfileSerializer
+from .serializers import (UserSerializer, GroupSerializer, 
+        ProductSerializer, ProfileSerializer, PurchaseOrderSerializer)
 
 from rest_framework.fields import ImageField
 
@@ -78,7 +79,36 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     #permission_classes = [permissions.AllowAny]
-
     #image = ImageField(write_only=True)
     
+
+class PurchaseOrderViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows purchase orders to be viewed or edited.
+    """
+    queryset = PurchaseOrder.objects.all()
+    serializer_class = PurchaseOrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return PurchaseOrder.objects.all()
+        else:
+            return PurchaseOrder.objects.filter(user=self.request.user.id)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action in ['list', 'create', 'retrieve']:
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+
+
+
+
+
 

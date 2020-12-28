@@ -1,5 +1,6 @@
 from django.db import models
 from PIL import Image
+from django.contrib.auth.models import User 
 
 
 class Product(models.Model):
@@ -39,4 +40,40 @@ class Product(models.Model):
         else:
             img.save(self.image.path)
       
+
+class PurchaseOrder(models.Model):
+    STATUS_OPTIONS = [
+            (1, 'waiting payment'),
+            (2, 'payment confirmed'),
+            (3, 'transaction complete'),
+            (4, 'purchase cancelled'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+    status = models.CharField(max_length=20, choices=STATUS_OPTIONS, default='waiting payment')
+    value = models.IntegerField()
+    date = models.DateField(auto_now_add=True);
+
+    def __str__(self):
+        return f'{self.user} purchase, value: {self.value}, status: {self.status}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
