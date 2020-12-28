@@ -5,7 +5,7 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        redirect: null
+        redirect: null,
     }
 
     componentDidMount() {
@@ -22,30 +22,31 @@ class Login extends Component {
         e.preventDefault();
         fetch("http://127.0.0.1:8000/api-token-auth/", {
             method: 'POST',
-            // credentials: 'include',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cookie': "SameSite=None",
             },
-            // body: `csrfmiddlewaretoken=${cookie}&email=${this.state.email}&password=${this.state.password}`
-            // body: `csrfmiddlewaretoken=koDi8M7AEYaSCjXkp3NTJD3HGDx8DMg0yvtcXseuVKU1sQWr49Ket5JG1HDfip9a&email=${this.state.email}&password=${this.state.password}&sessionid=gmdz6848cgheuycexab5sho7lku6chro`
             body: `username=${this.state.email}&password=${this.state.password}`
         }).then(res => res.json().then(data => {
             if (data.token) {
-                console.log(data.token);
                 localStorage.setItem('Token', data.token)
                 localStorage.setItem('username', data.username)
                 localStorage.setItem('user_id', data.user_id)
+
+
+                const location = this.props.location;
+                // let redirect = location.state ? location.state.next_page + data.user_id : '/';
+                let redirect = location.state ? location.state.next_page : '/';
+
                 this.setState({
-                    redirect: '/'
+                    redirect: redirect,
+                    // redirect: next_page ? next_page : '/'
                 })
                 this.props.setAppState({ logged_in: true })
             }
             else {
                 console.log('invalid credentials');
             }
-            //window.location.replace('http://localhost:8000/login/');
-
         }))
     }
 

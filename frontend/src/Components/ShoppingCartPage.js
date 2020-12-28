@@ -91,6 +91,7 @@ class CartItem extends Component {
                         <button className="increase control-button button" onClick={() => this.increase()}>+</button>
                     </div>
                     <small>Unidades</small>
+                    <div>remover produto</div>
                 </div>
                 <div className="price-container">
                     <div className="">
@@ -115,6 +116,7 @@ class ShoppingCartPage extends Component {
         })
 
     }
+
 
     render() {
         const [appState, setAppState] = this.props.appState
@@ -148,14 +150,19 @@ class ShoppingCartPage extends Component {
                             Total dos produtos: R$ {total_price},00
                         </div>
                         <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
-                        {localStorage.getItem('user_id') 
-                        ?
+                        {localStorage.getItem('user_id')
+                            ?
                             <>
                                 <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link>
                             </>
-                        :
+                            :
                             <>
-                                <Link to="/login">Finalizar compra</Link>
+                                <Link to={{
+                                    pathname: "/login",
+                                    // state: { next_page: `/profile/` }
+                                    state: { next_page: `/shopping-cart` }
+                                }}>
+                                    Finalizar compra</Link>
                             </>
                         }
                         {/* <button onClick={e => this.finishBuying(e)}>Finalizar Compra</button> */}

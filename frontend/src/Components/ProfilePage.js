@@ -72,12 +72,16 @@ class ChangeAddressForm extends Component {
         super(props);
         this.state = props.form_data;
     }
+
     async searchCode() {
-        let match = /\d{5}-\d{3}/.test(this.state.cep);
-        if (!match) return;
+        let match = /\d{5}-\d{3}/.test(this.state.zip_code);
+        if (!match){
+            alert('Digite o CEP corretamente')
+            return
+        }
 
         // const URL = `https://ws.apicep.com/cep/${this.state.cep}.json`
-        const URL = `https://viacep.com.br/ws/${this.state.cep}/json/`
+        const URL = `https://viacep.com.br/ws/${this.state.zip_code}/json/`
 
         let res = await fetch(URL);
         let data = await res.json();
@@ -138,7 +142,7 @@ class ChangeAddressForm extends Component {
                             value={this.state.zip_code}
                             placeholder="00000-000">
                         </input>
-                        <button onClick={() => this.searchCode()} type="button">Consultar meu CEP</button>
+                        <button onClick={(e) => this.searchCode(e)} type="button">Consultar meu CEP</button>
                     </div>
 
                     <div className="field-group">
@@ -318,30 +322,56 @@ class ChangeEmailForm extends Component {
 
 
 class ProfilePage extends Component {
-    state = {
-        current_form: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            current_form: props.form ? props.form : '',
 
-        // FORM DATA 
-        user_profile_form: {
-            full_name: "",
-            gender: ""
-        },
-        email_form: {
-            email: ""
-        },
-        address_form: {
-            zip_code: "",
-            address: "",
-            house_number: "",
-            state: "",
-            city: "",
-            district: "",
-            reference: "",
-            complement: "",
-        },
+            // FORM DATA 
+            user_profile_form: {
+                full_name: "",
+                gender: ""
+            },
+            email_form: {
+                email: ""
+            },
+            address_form: {
+                zip_code: "",
+                address: "",
+                house_number: "",
+                state: "",
+                city: "",
+                district: "",
+                reference: "",
+                complement: "",
+            },
+
+        }
     }
+    // state = {
+    //     current_form: '',
 
-    async fetchData(current_form = "user") {
+    //     // FORM DATA 
+    //     user_profile_form: {
+    //         full_name: "",
+    //         gender: ""
+    //     },
+    //     email_form: {
+    //         email: ""
+    //     },
+    //     address_form: {
+    //         zip_code: "",
+    //         address: "",
+    //         house_number: "",
+    //         state: "",
+    //         city: "",
+    //         district: "",
+    //         reference: "",
+    //         complement: "",
+    //     },
+    // }
+
+    async fetchData(current_form = 'user') {
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
         let USER_URL = `http://localhost:8000/users/${user_id}/`;
@@ -414,7 +444,7 @@ class ProfilePage extends Component {
     render() {
         return (
             <section className="profile-page">
-                <h1>Profile Page</h1>
+                <h1>Informações Pessoais</h1>
                 <h1>{localStorage.getItem('username')}</h1>
                 <div className="profile-tabs">
                     <button

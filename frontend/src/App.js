@@ -77,7 +77,9 @@ class App extends Component {
             )} />
 
             <Route path="/login" exact render={props => (
-              <Login logged_in={this.state.logged_in}
+              <Login
+                location={props.location}
+                logged_in={this.state.logged_in}
                 setAppState={list => this.setState(list)} />
             )} />
 

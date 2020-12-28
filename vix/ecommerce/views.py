@@ -20,7 +20,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        print(self.request.user.password)
+        #print(self.request.user.password)
         if self.request.user.is_superuser:
             return User.objects.all().order_by('-date_joined')
         else:
