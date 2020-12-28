@@ -49,8 +49,8 @@ class ProductDetail extends Component {
                             <h1>{this.state.product.name}</h1>
                             <p>{this.state.product.description}</p>
                             <h2>R$ {this.state.product.price / 100},00</h2>
+                            <Link className="add-button" to="/shopping-cart" onClick={e => this.addButton(e)}>Adicionar ao carrinho</Link>
                             {/* <button onClick={e => this.addButton(e)}>Adicionar ao carrinho</button> */}
-                            <Link to="/shopping-cart" onClick={e => this.addButton(e)}>Adicionar ao carrinho</Link>
                         </div>
                     </>
                     :

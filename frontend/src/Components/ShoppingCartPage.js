@@ -134,7 +134,7 @@ class ShoppingCartPage extends Component {
                     ?
                     <>
                         <div className="cart-items" >
-                            {cart_items.map(item => {
+                            {cart_items.reverse().map(item => {
                                 return (
                                     <CartItem
                                         addToCart={this.props.addToCart}
@@ -153,7 +153,8 @@ class ShoppingCartPage extends Component {
                         {localStorage.getItem('user_id')
                             ?
                             <>
-                                <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link>
+                                {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
+                                <Link to='/purchase_orders/1'>Finalizar compra</Link>
                             </>
                             :
                             <>

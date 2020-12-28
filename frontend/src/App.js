@@ -10,6 +10,8 @@ import { About } from './Components/About';
 import { ProductDetail } from './Components/ProductDetail';
 import { ProfilePage } from './Components/ProfilePage';
 import { ShoppingCartPage } from './Components/ShoppingCartPage';
+import { PurchaseOrders } from './Components/PurchaseOrders';
+
 import { CreateProductPage } from './Components/Admin/CreateProductPage';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -104,6 +106,8 @@ class App extends Component {
                 addToCart={(product) => this.addToCart(product)}
                 appState={appState} />
             )} />
+
+            <Route path="/purchase_orders/:user_id" exact component={PurchaseOrders} />
 
             <Route path="/create-product" exact component={CreateProductPage} />
 

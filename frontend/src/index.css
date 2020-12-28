@@ -638,7 +638,9 @@ p.product-price {
 
 }
 
-.description button {
+.description .add-button {
+    display: inline-block;
+    /* width: fit-content; */
     margin-top: 1em;
     color: white;
     background-color: var(--primary-color);
@@ -648,12 +650,12 @@ p.product-price {
     border-radius: 4px;
 }
 
-.description button:hover {
+.description .add-button:hover {
     cursor: pointer;
     background-color: var(--primary-color-hover);
 }
 
-.description button:active {
+.description .add-button:active {
     margin: 1.05em .15em;
     padding: .55em 0.65em;
 
