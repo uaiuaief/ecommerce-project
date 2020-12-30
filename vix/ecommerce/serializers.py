@@ -11,7 +11,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'profile', 'password']
+        fields = ['url', 'username', 'email', 'profile', 'purchases', 'password']
         #fields = "__all__"
 
 
@@ -39,11 +39,23 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class PurchaseOrderSerializer(serializers.HyperlinkedModelSerializer):
+class PurchaseOrderWriteSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = PurchaseOrder
         fields = "__all__"
+
+
+class PurchaseOrderReadSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    products = ProductSerializer(many=True)
+
+    class Meta:
+        model = PurchaseOrder
+        fields = "__all__"
     
+    
+   # def create(self, validated_data):
+   #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 

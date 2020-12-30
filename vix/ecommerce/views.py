@@ -7,7 +7,8 @@ from django.contrib.auth import authenticate, login
 
 from rest_framework import viewsets, permissions, renderers
 from .serializers import (UserSerializer, GroupSerializer, 
-        ProductSerializer, ProfileSerializer, PurchaseOrderSerializer)
+        ProductSerializer, ProfileSerializer, 
+        PurchaseOrderReadSerializer, PurchaseOrderWriteSerializer)
 
 from rest_framework.fields import ImageField
 
@@ -87,20 +88,35 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
     API endpoint that allows purchase orders to be viewed or edited.
     """
     queryset = PurchaseOrder.objects.all()
-    serializer_class = PurchaseOrderSerializer
+#    serializer_class = PurchaseOrderSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         if self.request.user.is_superuser:
-            return PurchaseOrder.objects.all()
+            return PurchaseOrder.objects.all().order_by('-date')
+
         else:
-            return PurchaseOrder.objects.filter(user=self.request.user.id)
+            return PurchaseOrder.objects.filter(user=self.request.user.id).order_by('-date')
+
+    def get_serializer_class(self):
+        if self.action in ['create']:
+            return PurchaseOrderWriteSerializer
+        else:
+            return PurchaseOrderReadSerializer
 
     def get_permissions(self):
         """
         Instantiates and returns the list of permissions that this view requires.
         """
-        if self.action in ['list', 'create', 'retrieve']:
+
+        user_id = self.request.user.id
+        user_parameter_url = self.request.POST.get('user')
+        logged_user_url = f"http://localhost:8000/users/{user_id}/"
+        is_same_user = user_parameter_url == logged_user_url
+         
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [permissions.IsAuthenticated]
+        elif self.action in ['create'] and is_same_user:
             permission_classes = [permissions.IsAuthenticated]
         else:
             permission_classes = [permissions.IsAdminUser]

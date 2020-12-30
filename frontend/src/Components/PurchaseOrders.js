@@ -8,6 +8,7 @@ class PurchaseOrders extends Component {
 
     async createPurchasingOrder() {
         let token = localStorage.getItem('Token')
+        let user_id = localStorage.getItem('user_id')
         let URL = `http://localhost:8000/purchase_orders/`
 
         let cart_items = JSON.parse(localStorage.getItem('cart'));
@@ -20,10 +21,11 @@ class PurchaseOrders extends Component {
         })
 
         let form_data = new FormData();
-        form_data.append('user', 'http://localhost:8000/users/8/');
+        let user_url = `http://localhost:8000/users/${user_id}/`
+        form_data.append('user', user_url);
         form_data.append('value', total_price);
 
-        // Não funciona
+        // Não funciona 
         item_urls.map(product => {
             for(let i = 0; i < product.amount; i++){
                 form_data.append('products', product.url)
@@ -61,8 +63,9 @@ class PurchaseOrders extends Component {
     render() {
         return (
             <div>
-                <h1>Suas Compras</h1>
+                {/* <h1>Suas Compras</h1> */}
                 <button onClick={e => this.createPurchasingOrder(e)}>Confirmar Compra</button>
+                
             </div>
         )
     }

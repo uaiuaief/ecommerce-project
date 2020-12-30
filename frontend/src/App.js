@@ -11,6 +11,7 @@ import { ProductDetail } from './Components/ProductDetail';
 import { ProfilePage } from './Components/ProfilePage';
 import { ShoppingCartPage } from './Components/ShoppingCartPage';
 import { PurchaseOrders } from './Components/PurchaseOrders';
+import { MyPurchases } from './Components/MyPurchases';
 
 import { CreateProductPage } from './Components/Admin/CreateProductPage';
 
@@ -106,6 +107,8 @@ class App extends Component {
                 addToCart={(product) => this.addToCart(product)}
                 appState={appState} />
             )} />
+
+            <Route path="/my_purchases" exact component={MyPurchases} />
 
             <Route path="/purchase_orders/:user_id" exact component={PurchaseOrders} />
 

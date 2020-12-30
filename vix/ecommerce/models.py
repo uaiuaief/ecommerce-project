@@ -49,7 +49,7 @@ class PurchaseOrder(models.Model):
             (4, 'purchase cancelled'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='purchases')
     products = models.ManyToManyField(Product)
     status = models.CharField(max_length=20, choices=STATUS_OPTIONS, default='waiting payment')
     value = models.IntegerField()

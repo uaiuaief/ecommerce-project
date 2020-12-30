@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 
 class UserProfileForm extends Component {
@@ -446,6 +447,7 @@ class ProfilePage extends Component {
             <section className="profile-page">
                 <h1>Informações Pessoais</h1>
                 <h1>{localStorage.getItem('username')}</h1>
+                <Link to="/my_purchases">Minhas compras</Link>
                 <div className="profile-tabs">
                     <button
                         className={this.state.current_form === 'user' ? "highlighted-tab" : ""}
