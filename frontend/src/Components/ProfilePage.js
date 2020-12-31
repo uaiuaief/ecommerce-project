@@ -76,7 +76,7 @@ class ChangeAddressForm extends Component {
 
     async searchCode() {
         let match = /\d{5}-\d{3}/.test(this.state.zip_code);
-        if (!match){
+        if (!match) {
             alert('Digite o CEP corretamente')
             return
         }
@@ -445,24 +445,26 @@ class ProfilePage extends Component {
     render() {
         return (
             <section className="profile-page">
-                <h1>Informações Pessoais</h1>
-                <h1>{localStorage.getItem('username')}</h1>
-                <Link to="/my_purchases">Minhas compras</Link>
-                <div className="profile-tabs">
-                    <button
-                        className={this.state.current_form === 'user' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ current_form: 'user' })}>Dados Pessoais</button>
-                    <button
-                        className={this.state.current_form === 'address' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ current_form: 'address' })}>Alterar Endereço</button>
-                    <button
-                        className={this.state.current_form === 'password' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ current_form: 'password' })}>Alterar Senha</button>
-                    <button
-                        className={this.state.current_form === 'email' ? "highlighted-tab" : ""}
-                        onClick={e => this.setState({ current_form: 'email' })}>Alterar E-mail</button>
+                <div className="profile-container">
+                    <h1>Informações Pessoais</h1>
+                    <h1>{localStorage.getItem('username')}</h1>
+                    <Link className="main-button secondary-color" to="/my_purchases">Minhas compras</Link>
+                    <div className="profile-tabs">
+                        <button
+                            className={this.state.current_form === 'user' ? "highlighted-tab" : ""}
+                            onClick={e => this.setState({ current_form: 'user' })}>Dados Pessoais</button>
+                        <button
+                            className={this.state.current_form === 'address' ? "highlighted-tab" : ""}
+                            onClick={e => this.setState({ current_form: 'address' })}>Alterar Endereço</button>
+                        <button
+                            className={this.state.current_form === 'password' ? "highlighted-tab" : ""}
+                            onClick={e => this.setState({ current_form: 'password' })}>Alterar Senha</button>
+                        <button
+                            className={this.state.current_form === 'email' ? "highlighted-tab" : ""}
+                            onClick={e => this.setState({ current_form: 'email' })}>Alterar E-mail</button>
+                    </div>
+                    {this.renderForm()}
                 </div>
-                {this.renderForm()}
             </section>
         )
     }

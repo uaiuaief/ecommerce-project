@@ -56,6 +56,4 @@ class PurchaseOrderReadSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
     
     
-   # def create(self, validated_data):
-   #     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 

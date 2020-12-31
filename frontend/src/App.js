@@ -1,4 +1,8 @@
 import './App.css';
+
+// PAGES
+import { ContactPage } from './Components/ContactPage';
+
 import { Banner } from './Components/Banner';
 import { Header } from './Components/Header';
 import { Showcase } from './Components/Showcase';
@@ -70,8 +74,8 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Header appState={appState} />
-          <div style={{ minHeight: '200px' }}>
-            {/* <Route path="/" exact component={Banner} /> */}
+          <div style={{ minHeight: '257px' }}>
+            <Route path="/" exact component={Banner} />
 
             <Route path="/" exact render={() => (
               <Showcase
@@ -93,6 +97,7 @@ class App extends Component {
 
             <Route path="/register" exact component={Register} />
             <Route path="/about" exact component={About} />
+            <Route path="/contact" exact component={ContactPage} />
 
             <Route path="/product/:product_id" exact appState={appState} render={(props) => (
               <ProductDetail
@@ -110,7 +115,10 @@ class App extends Component {
 
             <Route path="/my_purchases" exact component={MyPurchases} />
 
-            <Route path="/purchase_orders/:user_id" exact component={PurchaseOrders} />
+            <Route path="/purchase_orders/:user_id" exact render={() =>
+              <PurchaseOrders 
+                appState={appState} />
+            } />
 
             <Route path="/create-product" exact component={CreateProductPage} />
 

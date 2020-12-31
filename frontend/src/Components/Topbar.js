@@ -13,14 +13,14 @@ class Topbar extends Component {
         return (
             <div className="topbar">
                 <div className="left-side">
-                    <div className="topbar-item email">
+                    {/* <div className="topbar-item email">
                         <img alt="email" className="icon" src="/images/email.svg" />
                         <p>test@vix.com</p>
                     </div>
                     <div className="topbar-item phone">
                         <img alt="phone" className="icon" src="/images/phone.svg" />
                         <p>27 99999-9999</p>
-                    </div>
+                    </div> */}
                     {localStorage.getItem('Token')
                         ?
                         <>

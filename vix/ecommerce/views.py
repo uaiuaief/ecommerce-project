@@ -87,7 +87,7 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows purchase orders to be viewed or edited.
     """
-    queryset = PurchaseOrder.objects.all()
+    queryset = PurchaseOrder.objects.all().order_by('-date')
 #    serializer_class = PurchaseOrderSerializer
     permission_classes = [permissions.IsAuthenticated]
 

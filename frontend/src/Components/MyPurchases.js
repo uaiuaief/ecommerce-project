@@ -33,7 +33,7 @@ class MyPurchases extends Component {
                     {this.state.purchases
                         ?
                         <>
-                            {this.state.purchases.map(each => (
+                            {this.state.purchases.reverse().map(each => (
                                 <div style={{width: "250px", margin: 'auto'}}>
                                     <br/>
                                         {each.products.map(each => {

@@ -60,8 +60,8 @@ class CartItem extends Component {
                 <div className="flex ">
                     <div className="cart-image-wrapper">
                         <img src={product.image} alt='' />
-                        <button className="remove-product-button"
-                            onClick={(e) => this.removeProduct(e, product)}>Remover Produto</button>
+                        {/* <button className="remove-product-button"
+                            onClick={(e) => this.removeProduct(e, product)}>Remover Produto</button> */}
                     </div>
                     <div className="item-description">
                         <h1 className="item-title">
@@ -91,7 +91,10 @@ class CartItem extends Component {
                         <button className="increase control-button button" onClick={() => this.increase()}>+</button>
                     </div>
                     <small>Unidades</small>
-                    <div>remover produto</div>
+                    <div>
+                        <button className="remove-product-button"
+                            onClick={(e) => this.removeProduct(e, product)}>Remover Produto</button>
+                    </div>
                 </div>
                 <div className="price-container">
                     <div className="">
@@ -154,11 +157,11 @@ class ShoppingCartPage extends Component {
                             ?
                             <>
                                 {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
-                                <Link to='/purchase_orders/1'>Finalizar compra</Link>
+                                <Link className="main-button" to='/purchase_orders/1'>Finalizar compra</Link>
                             </>
                             :
                             <>
-                                <Link to={{
+                                <Link className="main-button" to={{
                                     pathname: "/login",
                                     // state: { next_page: `/profile/` }
                                     state: { next_page: `/shopping-cart` }
