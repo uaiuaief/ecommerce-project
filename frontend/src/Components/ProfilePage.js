@@ -42,7 +42,7 @@ class UserProfileForm extends Component {
                     name="user-profile"
                     className="user-profile-form">
                     <div>
-                        <label htmlFor="nome">Nome completo</label>
+                        <label className="required" htmlFor="nome">Nome completo</label>
                         <input id="nome"
                             onChange={e => this.setState({ full_name: e.target.value })}
                             maxLength="60"
@@ -50,7 +50,7 @@ class UserProfileForm extends Component {
                             required ></input>
                     </div>
                     <div>
-                        <label htmlFor="sexo">Sexo</label>
+                        <label className="required" htmlFor="sexo">Sexo</label>
                         <select onChange={e => this.setState({ gender: e.target.value })}
                             value={this.state.gender}
                             required
@@ -148,7 +148,7 @@ class ChangeAddressForm extends Component {
 
                     <div className="field-group">
                         <div>
-                            <label htmlFor="endereço">Endereço</label>
+                            <label className="required" htmlFor="endereço">Endereço</label>
                             <input id="endereço"
                                 required
                                 maxLength="120"
@@ -157,7 +157,7 @@ class ChangeAddressForm extends Component {
                             </input>
                         </div>
                         <div className="small-input">
-                            <label htmlFor="número">Número</label>
+                            <label className="required" htmlFor="número">Número</label>
                             <input id="número"
                                 maxLength="20"
                                 value={this.state.house_number}
@@ -178,7 +178,7 @@ class ChangeAddressForm extends Component {
 
                     <div className="field-group">
                         <div className="small-input">
-                            <label htmlFor="bairro">Bairro</label>
+                            <label className="required" htmlFor="bairro">Bairro</label>
                             <input id="bairro"
                                 required
                                 maxLength="40"
@@ -198,7 +198,7 @@ class ChangeAddressForm extends Component {
 
                     <div className="field-group">
                         <div className="grid-small">
-                            <label htmlFor="estado">Estado</label>
+                            <label className="required" htmlFor="estado">Estado</label>
                             <input id="estado"
                                 required
                                 maxLength="40"
@@ -207,7 +207,7 @@ class ChangeAddressForm extends Component {
                             </input>
                         </div>
                         <div className="grid-large">
-                            <label htmlFor="cidade">Cidade</label>
+                            <label className="required" htmlFor="cidade">Cidade</label>
                             <input id="cidade"
                                 required
                                 maxLength="40"
@@ -231,16 +231,25 @@ class ChangePasswordForm extends Component {
             <div>
                 <form>
                     <div>
-                        <label htmlFor="current-password">Senha atual</label>
-                        <input id="current-password" type="password" placeholder=""></input>
+                        <label className="required" htmlFor="current-password">Senha atual</label>
+                        <input id="current-password"
+                            type="password"
+                            required
+                            placeholder=""></input>
                     </div>
                     <div>
-                        <label htmlFor="new-password">Nova senha</label>
-                        <input id="new-password" type="password" placeholder=""></input>
+                        <label className="required" htmlFor="new-password">Nova senha</label>
+                        <input id="new-password"
+                            type="password"
+                            required
+                            placeholder=""></input>
                     </div>
                     <div>
-                        <label htmlFor="confirm-new-password">Confirme a nova senha</label>
-                        <input id="confirm-new-password" type="password" placeholder=""></input>
+                        <label className="required" htmlFor="confirm-new-password">Confirme a nova senha</label>
+                        <input id="confirm-new-password"
+                            type="password"
+                            required
+                            placeholder=""></input>
                     </div>
                     <button type="submit">Salvar Alterações</button>
                 </form>
@@ -289,7 +298,7 @@ class ChangeEmailForm extends Component {
             <div>
                 <form onSubmit={e => this.submitEmailForm(e)}>
                     <div>
-                        <label htmlFor="current-email">E-mail atual</label>
+                        <label className="required" htmlFor="current-email">E-mail atual</label>
                         <input id="current-email"
                             // onChange={e => this.setState({email: e.target.value})}
                             readOnly
@@ -298,7 +307,7 @@ class ChangeEmailForm extends Component {
                             placeholder=""></input>
                     </div>
                     <div>
-                        <label htmlFor="new-email">Novo e-mail</label>
+                        <label className="required" htmlFor="new-email">Novo e-mail</label>
                         <input id="new-email"
                             onChange={e => this.setState({ new_email: e.target.value })}
                             required
@@ -306,7 +315,7 @@ class ChangeEmailForm extends Component {
                             placeholder=""></input>
                     </div>
                     <div>
-                        <label htmlFor="confirm-new-email">Confirme o novo e-mail</label>
+                        <label className="required" htmlFor="confirm-new-email">Confirme o novo e-mail</label>
                         <input id="confirm-new-email"
                             onChange={e => this.setState({ confirm_email: e.target.value })}
                             required
@@ -349,28 +358,6 @@ class ProfilePage extends Component {
 
         }
     }
-    // state = {
-    //     current_form: '',
-
-    //     // FORM DATA 
-    //     user_profile_form: {
-    //         full_name: "",
-    //         gender: ""
-    //     },
-    //     email_form: {
-    //         email: ""
-    //     },
-    //     address_form: {
-    //         zip_code: "",
-    //         address: "",
-    //         house_number: "",
-    //         state: "",
-    //         city: "",
-    //         district: "",
-    //         reference: "",
-    //         complement: "",
-    //     },
-    // }
 
     async fetchData(current_form = 'user') {
         const token = localStorage.getItem("Token");
@@ -448,7 +435,7 @@ class ProfilePage extends Component {
                 <div className="profile-container">
                     <h1>Informações Pessoais</h1>
                     <h1>{localStorage.getItem('username')}</h1>
-                    <Link className="main-button secondary-color" to="/my_purchases">Minhas compras</Link>
+                    {/* <Link className="main-button secondary-color" to="/my_purchases">Minhas compras</Link> */}
                     <div className="profile-tabs">
                         <button
                             className={this.state.current_form === 'user' ? "highlighted-tab" : ""}

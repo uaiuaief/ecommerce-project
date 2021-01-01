@@ -7,15 +7,11 @@ class Header extends Component {
     render() {
         return (
             <header>
+                <Topbar appState={this.props.appState} setAppState={this.props.setAppState} />
                 <div className="content">
-                    <Topbar appState={this.props.appState} setAppState={this.props.setAppState}/>
-                    {/* <div className="logo">
-                        <img src="/images/vixlogo.png" />
+                    {/* <div className="navbar-container">
+                        <Navbar appState={this.props.appState} />
                     </div> */}
-                    {/* <h1>I'm the Header</h1> */}
-                    <div className="navbar-container">
-                        <Navbar appState={this.props.appState}/>
-                    </div>
                 </div>
             </header>
         )

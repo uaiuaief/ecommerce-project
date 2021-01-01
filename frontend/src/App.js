@@ -74,8 +74,9 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Header appState={appState} />
+          <div style={{ height: "65px" }}></div>
           <div style={{ minHeight: '257px' }}>
-            <Route path="/" exact component={Banner} />
+            {/* <Route path="/" exact component={Banner} /> */}
 
             <Route path="/" exact render={() => (
               <Showcase
@@ -116,7 +117,7 @@ class App extends Component {
             <Route path="/my_purchases" exact component={MyPurchases} />
 
             <Route path="/purchase_orders/:user_id" exact render={() =>
-              <PurchaseOrders 
+              <PurchaseOrders
                 appState={appState} />
             } />
 

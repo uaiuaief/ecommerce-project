@@ -14,14 +14,14 @@ class ContactPage extends Component {
                 <div className="contact-container">
                     <form>
                         <h1 className="form-title">Envie a sua mensagem</h1>
-                        <label>Seu Nome</label>
-                        <input></input>
-                        <label>Seu Email</label>
-                        <input></input>
-                        <label>Assunto</label>
-                        <input></input>
-                        <label>Mensagem</label>
-                        <textarea></textarea>
+                        <label className="required">Seu Nome</label>
+                        <input required></input>
+                        <label className="required">Seu Email</label>
+                        <input required></input>
+                        <label className="required">Assunto</label>
+                        <input required></input>
+                        <label className="required">Mensagem</label>
+                        <textarea required></textarea>
                         <button type="submit">Enviar</button>
                     </form>
                     <div className="contact-info">

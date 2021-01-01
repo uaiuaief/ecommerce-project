@@ -42,7 +42,7 @@ class Navbar extends Component {
 
     showSearchBar(e) {
         let element = document.querySelector('.search-bar input');
-        element.style.width = "590px";
+        element.style.width = "490px";
         element.style.padding = "0 0 0 .6em";
 
     }
@@ -51,11 +51,6 @@ class Navbar extends Component {
         const [appState, setAppState] = this.props.appState
         return (
             <nav>
-                <div className="logo">
-                    <Link to="/">
-                        <img src="/images/vixlogo.png" />
-                    </Link>
-                </div>
                 <div className="navbar-links">
                     <NavbarItem to="/"
                         func={(e, page) => this.changeCurrentPage(e, page)}
@@ -94,22 +89,17 @@ class Navbar extends Component {
                     </form>
                 </div>
 
-                <div className="shopping-cart">
+                {/* <Link className="shopping-cart">
                     <div className="cart-wrapper">
-                        <Link to="/shopping-cart">Meu carrinho</Link>
-                        <img src="/images/shopping-cart-icon.svg" />
+                        <Link to="/shopping-cart"></Link>
+                        <img src="/images/shopping_cart.svg" />
+                        <small>{appState.cart_amount}</small>
                     </div>
-                    {appState.cart_items.length
-                        ?
-                        <small>{appState.cart_amount} Produtos</small>
-                        :
-                        <small> Carrinho Vazio </small>
-                    }
-                </div>
+                </Link> */}
             </nav>
         )
     }
 }
 
 
-export { Navbar }
+export { Navbar, NavbarItem}
