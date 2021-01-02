@@ -13,12 +13,24 @@ class CartItem extends Component {
     }
 
     removeProduct(e, item) {
-        const [appState, setAppState] = this.props.appState;
+        let element = document.getElementById(`item-${this.props.listID}`)
+        element.classList.add('removed');
 
-        setAppState({
-            cart_items: [...appState.cart_items.filter((each) => each != item)],
-            cart_amount: appState.cart_amount - item.amount
+        element.addEventListener("animationend", () => {
+            const [appState, setAppState] = this.props.appState;
+
+            setAppState({
+                cart_items: [...appState.cart_items.filter((each) => each != item)],
+                cart_amount: appState.cart_amount - item.amount
+            })
         })
+
+        // const [appState, setAppState] = this.props.appState;
+
+        // setAppState({
+        //     cart_items: [...appState.cart_items.filter((each) => each != item)],
+        //     cart_amount: appState.cart_amount - item.amount
+        // })
 
     }
 
@@ -56,7 +68,7 @@ class CartItem extends Component {
     render() {
         const { product } = this.props
         return (
-            <div className="item">
+            <div className="item" id={`item-${this.props.listID}`}>
                 <div className="flex ">
                     <div className="cart-image-wrapper">
                         <img src={product.image} alt='' />
@@ -140,6 +152,8 @@ class ShoppingCartPage extends Component {
                             {cart_items.reverse().map(item => {
                                 return (
                                     <CartItem
+                                        key={item.id}
+                                        listID={item.id}
                                         addToCart={this.props.addToCart}
                                         product={item}
                                         appState={this.props.appState} />

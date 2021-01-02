@@ -88,14 +88,6 @@ class Navbar extends Component {
                         </button>
                     </form>
                 </div>
-
-                {/* <Link className="shopping-cart">
-                    <div className="cart-wrapper">
-                        <Link to="/shopping-cart"></Link>
-                        <img src="/images/shopping_cart.svg" />
-                        <small>{appState.cart_amount}</small>
-                    </div>
-                </Link> */}
             </nav>
         )
     }

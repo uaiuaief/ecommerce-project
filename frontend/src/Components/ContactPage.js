@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 class ContactPage extends Component {
 
     componentDidMount() {
-        document.querySelector('.contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // document.querySelector('.contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.querySelector('body').scrollIntoView({behavior: 'smooth', block: 'start' });
     }
 
     render() {

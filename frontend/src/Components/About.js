@@ -2,7 +2,7 @@ import { Component } from "react"
 
 class About extends Component {
     componentDidMount() {
-        document.querySelector('.about').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.querySelector('body').scrollIntoView({behavior: 'smooth', block: 'start' });
     }
 
     render() {

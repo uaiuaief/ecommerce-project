@@ -71,14 +71,14 @@ class Topbar extends Component {
                             </div>
                             :
                             <>
-                                <div className="topbar-item login link">
+                                <Link to="/login" className="topbar-item login link">
                                     <img alt="login" className="icon" src="/images/account_circle.svg" />
-                                    <Link to="/login">Login</Link>
-                                </div>
-                                <div className="topbar-item register link">
+                                    Login
+                                </Link>
+                                <Link to="/register" className="topbar-item register link">
                                     <img alt="register" className="icon" src="/images/sign-up.svg" />
-                                    <Link to='/register'>Cadastre-se</Link>
-                                </div>
+                                    Cadastre-se
+                                </Link>
                             </>}
                         <Link to="/shopping-cart" className="topbar-item shopping-cart">
                             <div className="cart-wrapper">

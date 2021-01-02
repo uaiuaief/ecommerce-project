@@ -20,6 +20,8 @@ class Showcase extends Component {
         })
         // console.log(data.results);
 
+        document.querySelector('body').scrollIntoView({behavior: 'smooth', block: 'start' });
+
     }
 
     render() {
