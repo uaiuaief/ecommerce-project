@@ -60,7 +60,7 @@ class UserProfileForm extends Component {
                             <option>Feminino</option>
                         </select>
                     </div>
-                    <button type="submit">Salvar Alterações</button>
+                    <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )
@@ -217,7 +217,7 @@ class ChangeAddressForm extends Component {
                         </div>
                     </div>
 
-                    <button type="submit">Salvar Alterações</button>
+                    <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )
@@ -251,7 +251,7 @@ class ChangePasswordForm extends Component {
                             required
                             placeholder=""></input>
                     </div>
-                    <button type="submit">Salvar Alterações</button>
+                    <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )
@@ -322,7 +322,7 @@ class ChangeEmailForm extends Component {
                             type="email"
                             placeholder=""></input>
                     </div>
-                    <button type="submit">Salvar Alterações</button>
+                    <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )
@@ -433,8 +433,8 @@ class ProfilePage extends Component {
         return (
             <section className="profile-page">
                 <div className="profile-container">
-                    <h1>Informações Pessoais</h1>
-                    <h1>{localStorage.getItem('username')}</h1>
+                    {/* <h1>Informações Pessoais</h1>
+                    <h1>{localStorage.getItem('username')}</h1> */}
                     {/* <Link className="main-button secondary-color" to="/my_purchases">Minhas compras</Link> */}
                     <div className="profile-tabs">
                         <button
@@ -442,13 +442,13 @@ class ProfilePage extends Component {
                             onClick={e => this.setState({ current_form: 'user' })}>Dados Pessoais</button>
                         <button
                             className={this.state.current_form === 'address' ? "highlighted-tab" : ""}
-                            onClick={e => this.setState({ current_form: 'address' })}>Alterar Endereço</button>
+                            onClick={e => this.setState({ current_form: 'address' })}>Endereço</button>
                         <button
                             className={this.state.current_form === 'password' ? "highlighted-tab" : ""}
-                            onClick={e => this.setState({ current_form: 'password' })}>Alterar Senha</button>
+                            onClick={e => this.setState({ current_form: 'password' })}>Senha</button>
                         <button
                             className={this.state.current_form === 'email' ? "highlighted-tab" : ""}
-                            onClick={e => this.setState({ current_form: 'email' })}>Alterar E-mail</button>
+                            onClick={e => this.setState({ current_form: 'email' })}> E-mail </button>
                     </div>
                     {this.renderForm()}
                 </div>

@@ -79,7 +79,7 @@ class Login extends Component {
                                 placeholder="Senha"
                                 value={this.state.password}></input>
                             <a href="#">Esqueceu a senha?</a>
-                            <button type="submit">Entrar</button>
+                            <button className="primary-button" type="submit">Entrar</button>
                             <Link to="/register">Não é cadastrado? Cadastre-se aqui</Link>
                         </form>
                     </div>

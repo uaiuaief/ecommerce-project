@@ -52,7 +52,10 @@ class ProductDetail extends Component {
                             </div>
                             <div>
                                 <p className="price">R$ {this.state.product.price / 100},00</p>
-                                <Link className="add-button" to="/shopping-cart" onClick={e => this.addButton(e)}>Adicionar ao carrinho</Link>
+                                <Link className="add-button" to="/shopping-cart" onClick={e => this.addButton(e)}>
+                                    <img src="/images/add_shopping_cart.svg"/>
+                                    Comprar
+                                    </Link>
                             </div>
                             {/* <button onClick={e => this.addButton(e)}>Adicionar ao carrinho</button> */}
                         </div>

@@ -25,12 +25,6 @@ class CartItem extends Component {
             })
         })
 
-        // const [appState, setAppState] = this.props.appState;
-
-        // setAppState({
-        //     cart_items: [...appState.cart_items.filter((each) => each != item)],
-        //     cart_amount: appState.cart_amount - item.amount
-        // })
 
     }
 
@@ -124,12 +118,20 @@ class CartItem extends Component {
 class ShoppingCartPage extends Component {
 
     emptyCart(e) {
-        const [appState, setAppState] = this.props.appState
-        setAppState({
-            cart_items: [],
-            cart_amount: 0
-        })
 
+        let element = document.querySelector('.cart-items')
+        if (!element) return
+        element.classList.add('removed');
+
+        element.addEventListener("animationend", () => {
+            const [appState, setAppState] = this.props.appState
+            console.log('123');
+            setAppState({
+                cart_items: [],
+                cart_amount: 0
+            })
+
+        })
     }
 
 
@@ -143,7 +145,11 @@ class ShoppingCartPage extends Component {
 
         return (
             <div className="shopping-cart-section">
-                <h1 className="page-title">Produtos adicionados ao carrinho</h1>
+                <div className="heading">
+                    <h1 className="page-title">Produtos adicionados ao carrinho</h1>
+                    <button className="muted-button"
+                        onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
+                </div>
 
                 {cart_items.length
                     ?
@@ -163,33 +169,33 @@ class ShoppingCartPage extends Component {
                             }
 
                         </div>
-                        <div style={{ fontSize: "2em", padding: "1em 1em" }}>
-                            Total dos produtos: R$ {total_price},00
+                        <div className="purchase-summary">
+                            <p> Total dos produtos: R$ {total_price},00 </p>
+                            {localStorage.getItem('user_id')
+                                ?
+                                <>
+                                    {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
+                                    <Link className="primary-button" to='/purchase_orders/1'>Finalizar compra</Link>
+                                </>
+                                :
+                                <>
+                                    <Link className="primary-button" to={{
+                                        pathname: "/login",
+                                        // state: { next_page: `/profile/` }
+                                        state: { next_page: `/shopping-cart` }
+                                    }}>
+                                        Finalizar compra</Link>
+                                </>
+
+                            }
                         </div>
-                        <button onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
-                        {localStorage.getItem('user_id')
-                            ?
-                            <>
-                                {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
-                                <Link className="main-button" to='/purchase_orders/1'>Finalizar compra</Link>
-                            </>
-                            :
-                            <>
-                                <Link className="main-button" to={{
-                                    pathname: "/login",
-                                    // state: { next_page: `/profile/` }
-                                    state: { next_page: `/shopping-cart` }
-                                }}>
-                                    Finalizar compra</Link>
-                            </>
-                        }
                         {/* <button onClick={e => this.finishBuying(e)}>Finalizar Compra</button> */}
                     </>
                     :
                     <>
-                        <div style={{ height: "300px", marginTop: "3em" }}>
-                            <h1> Seu carrinho está vazio </h1>
-                            <Link to="/">Ir para produtos</Link>
+                        <div className="empty-cart">
+                            <h1> Seu carrinho está vazio!</h1>
+                            <Link className="primary-button" to="/">Ver mais produtos</Link>
                         </div>
                     </>
                 }

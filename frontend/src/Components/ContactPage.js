@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 class ContactPage extends Component {
 
     componentDidMount() {
-        // document.querySelector('.contact').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // document.querySelector('.contact-container').scrollIntoView({ behavior: 'smooth', block: 'end' });
         document.querySelector('body').scrollIntoView({behavior: 'smooth', block: 'start' });
     }
 
@@ -22,8 +22,8 @@ class ContactPage extends Component {
                         <label className="required">Assunto</label>
                         <input required></input>
                         <label className="required">Mensagem</label>
-                        <textarea required></textarea>
-                        <button type="submit">Enviar</button>
+                        <textarea spellCheck="false" required></textarea>
+                        <button className="secondary-button" type="submit">Enviar</button>
                     </form>
                     <div className="contact-info">
                         <div>
