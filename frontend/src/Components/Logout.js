@@ -8,7 +8,7 @@ class Logout extends Component {
         localStorage.removeItem('user_id')
         this.props.setAppState({ logged_in: false })
         return (
-            <Redirect to='/'></Redirect>
+            <Redirect to='/login'></Redirect>
         )
     }
 }

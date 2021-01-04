@@ -16,25 +16,28 @@ Shopping cart page -> adicionar botão de continuar comprando?
 Ajuste no design da shopping cart page
 
 04/01
-???
+Página "minhas compras" 
+Colocar indicação em "Olá usuário" para mostrar que é um dropdown menu
 
 
 -----------------------------------------
 Coisas que faltam para terminar o projeto:
 -----------------------------------------
 
-**FAZENDO** - Página de finalizar compra
+**FAZENDO** - 
 
-Colocar indicação em "Olá usuário" para mostrar que é um dropdown menu
+Flash notifications
+Página de finalizar compra
+Página "minhas compras quando não tiver nenhuma compra"
 Página de login e Cadastro
-Página "minhas compras"
+Indicação quando user erra senha ou login
 Backend da página de contato
 Design footer
-Design da profile page
+Design da profile page (Forms)
 Sistema de busca
 Sistema de mudança de senha
 Diferença entre "ínicio" e "produtos"
-Sistema de pagamento
+Sistema de pagamento stripe
 
 ???
 

@@ -53,7 +53,7 @@ class Topbar extends Component {
                             ?
                             <div className="user-menu">
                                 {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Olá {localStorage.getItem('username')}</Link> */}
-                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')}</Link>
+                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg"/></Link>
                                 <div className="user-menu-box">
                                     <Link className="menu-option" to={`/profile/${localStorage.getItem('user_id')}`}>
                                         <img alt="profile" className="icon" src="/images/account_circle.svg" />

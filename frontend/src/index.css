@@ -379,6 +379,9 @@ nav {
 
 .user-menu {
     position: relative;
+    display: flex;
+    align-items: center;
+    /* color: var(--primary-color); */
 }
 
 .user-menu:hover .user-menu-box{
@@ -391,6 +394,7 @@ nav {
     visibility: hidden;
     opacity: 0;
     left: -70px;
+    top: 25px;
 
     padding: .8em 1.3em;
     border-radius: 5px;
@@ -974,7 +978,7 @@ p.product-price {
 
 .cart-image-wrapper{
     width: 200px;
-    /* height: 200px; */
+    height: 200px;
 
 }
 
@@ -1304,6 +1308,117 @@ button.highlighted-tab:hover {
 
 
 /* END CONTACT PAGE */
+
+
+
+
+
+
+/* MY PURCHASES PAGE */ 
+
+.my-purchases-page {
+    /* width: 70%; */
+    margin: auto;
+    /* background-color: var(--light-bg-2); */
+}
+
+.my-purchases-page > h1 {
+    width: 70%;
+    margin: auto;
+    margin-top: 1.5rem;
+    font-size: 2.0em;
+    text-align: left;
+}
+
+.my-purchases-page .heading {
+    margin-top: 1em;
+    background-color: var(--light-bg-2);
+    border-radius: 4px;
+    padding: .7em;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.purchase-list {
+    width: 70%;
+    margin: auto;
+    color: var(--dark-text);
+    margin-top: 1em;
+    /* box-shadow: 0px 3px 10px 0px #949494; */
+    background-color: var(--light-bg);
+}
+
+.purchase {
+    position: relative;
+    box-shadow: 0px 3px 10px 0px #949494;
+    margin-bottom: 2em;
+    border-radius: 4px;
+    padding: 1em;
+}
+
+.purchase-info {
+    font-size: 1.0em;
+    text-align: left;
+    line-height: 1.7em;
+}
+
+.expand-button {
+    background-color: var(--dark-bg);
+
+    padding: .5em .5em .1em .5em;
+    border-radius: 4px;
+    border: none;
+}
+
+.expand-button:hover {
+    cursor: pointer;
+    background-color: #555;
+}
+
+
+.purchase-item {
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    padding: .5em;
+    /* background-color: var(--light-bg-2); */
+    border-bottom: 1px solid var(--muted-light-text);
+}
+
+/* .purchase-item:last-of-type {
+    border: none;
+
+} */
+
+.purchase-product-list {
+    display: none;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+.purchase-product-list:first-of-type {
+    display: initial !important;
+}
+
+.purchase .image-wrapper {
+    margin: 0;
+    height: 200px;
+    width: 200px;
+}
+
+.purchase .product-amount {
+    align-self: center;
+}
+
+.purchase .product-amount .info-text {
+    margin: auto;
+}
+
+
+/* END MY PURCHASES PAGE */ 
+
 
 
 
