@@ -31,6 +31,7 @@ class App extends Component {
     logged_in: false,
     cart_items: local_cart ? local_cart : [],
     cart_amount: local_cart_amount ? Number(local_cart_amount) : 0,
+    last_added_item: null,
   }
 
   setState(dict) {
@@ -41,16 +42,20 @@ class App extends Component {
 
   }
 
-  addToCart(product) {
+  addToCart(product, increase=false) {
     let hasID = this.state.cart_items.some(each => {
       if (each.id == product.id) {
         let newcart = [...this.state.cart_items];
         let index = newcart.indexOf(each);
         newcart[index].amount += 1
+
         this.setState({
           cart_items: [...newcart],
-          cart_amount: this.state.cart_amount + 1
+          cart_amount: this.state.cart_amount + 1,
+          last_added_item: increase ? null : product
+
         })
+
         return true
       }
       else {
@@ -61,7 +66,8 @@ class App extends Component {
     if (!hasID) {
       this.setState({
         cart_items: [...this.state.cart_items, product],
-        cart_amount: this.state.cart_amount + 1
+        cart_amount: this.state.cart_amount + 1,
+        last_added_item: product
       })
     }
 
@@ -110,7 +116,7 @@ class App extends Component {
 
             <Route path="/shopping-cart" exact render={() => (
               <ShoppingCartPage
-                addToCart={(product) => this.addToCart(product)}
+                addToCart={(product) => this.addToCart(product, true)}
                 appState={appState} />
             )} />
 

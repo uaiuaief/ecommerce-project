@@ -15,8 +15,11 @@
     --muted-dark-text: #929292;
 
     --primary-color:#d46b48;
-    --primary-color-hover:#e48769;
+    --primary-color-hover:#F69675;
     --primary-color-dark:#a54829;
+
+    --secondary-color: #51AB80;
+    --secondary-color-hover: #82CAA7;
 
     /* Pallete */
     --light-background-color:#f3f3f3 ;
@@ -82,8 +85,8 @@ label {
 
 .muted-button {
     width: fit-content;
-    color: rgb(42, 42, 165);
-    border: 2px solid rgb(42, 42, 165);
+    color: var(--dark-bg);
+    border: 2px solid var(--dark-bg);
     background-color: inherit;
     padding: .6em 0.8em;
     font-size: 0.9em;
@@ -94,7 +97,7 @@ label {
 }
 
 .muted-button:hover {
-    background-color: rgb(42, 42, 165);
+    background-color: var(--dark-bg);
     color: white;
     cursor: pointer;
 
@@ -108,8 +111,12 @@ label {
 
 .muted-button-2 {
     width: fit-content;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    /* color: var(--primary-color);
+    border: 2px solid var(--primary-color); */
+
+    color: #51AB80;
+    border: 2px solid #51AB80;
+
     background-color: inherit;
     padding: .6em 0.8em;
     font-size: 0.9em;
@@ -120,15 +127,10 @@ label {
 }
 
 .muted-button-2:hover {
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
+    background-color: #51AB80;
     color: white;
     cursor: pointer;
-
-}
-
-.muted-button-2:active {
-    padding: .5em 0.7em;
-    margin: 0.1em 0.1em;
 
 }
 
@@ -137,6 +139,7 @@ label {
     margin-top: 1em;
     color: var(--light-text);
     background-color: var(--primary-color);
+    /* background-color: var(--secondary-color); */
     padding: .6em 0.8em;
     font-size: 0.9em;
     border: none;
@@ -149,6 +152,7 @@ label {
 .primary-button:hover {
     cursor: pointer;
     background-color: var(--primary-color-hover);
+    /* background-color: var(--secondary-color-hover); */
 }
 
 
@@ -798,6 +802,7 @@ p.product-price {
     box-shadow: 0px 3px 20px 0px #999;
     border-radius: 8px;
     overflow: hidden;
+    animation: fade-in .5s linear;
 }
 
 .product-detail h2,
@@ -903,14 +908,14 @@ p.product-price {
 }
 
 .empty-cart {
-    margin: 1em 0;
+    margin: 2em 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--light-bg-2);
     box-shadow: 0px 3px 20px 0px #999;
-    height: 300px;
+    height: 350px;
     border-radius: 4px;
 }
 
@@ -920,11 +925,6 @@ p.product-price {
     font-weight: 600;
     color: var(--light-text);
 }
-
-/* .cleared-cart {
-    opacity: 0;
-    transition: .5s;
-} */
 
 .cart-items {
     margin-top: 1.0em;
@@ -944,6 +944,11 @@ p.product-price {
     margin-bottom: 1em;
     border-radius: 4px;
     padding: .5em;
+}
+
+.last-added-item {
+    /* animation: fade-in 1s linear; */
+    animation: last-added 1.2s ease-out;
 }
 
 .item-description {
@@ -997,7 +1002,8 @@ p.product-price {
 }
 
 .control-button {
-    background-color: #ff4030;
+    /* background-color: #ff4030; */
+    background-color: var(--primary-color);
     color: #fff;
 }
 
@@ -1044,6 +1050,7 @@ p.info-text {
 
 .purchase-summary {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between  ;
     margin: 0 0 1.3em 0 ;
@@ -1052,16 +1059,26 @@ p.info-text {
     padding: .3em 0em;
 }
 
+.purchase-summary .buttons {
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
 .purchase-summary p {
-    font-size: 2.4em;
+    font-size: 2.0em;
     color: var(--dark-text);
 }
 
 .shopping-cart-section .primary-button {
     margin: 0;
-    /* margin: 1em auto; */
-    font-size: 1.3em;
-    /* text-transform: uppercase; */
+    font-size: 1.07em;
+}
+
+.shopping-cart-section .muted-button-2 {
+    margin: 0;
+    margin-left: 1em;
+    font-size: 1.0em;
 }
 
 
@@ -1358,7 +1375,19 @@ button.highlighted-tab:hover {
 
 
 /* Animation test */
-@keyframes remove {
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+@keyframes fade-out {
     from {
         opacity: 1;
     }
@@ -1369,13 +1398,14 @@ button.highlighted-tab:hover {
 
 }
 
-@keyframes clear-cart {
+@keyframes last-added {
     from {
-        opacity: 1;
+        background-color: var(--secondary-color);
+        /* background-color: #005e08; */
     }
 
     to {
-        opacity: 0;
+        background-color: inherit;
     }
 
 }
@@ -1383,12 +1413,9 @@ button.highlighted-tab:hover {
 
 
 .removed {
-    animation-duration: 0.5s;
-    animation-name: remove;
+    animation-duration: 0.2s;
+    animation-name: fade-out;
+    animation-timing-function: linear;
 }
 
-.cleared-cart {
-    animation-duration: 0.5s;
-    animation-name: clear-cart;
-}
 

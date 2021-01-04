@@ -53,16 +53,18 @@ class CartItem extends Component {
     }
 
     increase() {
-        this.props.addToCart(this.props.product)
+        this.props.addToCart(this.props.product, true)
         this.setState({
             decrease_button_disabled: false
         })
     }
 
     render() {
-        const { product } = this.props
+        const { product } = this.props;
+        let last = this.props.last_added_item;
         return (
-            <div className="item" id={`item-${this.props.listID}`}>
+            <div id={`item-${this.props.listID}`}
+                className={last ? "last-added-item item" : "item"}>
                 <div className="flex ">
                     <div className="cart-image-wrapper">
                         <img src={product.image} alt='' />
@@ -134,8 +136,41 @@ class ShoppingCartPage extends Component {
         })
     }
 
+    getCartItems() {
+        const [appState, setAppState] = this.props.appState
+        const cart_items = appState.cart_items
+
+        if (appState.last_added_item) {
+            cart_items.sort((a, b) => {
+                if (b.id == appState.last_added_item.id) {
+                    return 1
+                }
+                else {
+                    return 0
+                }
+            })
+        }
+
+        let items = cart_items.map(item => {
+            let last_added_item = appState.last_added_item ? appState.last_added_item.id == item.id : false;
+            return (
+                <CartItem
+                    last_added_item={last_added_item}
+                    key={item.id}
+                    listID={item.id}
+                    addToCart={this.props.addToCart}
+                    product={item}
+                    appState={this.props.appState} />
+
+            )
+        })
+
+        return items;
+    }
+
 
     render() {
+        // console.log(this.props);
         const [appState, setAppState] = this.props.appState
         const cart_items = appState.cart_items
 
@@ -145,19 +180,21 @@ class ShoppingCartPage extends Component {
 
         return (
             <div className="shopping-cart-section">
-                <div className="heading">
-                    <h1 className="page-title">Produtos adicionados ao carrinho</h1>
-                    <button className="muted-button"
-                        onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
-                </div>
-
                 {cart_items.length
                     ?
                     <>
+                        <div className="heading">
+                            <h1 className="page-title">Produtos adicionados ao carrinho</h1>
+                            <button className="muted-button"
+                                onClick={e => this.emptyCart(e)}>Esvaziar Carrinho</button>
+                        </div>
                         <div className="cart-items" >
-                            {cart_items.reverse().map(item => {
+                            {this.getCartItems()}
+                            {/* {cart_items.reverse().map(item => {
+                                let last_added_item = appState.last_added_item ? appState.last_added_item.id == item.id : false;
                                 return (
                                     <CartItem
+                                        last_added_item={last_added_item}
                                         key={item.id}
                                         listID={item.id}
                                         addToCart={this.props.addToCart}
@@ -166,30 +203,36 @@ class ShoppingCartPage extends Component {
 
                                 )
                             })
-                            }
+                            } */}
 
                         </div>
                         <div className="purchase-summary">
                             <p> Total dos produtos: R$ {total_price},00 </p>
-                            {localStorage.getItem('user_id')
-                                ?
-                                <>
-                                    {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
-                                    <Link className="primary-button" to='/purchase_orders/1'>Finalizar compra</Link>
-                                </>
-                                :
-                                <>
-                                    <Link className="primary-button" to={{
-                                        pathname: "/login",
-                                        // state: { next_page: `/profile/` }
-                                        state: { next_page: `/shopping-cart` }
-                                    }}>
-                                        Finalizar compra</Link>
-                                </>
+                            <div className="buttons" >
 
-                            }
+                                <Link 
+                                    className="muted-button-2"
+                                    to='/'>Continuar Comprando</Link>
+
+                                {localStorage.getItem('user_id')
+                                    ?
+                                    <>
+                                        {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
+                                        <Link className="primary-button" to='/purchase_orders/1'>Finalizar Compra</Link>
+                                    </>
+                                    :
+                                    <>
+                                        <Link className="primary-button" to={{
+                                            pathname: "/login",
+                                            // state: { next_page: `/profile/` }
+                                            state: { next_page: `/shopping-cart` }
+                                        }}>
+                                            Finalizar Compra</Link>
+                                    </>
+
+                                }
+                            </div>
                         </div>
-                        {/* <button onClick={e => this.finishBuying(e)}>Finalizar Compra</button> */}
                     </>
                     :
                     <>
