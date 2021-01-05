@@ -19,25 +19,30 @@ Ajuste no design da shopping cart page
 Página "minhas compras" 
 Colocar indicação em "Olá usuário" para mostrar que é um dropdown menu
 
+05/01
+Página de login
+Indicação quando user erra senha ou login
+Página de cadastro
+Página "minhas compras quando não tiver nenhuma compra"
+
+06/01
+???
 
 -----------------------------------------
 Coisas que faltam para terminar o projeto:
 -----------------------------------------
 
-**FAZENDO** - 
+**FAZENDO** - Design da profile page (Forms)
 
 Flash notifications
-Página de finalizar compra
-Página "minhas compras quando não tiver nenhuma compra"
-Página de login e Cadastro
-Indicação quando user erra senha ou login
+Erro ao criar usuário com mesmo nome ou email
 Backend da página de contato
 Design footer
-Design da profile page (Forms)
 Sistema de busca
-Sistema de mudança de senha
+Sistema de mudança de senha (Esqueci a senha)
 Diferença entre "ínicio" e "produtos"
 Sistema de pagamento stripe
+Página de finalizar compra
 
 ???
 

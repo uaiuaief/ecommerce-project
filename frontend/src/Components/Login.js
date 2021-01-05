@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom"
 
 class Login extends Component {
     state = {
-        email: '',
+        username: '',
         password: '',
         redirect: null,
     }
@@ -15,7 +15,13 @@ class Login extends Component {
                 redirect: '/'
             })
         }
-        document.querySelector('.login-page').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // document.querySelector('.login-page').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    hideError(e) {
+        let element = document.getElementById("login-error");
+        element.style.display = "none";
     }
 
     handleSubmit(e) {
@@ -26,7 +32,7 @@ class Login extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cookie': "SameSite=None",
             },
-            body: `username=${this.state.email}&password=${this.state.password}`
+            body: `username=${this.state.username}&password=${this.state.password}`
         }).then(res => res.json().then(data => {
             if (data.token) {
                 localStorage.setItem('Token', data.token)
@@ -45,7 +51,8 @@ class Login extends Component {
                 this.props.setAppState({ logged_in: true })
             }
             else {
-                console.log('invalid credentials');
+                let element = document.getElementById("login-error");
+                element.style.display = "flex";
             }
         }))
     }
@@ -65,23 +72,41 @@ class Login extends Component {
                         backgroundPosition: "30%",
                     }}
                 >
-
                     <div className="login-area">
                         <h1>Fazer Login</h1>
+                        <div id="login-error">
+                            Usuário ou senha incorretos.
+                            <button onClick={(e) => this.hideError(e)}>
+                                <img src="/images/close.svg"/>
+                            </button>
+                        </div>
                         <form onSubmit={e => this.handleSubmit(e)} method="POST" action="http://127.0.0.1:8000/login/">
-                            <input onChange={e => this.setState({ email: e.target.value })}
-                                name='email'
-                                placeholder="E-mail ou Usuário"
-                                value={this.state.email}></input>
-                            <input onChange={e => this.setState({ password: e.target.value })}
-                                name='password'
-                                type='password'
-                                placeholder="Senha"
-                                value={this.state.password}></input>
-                            <a href="#">Esqueceu a senha?</a>
+                            <div className="input-block">
+                                <span className="label-line">
+                                    <label htmlFor="username">Usuário</label>
+                                </span>
+                                <input onChange={e => this.setState({ username: e.target.value })}
+                                    required
+                                    id="username"
+                                    value={this.state.username}></input>
+                            </div>
+                            <div className="input-block">
+                                <span className="label-line">
+                                    <label htmlFor="password">Senha</label>
+                                    <a href="#">Esqueceu a senha?</a>
+                                </span>
+                                <input onChange={e => this.setState({ password: e.target.value })}
+                                    id='password'
+                                    required
+                                    type='password'
+                                    value={this.state.password}></input>
+                            </div>
                             <button className="primary-button" type="submit">Entrar</button>
-                            <Link to="/register">Não é cadastrado? Cadastre-se aqui</Link>
                         </form>
+                        <div className="login-area-footer">
+                            Não é cadastrado?
+                            <Link to="/register"> Crie a sua conta</Link>
+                        </div>
                     </div>
                 </section>
         )

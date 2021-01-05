@@ -11,13 +11,14 @@ class Register extends Component {
     }
 
     componentDidMount() {
-        document.querySelector('.register-page').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // document.querySelector('.register-page').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     handleSubmit(e) {
         e.preventDefault();
         let element = document.querySelector('.password-errors')
-        if(!this.passwordsMatch()) {
+        if (!this.passwordsMatch()) {
             element.innerHTML = 'passwords must match'
             return
         }
@@ -37,7 +38,7 @@ class Register extends Component {
         })
     }
 
-    passwordsMatch(){
+    passwordsMatch() {
         return (this.state.password === this.state.confirm_password)
     }
 
@@ -55,35 +56,54 @@ class Register extends Component {
                 <div className="register-area">
                     <h1>Cadastre-se</h1>
                     <form onSubmit={e => this.handleSubmit(e)}>
-                        <input onChange={e => this.setState({ username: e.target.value })}
-                            placeholder="Usuário"
-                            required
-                            maxLength="40"
-                            value={this.state.username}></input>
-                        <input onChange={e => this.setState({ email: e.target.value })}
-                            name='email'
-                            placeholder="E-mail"
-                            required
-                            type="email"
-                            value={this.state.email}></input>
-                        <input onChange={e => this.setState({ password: e.target.value })}
-                            name='password'
-                            type='password'
-                            placeholder="Senha"
-                            required
-                            minLength="8"
-                            value={this.state.password}></input>
-                        <input onChange={e => this.setState({ confirm_password: e.target.value })}
-                            name='confirm_password'
-                            type='password'
-                            placeholder="Confirme a Senha"
-                            required
-                            minLength="8"
-                            value={this.state.confirm_password}></input>
-                        <small className="password-errors"></small>
-                        <Link to="/login">Já é cadastrado? Faça seu login aqui</Link>
+                        <div className="input-block">
+                            <span className="label-line">
+                                <label className="required">Usuário</label>
+                            </span>
+                            <input onChange={e => this.setState({ username: e.target.value })}
+                                required
+                                maxLength="40"
+                                value={this.state.username}></input>
+                        </div>
+                        <div className="input-block">
+                            <span className="label-line">
+                                <label className="required">E-mail</label>
+                            </span>
+                            <input onChange={e => this.setState({ email: e.target.value })}
+                                name='email'
+                                required
+                                type="email"
+                                value={this.state.email}></input>
+                        </div>
+                        <div className="input-block">
+                            <span className="label-line">
+                                <label className="required">Senha</label>
+                            </span>
+                            <input onChange={e => this.setState({ password: e.target.value })}
+                                name='password'
+                                type='password'
+                                required
+                                minLength="8"
+                                value={this.state.password}></input>
+                        </div>
+                        <div className="input-block">
+                            <span className="label-line">
+                                <label className="required">Confirme a senha</label>
+                            </span>
+                            <input onChange={e => this.setState({ confirm_password: e.target.value })}
+                                name='confirm_password'
+                                type='password'
+                                required
+                                minLength="8"
+                                value={this.state.confirm_password}></input>
+                            <div className="password-errors"></div>
+                        </div>
                         <button type="submit">Cadastrar</button>
                     </form>
+                    <div className="login-area-footer">
+                        Já é cadastrado?
+                        <Link to="/login"> Faça o login</Link>
+                    </div>
                 </div>
                 {this.state.redirect ? <Redirect to='/login'></Redirect> : ''}
             </section>

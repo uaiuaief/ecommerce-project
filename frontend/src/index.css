@@ -61,7 +61,7 @@ label {
 }
 
 .required:after {
-    content: '*';
+    content: ' *';
     color: red;
     font-size: 1.2em;
 }
@@ -659,7 +659,7 @@ p.product-price {
 
 .login-page, .register-page{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     color: black;
     height: 100vh;
@@ -667,72 +667,140 @@ p.product-price {
     padding: 1em;
 }
 
+#login-error {
+    display: none;
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffe3e6;
+    border: 1px solid #ecbbbf;
+    margin-bottom: 1em;
+    padding: 1.0em 2.5em;
+    border-radius: 5px;
+    font-size: .85em;
+}
+
+#login-error button {
+    all: initial;
+    display: flex;
+    align-items: center;
+    font-size: .5em;
+    filter: invert(54%) sepia(26%) saturate(816%) hue-rotate(306deg) brightness(95%) contrast(85%);
+}
+
+#login-error button:hover {
+    cursor: pointer;
+}
+
 .login-area, .register-area{
-    width: 400px;
-    height: 520px;
+    height: fit-content;
+    margin-top: 3em;
     background-color: var(--light-bg);
+    padding: 2.5em 2em;
+    border-radius: 5px;
     /* box-shadow: 0px 3px 20px 0px #888; */
     box-shadow: 0px 3px 20px 0px #000;
+
+}
+
+.login-area form, .register-area form{
+    padding: 1.5em 1.5em;
+    background-color: var(--light-bg-2);
+    border: 1px solid #d4d4d4;
     border-radius: 4px;
+}
+
+.login-area-footer {
+    margin-top: 1em;
+    padding: 1.3em;
+    background-color: var(--light-bg);
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    font-size: .85em;
+}
+
+.input-block {
+    margin: auto;
+    width: fit-content;
+}
+
+.input-block label{
+    color: var(--dark-text);
+    font-size: .9em;
+    font-weight: 600;
+    /* text-align: left; */
+}
+
+.login-page h1, .register-page h1 {
+    /* padding-top: 1.8em; */
+    padding-bottom: 0em;
+    font-size: 1.8em;
+    margin-bottom: .7em;
+}
+
+.login-page h1 {
+    /* padding-top: 2.2em; */
+
+}
+
+.login-area-footer a {
+    /* font-size: .8em; */
+    color: #0366d6;
+}
+
+.label-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+.label-line .required:after {
+    font-size: 1em;
+
+}
+
+.label-line a {
+    font-size: .8em;
+    color: #0366d6;
+    font-weight: 600;
 
 }
 
 .login-area input, .register-area input {
-    padding: 1em;
-    margin-top: 1em;
-    /* background-color: #ebebeb;  */
-    background-color: var(--light-bg-2); 
-    border: none;
-    border-radius: 50px;
+    height: 2em;
+    padding: 0 .6em;
+    margin-top: .3em;
+    border: 1px solid #bbb;
+    border-radius: 5px;
     font-size: 15px;
     width: 260px;
     color: var(--dark-text);
 }
 
-.login-page h1, .register-page h1 {
-    padding-top: 1.8em;
-    padding-bottom: 0em;
-    font-size: 2.5em;
+.login-area input:focus, .register-area input:focus {
+    border: 2px solid #0d76ee;
+    box-shadow: 0px 0px 2px 0px #0d76ee;
 }
 
-.login-page h1 {
-    padding-top: 2.2em;
-    margin-bottom: .4em;
-
-}
-
-.login-page a, .register-page a {
-    display: block;
-    color: var(--muted-dark-text);
-    margin-top: 1em;
-}
 
 .login-page button, .register-page button{
+    padding: initial;
     cursor: pointer;
     display: block;
     margin: auto;
-    width: 250px;
-    height: 40px;
-    background-color: midnightblue;
+    width: 260px;
+    height: 35px;
+    background-color: #329465;
     color: var(--light-text);
     border: none;
     border-radius: 5px;
-    margin-top: 1em;
+    margin-top: .3em;
 }
 
-.register-page {
-    /* height: 700px; */
-}
-
-.register-area input {
-    display: block;
-    margin: auto;
-    margin-top: 1em;
-}
-
-.register-area {
-    /* width: 600px; */
-    height: 520px;
+.login-page button:hover ,
+.register-page button:hover {
+    background-color: var(--secondary-color);
 }
 
 .logout-icon {
@@ -1101,11 +1169,13 @@ p.info-text {
 
 .profile-container {
     width: 70%;
-    width: 45%;
+    width: 50%;
     margin: 2em auto;
     /* padding: 1em; */
     background-color: var(--light-bg);
-    box-shadow: 0px 3px 20px 0px #999;
+    box-shadow: 0px 3px 10px 0px #999;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .profile-container .secondary-button {
@@ -1118,8 +1188,42 @@ p.info-text {
     margin-top: 1.0em;
     width: 500px;
     /* background-color: white; */
+}
 
-    
+.field-group {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.big-input {
+    width: 420px;
+}
+
+.small-input {
+    width: 70px;
+}
+
+select {
+    width: 70px;
+    height: 3em;
+}
+
+.zipcode {
+    /* text-align: left; */
+    /* margin: 0; */
+}
+
+.gender {
+    text-align: left;
+}
+
+.gender select {
+    width: initial;
+}
+
+button.form-submit {
+    margin: 2em !important;
 }
 
 .profile-page form > div {
@@ -1161,9 +1265,6 @@ p.info-text {
     cursor: pointer;
     opacity: 1;
     background-color: #eaeaea;
-}
-
-.profile-tabs button:active {
 }
 
 button.highlighted-tab {

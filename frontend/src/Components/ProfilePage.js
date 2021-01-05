@@ -49,7 +49,7 @@ class UserProfileForm extends Component {
                             value={this.state.full_name}
                             required ></input>
                     </div>
-                    <div>
+                    <div className="gender">
                         <label className="required" htmlFor="sexo">Sexo</label>
                         <select onChange={e => this.setState({ gender: e.target.value })}
                             value={this.state.gender}
@@ -134,20 +134,25 @@ class ChangeAddressForm extends Component {
         return (
             <div>
                 <form onSubmit={e => this.submitAddressForm(e)} name="address" className="change-address-form">
-                    <div className="small-input">
-                        <label htmlFor="cep">Insira o CEP</label>
-                        <input id="cep"
-                            onChange={e => this.setState({ zip_code: e.target.value })}
-                            maxLength="9"
-                            pattern="\d{5}-\d{3}"
-                            value={this.state.zip_code}
-                            placeholder="00000-000">
-                        </input>
-                        <button onClick={(e) => this.searchCode(e)} type="button">Consultar meu CEP</button>
+                    <div className="zipcode">
+                        <div className="">
+                            <label htmlFor="cep">Insira o CEP</label>
+                            <input id="cep"
+                                onChange={e => this.setState({ zip_code: e.target.value })}
+                                maxLength="9"
+                                pattern="\d{5}-\d{3}"
+                                value={this.state.zip_code}
+                                placeholder="00000-000">
+                            </input>
+                        </div>
+                        <div className="" >
+                            <button className="zipcode-button"
+                                onClick={(e) => this.searchCode(e)} type="button">Consultar meu CEP</button>
+                        </div>
                     </div>
 
-                    <div className="field-group">
-                        <div>
+                    <div className="field-group address-field-group">
+                        <div className="big-input">
                             <label className="required" htmlFor="endereço">Endereço</label>
                             <input id="endereço"
                                 required
@@ -176,8 +181,8 @@ class ChangeAddressForm extends Component {
                         </input>
                     </div>
 
-                    <div className="field-group">
-                        <div className="small-input">
+                    <div className="">
+                        <div className="">
                             <label className="required" htmlFor="bairro">Bairro</label>
                             <input id="bairro"
                                 required
@@ -197,16 +202,7 @@ class ChangeAddressForm extends Component {
                     </div>
 
                     <div className="field-group">
-                        <div className="grid-small">
-                            <label className="required" htmlFor="estado">Estado</label>
-                            <input id="estado"
-                                required
-                                maxLength="40"
-                                onChange={e => this.setState({ state: e.target.value.toUpperCase() })}
-                                value={this.state.state}>
-                            </input>
-                        </div>
-                        <div className="grid-large">
+                        <div className="big-input">
                             <label className="required" htmlFor="cidade">Cidade</label>
                             <input id="cidade"
                                 required
@@ -215,9 +211,28 @@ class ChangeAddressForm extends Component {
                                 value={this.state.city}>
                             </input>
                         </div>
+                        <div className="small-input">
+                            <label className="required" htmlFor="estado">Estado</label>
+                            {/* <input id="estado"
+                                required
+                                maxLength="40"
+                                onChange={e => this.setState({ state: e.target.value.toUpperCase() })}
+                                value={this.state.state}>
+                            </input> */}
+                            <select id="estado"
+                                required
+                                onChange={e => this.setState({ state: e.target.value.toUpperCase() })}
+                                value={this.state.state}>
+                                <option>PR</option>
+                                <option>AL</option>
+                                <option>ES</option>
+                                <option>RJ</option>
+                            </select>
+                        </div>
+
                     </div>
 
-                    <button className="secondary-button" type="submit">Salvar Alterações</button>
+                    <button className="form-submit secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )
@@ -359,7 +374,7 @@ class ProfilePage extends Component {
         }
     }
 
-    async fetchData(current_form = 'user') {
+    async fetchData(current_form = 'address') {
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
         let USER_URL = `http://localhost:8000/users/${user_id}/`;

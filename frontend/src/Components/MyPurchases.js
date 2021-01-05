@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 class PurchaseProduct extends Component {
     render() {
@@ -118,15 +119,26 @@ class MyPurchases extends Component {
 
 
                 <div className="purchase-list">
-                    {this.state.purchases
+                    {this.state.purchases == null
                         ?
-                        <>
-                            {this.state.purchases.map(each => (
-                                <Purchase purchase={each} />
-                            ))}
-                        </>
+                        <p>Loading...</p>
+
                         :
-                        <p>loading...</p>
+                        this.state.purchases.length
+                            ?
+                            <>
+                                {this.state.purchases.map(each => (
+                                    <Purchase purchase={each} />
+                                ))}
+                            </>
+                            :
+
+                            <>
+                                <div className="empty-cart">
+                                    <h1>Você não possui nenhuma compra.</h1>
+                                    {/* <Link className="primary-button" to="/">Ver produtos</Link> */}
+                                </div>
+                            </>
                     }
                 </div>
             </section>
