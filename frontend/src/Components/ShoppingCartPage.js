@@ -65,7 +65,7 @@ class CartItem extends Component {
         return (
             <div id={`item-${this.props.listID}`}
                 className={last ? "last-added-item item" : "item"}>
-                <div className="flex ">
+                <div className="item-detail">
                     <div className="cart-image-wrapper">
                         <img src={product.image} alt='' />
                         {/* <button className="remove-product-button"
@@ -120,7 +120,6 @@ class CartItem extends Component {
 class ShoppingCartPage extends Component {
 
     emptyCart(e) {
-
         let element = document.querySelector('.cart-items')
         if (!element) return
         element.classList.add('removed');
@@ -190,27 +189,12 @@ class ShoppingCartPage extends Component {
                         </div>
                         <div className="cart-items" >
                             {this.getCartItems()}
-                            {/* {cart_items.reverse().map(item => {
-                                let last_added_item = appState.last_added_item ? appState.last_added_item.id == item.id : false;
-                                return (
-                                    <CartItem
-                                        last_added_item={last_added_item}
-                                        key={item.id}
-                                        listID={item.id}
-                                        addToCart={this.props.addToCart}
-                                        product={item}
-                                        appState={this.props.appState} />
-
-                                )
-                            })
-                            } */}
-
                         </div>
                         <div className="purchase-summary">
                             <p> Total dos produtos: R$ {total_price},00 </p>
                             <div className="buttons" >
 
-                                <Link 
+                                <Link
                                     className="muted-button-2"
                                     to='/'>Continuar Comprando</Link>
 
@@ -218,14 +202,18 @@ class ShoppingCartPage extends Component {
                                     ?
                                     <>
                                         {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
-                                        <Link className="primary-button" to='/purchase_orders/1'>Finalizar Compra</Link>
+                                        <Link className="primary-button"
+                                            to='/purchase_orders/1'>Finalizar Compra</Link>
                                     </>
                                     :
                                     <>
                                         <Link className="primary-button" to={{
                                             pathname: "/login",
                                             // state: { next_page: `/profile/` }
-                                            state: { next_page: `/shopping-cart` }
+                                            state: {
+                                                flash_message: "Faça login para finalizar a compra",
+                                                next_page: `/shopping-cart`
+                                            }
                                         }}>
                                             Finalizar Compra</Link>
                                     </>

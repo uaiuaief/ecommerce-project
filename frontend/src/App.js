@@ -32,6 +32,7 @@ class App extends Component {
     cart_items: local_cart ? local_cart : [],
     cart_amount: local_cart_amount ? Number(local_cart_amount) : 0,
     last_added_item: null,
+    flash_message: '',
   }
 
   setState(dict) {
@@ -42,7 +43,7 @@ class App extends Component {
 
   }
 
-  addToCart(product, increase=false) {
+  addToCart(product, increase = false) {
     let hasID = this.state.cart_items.some(each => {
       if (each.id == product.id) {
         let newcart = [...this.state.cart_items];
@@ -67,7 +68,7 @@ class App extends Component {
       this.setState({
         cart_items: [...this.state.cart_items, product],
         cart_amount: this.state.cart_amount + 1,
-        last_added_item: product
+        last_added_item: product,
       })
     }
 
@@ -79,8 +80,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header appState={appState} />
-          <div style={{ height: "65px" }}></div>
+          <Header appState={appState}
+            flash_message={this.state.flash_message} />
+
+          <div id="filler" style={{ height: "65px" }}></div>
+
           <div style={{ minHeight: '257px' }}>
             {/* <Route path="/" exact component={Banner} /> */}
 

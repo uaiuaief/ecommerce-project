@@ -1,6 +1,7 @@
 import { Component } from "react"
 import { Link } from 'react-router-dom';
 import { Navbar, NavbarItem } from './Navbar.js';
+import { FlashMessage } from './FlashMessage.js'
 
 class Topbar extends Component {
     state = {
@@ -27,17 +28,17 @@ class Topbar extends Component {
         const [appState, setAppState] = this.props.appState;
         return (
             <div className="topbar">
+                {appState.flash_message
+                    ?
+                        <FlashMessage
+                            appState={this.props.appState} />
+                    :
+                        ''
+
+                }
                 <div className="topbar-content">
 
                     <div className="left-side">
-                        {/* <div className="topbar-item email">
-                        <img alt="email" className="icon" src="/images/email.svg" />
-                        <p>test@vix.com</p>
-                    </div>
-                    <div className="topbar-item phone">
-                        <img alt="phone" className="icon" src="/images/phone.svg" />
-                        <p>27 99999-9999</p>
-                    </div> */}
                         <div className="logo">
                             <Link to="/">
                                 {/* <img src="/images/vixlogo.png" /> */}
@@ -53,7 +54,7 @@ class Topbar extends Component {
                             ?
                             <div className="user-menu">
                                 {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Olá {localStorage.getItem('username')}</Link> */}
-                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg"/></Link>
+                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg" /></Link>
                                 <div className="user-menu-box">
                                     <Link className="menu-option" to={`/profile/${localStorage.getItem('user_id')}`}>
                                         <img alt="profile" className="icon" src="/images/account_circle.svg" />

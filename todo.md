@@ -26,15 +26,22 @@ Página de cadastro
 Página "minhas compras quando não tiver nenhuma compra"
 
 06/01
+Responsive Design - Showcase
+Responsive Design - Product Detail
+Flash notifications
+
+07/01
 ???
 
 -----------------------------------------
 Coisas que faltam para terminar o projeto:
 -----------------------------------------
 
-**FAZENDO** - Design da profile page (Forms)
+**FAZENDO** - 
 
-Flash notifications
+Customize flash notifications colors (error, success, warning)
+Responsive design - Resto
+Design da profile page (Forms)
 Erro ao criar usuário com mesmo nome ou email
 Backend da página de contato
 Design footer
@@ -45,4 +52,5 @@ Sistema de pagamento stripe
 Página de finalizar compra
 
 ???
+
 

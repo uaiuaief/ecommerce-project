@@ -17,6 +17,11 @@ class Login extends Component {
         }
         // document.querySelector('.login-page').scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        let location = this.props.location
+        let flash_message = location.state ? location.state.flash_message : '';
+        this.props.setAppState({ flash_message: flash_message })
+
     }
 
     hideError(e) {
@@ -77,7 +82,7 @@ class Login extends Component {
                         <div id="login-error">
                             Usuário ou senha incorretos.
                             <button onClick={(e) => this.hideError(e)}>
-                                <img src="/images/close.svg"/>
+                                <img src="/images/close.svg" />
                             </button>
                         </div>
                         <form onSubmit={e => this.handleSubmit(e)} method="POST" action="http://127.0.0.1:8000/login/">
