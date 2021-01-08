@@ -212,6 +212,7 @@ class ShoppingCartPage extends Component {
                                             // state: { next_page: `/profile/` }
                                             state: {
                                                 flash_message: "Faça login para finalizar a compra",
+                                                flash_message_type: 'warning',
                                                 next_page: `/shopping-cart`
                                             }
                                         }}>

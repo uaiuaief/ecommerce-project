@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate, login 
+from rest_framework import status
 
 
 @csrf_exempt
@@ -11,8 +12,24 @@ def register(request):
         username = request.POST.get("username")
         email = request.POST.get("email")
         password =  request.POST.get("password")
+        
+        username_already_exists = User.objects.filter(username=username).first()
+        email_already_exists = User.objects.filter(email=email).first()
+
+        if username_already_exists:
+            body = {
+                'content': 'An user with that username already exists',
+            }
+            return JsonResponse(body, status=status.HTTP_403_FORBIDDEN)
+        elif email_already_exists:
+            body = {
+                'content': 'An user with that email already exists',
+            }
+            return JsonResponse(body, status=status.HTTP_403_FORBIDDEN)
+
 
         user = User(username=username, email=email, password=password)
+
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
 

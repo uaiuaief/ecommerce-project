@@ -15,7 +15,18 @@ class Register extends Component {
         document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    componentWillUnmount(){
+        const [appState, setAppState] = this.props.appState;
+
+        setAppState({
+            flash_message: '',
+            flash_message_type: '',
+        })
+    }
+
     handleSubmit(e) {
+        const [appState, setAppState] = this.props.appState;
+
         e.preventDefault();
         let element = document.querySelector('.password-errors')
         if (!this.passwordsMatch()) {
@@ -29,13 +40,25 @@ class Register extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: `username=${this.state.username}&email=${this.state.email}&password=${this.state.password}`
-        }).then(res => res.json().then(data => {
-            console.log(data);
-        }))
-
-        this.setState({
-            redirect: '/login'
+        }).then(res => {
+            let response_status_type = res.status.toString().charAt(0);
+            if (response_status_type === '2') {
+                this.setState({
+                    redirect: '/login'
+                })
+            }
+            else {
+                setAppState({
+                    flash_message: "Já existe um usuário com esse nome ou email",
+                    flash_message_type: "error"
+                })                
+            }
+            
         })
+
+        // this.setState({
+            // redirect: '/login'
+        // })
     }
 
     passwordsMatch() {
@@ -105,7 +128,16 @@ class Register extends Component {
                         <Link to="/login"> Faça o login</Link>
                     </div>
                 </div>
-                {this.state.redirect ? <Redirect to='/login'></Redirect> : ''}
+                {/* {this.state.redirect ? <Redirect to='/login'></Redirect> : ''} */}
+                {this.state.redirect ? <Redirect to={{
+                    pathname: '/login',
+                    state: {
+
+                        flash_message: "Seu cadastro foi realizado com sucesso.",
+                        flash_message_type: 'success',
+                    }
+                }}>
+                </Redirect> : ''}
             </section>
         )
     }

@@ -31,26 +31,34 @@ Responsive Design - Product Detail
 Flash notifications
 
 07/01
-???
-
------------------------------------------
-Coisas que faltam para terminar o projeto:
------------------------------------------
-
-**FAZENDO** - 
-
 Customize flash notifications colors (error, success, warning)
+Colocar opção de todos os estados br
+Erro ao criar usuário com mesmo nome ou email
+Footer design 
+
+
+----------------------------------------------
+Coisas que faltam para terminar o projeto:   |
+----------------------------------------------
+
+**FAZENDO** -> Sistema de pagamento stripe
+
+_Front end_
+404 page
 Responsive design - Resto
 Design da profile page (Forms)
-Erro ao criar usuário com mesmo nome ou email
-Backend da página de contato
-Design footer
 Sistema de busca
-Sistema de mudança de senha (Esqueci a senha)
 Diferença entre "ínicio" e "produtos"
-Sistema de pagamento stripe
 Página de finalizar compra
 
+
+_Back end_
+Backend da página de contato
+Sistema de mudança de senha (Esqueci a senha)
+
+
 ???
+
+
 
 

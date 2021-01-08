@@ -16,17 +16,55 @@ class Login extends Component {
             })
         }
         // document.querySelector('.login-page').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 
         let location = this.props.location
         let flash_message = location.state ? location.state.flash_message : '';
-        this.props.setAppState({ flash_message: flash_message })
+        let flash_message_type = location.state ? location.state.flash_message_type : '';
+
+        this.props.setAppState({
+            flash_message: flash_message,
+            flash_message_type: flash_message_type
+        })
+
+        if (flash_message) {
+            let element = document.getElementById('username');
+
+        }
+
+        document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    }
+
+    componentWillUnmount() {
+        let location = this.props.location
+        let flash_message = location.state ? location.state.flash_message : '';
+
+        if (flash_message) {
+            this.props.setAppState({
+                flash_message: '',
+                flash_message_type: '',
+            })
+
+        }
 
     }
 
     hideError(e) {
         let element = document.getElementById("login-error");
         element.style.display = "none";
+    }
+
+    getRedirect() {
+        const location = this.props.location;
+        // let redirect = location.state ? location.state.next_page + data.user_id : '/';
+        try {
+            let redirect = location.state.next_page ? location.state.next_page : '/'
+            return redirect;
+        } catch (TypeError) {
+            return '/';    
+        }
+
     }
 
     handleSubmit(e) {
@@ -44,10 +82,7 @@ class Login extends Component {
                 localStorage.setItem('username', data.username)
                 localStorage.setItem('user_id', data.user_id)
 
-
-                const location = this.props.location;
-                // let redirect = location.state ? location.state.next_page + data.user_id : '/';
-                let redirect = location.state ? location.state.next_page : '/';
+                let redirect = this.getRedirect();
 
                 this.setState({
                     redirect: redirect,

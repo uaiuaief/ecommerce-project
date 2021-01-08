@@ -10,12 +10,10 @@ class Product extends Component {
         return (
             <div className="product">
                 <div className="overlay">
-                    {/* <h1>Produto {this.props.preço}</h1> */}
                     <h1>Ver Produto</h1>
-                    {/* <img src="images/shopping-cart-icon.svg"/> */}
                 </div>
                 <div className="image-wrapper">
-                    <img src={this.props.image} />
+                    <img src={this.props.image} loading="lazy" />
                 </div>
                 <div className="product-info">
                     <p className="product-title">{this.props.name}</p>

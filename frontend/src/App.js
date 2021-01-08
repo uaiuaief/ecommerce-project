@@ -32,7 +32,9 @@ class App extends Component {
     cart_items: local_cart ? local_cart : [],
     cart_amount: local_cart_amount ? Number(local_cart_amount) : 0,
     last_added_item: null,
+
     flash_message: '',
+    flash_message_type: '',
   }
 
   setState(dict) {
@@ -84,8 +86,14 @@ class App extends Component {
             flash_message={this.state.flash_message} />
 
           <div id="filler" style={{ height: "65px" }}></div>
+          {this.state.flash_message
+            ?
+              <div style={{ height: "42px" }}></div>
+            :
+              ''
+          }
 
-          <div style={{ minHeight: '257px' }}>
+          <div style={{ minHeight: '400px' }}>
             {/* <Route path="/" exact component={Banner} /> */}
 
             <Route path="/" exact render={() => (
@@ -106,7 +114,17 @@ class App extends Component {
                 setAppState={list => this.setState(list)} />
             )} />
 
-            <Route path="/register" exact component={Register} />
+            {/* <Route path="/register" exact component={Register} /> */}
+
+            <Route path="/register" exact render={() => (
+              <Register
+                appState={appState} />
+            )} />
+
+
+
+
+
             <Route path="/about" exact component={About} />
             <Route path="/contact" exact component={ContactPage} />
 
@@ -136,6 +154,7 @@ class App extends Component {
           </div>
           {/* <Showcase /> */}
           <Footer />
+          {/* <div id="filler" style={{ height: "50px" }}></div> */}
         </div>
       </BrowserRouter>
     );
