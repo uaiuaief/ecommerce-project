@@ -59,13 +59,15 @@ class PurchaseOrder(models.Model):
         return f'{self.user} purchase, value: {self.value}, status: {self.status}'
 
 
+class ContactUsMessage(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.CharField(max_length=120)
+    subject = models.CharField(max_length=120)
+    message = models.TextField()
+    date = models.DateField(auto_now_add=True);
 
-
-
-
-
-
-
+    def __str__(self):
+        return f'Name: {self.name}, Email: {self.email}, Subject: {self.subject}, Date: {self.date}'
 
 
 

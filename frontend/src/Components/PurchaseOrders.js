@@ -1,11 +1,16 @@
 import { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { loadStripe } from '@stripe/stripe-js';
+
 
 
 class PurchaseOrders extends Component {
+    stripePromise = loadStripe('pk_test_51I3nPqAHPQv4bwqaS2vvi7WXqZ3fSqRpokIGn2EXOr99RXKwL8FuwmQlj99UhdYV1eA3sSjNHfX8NyolJGr4gb7A00hsBy6BLx')
     state = {
         purchase_orders: null,
         purchase_confirmed: false,
+
+        loading: false,
     }
 
     async createPurchasingOrder() {
@@ -87,19 +92,50 @@ class PurchaseOrders extends Component {
         // console.log(data.products);
     }
 
+    async getKey() {
+        this.setState({
+            loading: true
+        })
+
+        let res = await fetch('http://localhost:8000/payment/')
+        let data = await res.json();
+        console.log(data.key);
+
+        const stripe = await this.stripePromise;
+        await stripe.redirectToCheckout({
+            // sessionId: session.id,
+            sessionId: data.id,
+        });
+        // this.setState({
+        //     loading: false
+        // })
+
+        // const stripePromise = loadStripe(data.key)
+    }
+
     render() {
         return (
-            this.state.purchase_confirmed
-                ?
-                <div>
-                <h1>Compra realizada com sucesso</h1>
-                    <Link to="/my_purchases">Ver minhas compras</Link>
-                </div>
-                :
-                <div>
-                    {/* <h1>Suas Compras</h1> */}
-                    <button className="main-button" onClick={e => this.createPurchasingOrder(e)}>Confirmar Compra</button>
-                </div>
+            <div>
+                {this.state.loading
+                    ?
+                    <div>Loading...</div>
+                    :
+                    <button onClick={() => this.getKey()}>
+                        get key
+                </button>
+                }
+            </div>
+            // this.state.purchase_confirmed
+            //     ?
+            //     <div>
+            //     <h1>Compra realizada com sucesso</h1>
+            //         <Link to="/my_purchases">Ver minhas compras</Link>
+            //     </div>
+            //     :
+            //     <div>
+            //         {/* <h1>Suas Compras</h1> */}
+            //         <button className="main-button" onClick={e => this.createPurchasingOrder(e)}>Confirmar Compra</button>
+            //     </div>
         )
     }
 }

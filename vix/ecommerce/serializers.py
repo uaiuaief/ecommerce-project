@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Product, PurchaseOrder
+from .models import Product, PurchaseOrder, ContactUsMessage
 from users.models import Profile 
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -55,5 +55,13 @@ class PurchaseOrderReadSerializer(serializers.HyperlinkedModelSerializer):
         model = PurchaseOrder
         fields = "__all__"
     
+
+class ContactUsMessageSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = ContactUsMessage
+        fields = "__all__"
+ 
     
 

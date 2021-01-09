@@ -36,12 +36,20 @@ Colocar opção de todos os estados br
 Erro ao criar usuário com mesmo nome ou email
 Footer design 
 
+08/01
+Ler documentação do stripe
+Backend da página de contato
+Responsive Design - Contact Page
+Responsive Design - Footer
+
 
 ----------------------------------------------
 Coisas que faltam para terminar o projeto:   |
 ----------------------------------------------
 
-**FAZENDO** -> Sistema de pagamento stripe
+HOLD => Sistema de pagamento stripe 
+**FAZENDO** -> 
+
 
 _Front end_
 404 page
@@ -53,8 +61,8 @@ Página de finalizar compra
 
 
 _Back end_
-Backend da página de contato
 Sistema de mudança de senha (Esqueci a senha)
+Adicionar mais de um produto de cada na ordem de compra
 
 
 ???

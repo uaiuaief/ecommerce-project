@@ -93,7 +93,7 @@ class App extends Component {
               ''
           }
 
-          <div style={{ minHeight: '400px' }}>
+          <div style={{ minHeight: '405px' }}>
             {/* <Route path="/" exact component={Banner} /> */}
 
             <Route path="/" exact render={() => (
@@ -126,7 +126,10 @@ class App extends Component {
 
 
             <Route path="/about" exact component={About} />
-            <Route path="/contact" exact component={ContactPage} />
+            {/* <Route path="/contact" exact component={ContactPage} /> */}
+            <Route path="/contact" exact render={(props) => (
+                <ContactPage appState={appState} />
+            )} />
 
             <Route path="/product/:product_id" exact appState={appState} render={(props) => (
               <ProductDetail

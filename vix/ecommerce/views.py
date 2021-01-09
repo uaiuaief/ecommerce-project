@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, Group
-from .models import Product, PurchaseOrder
+from .models import Product, PurchaseOrder, ContactUsMessage
 from users.models import Profile
 from django.contrib.auth import authenticate, login
 
 from rest_framework import viewsets, permissions, renderers
-from .serializers import (UserSerializer, GroupSerializer, 
-        ProductSerializer, ProfileSerializer, 
-        PurchaseOrderReadSerializer, PurchaseOrderWriteSerializer)
+from .serializers import (UserSerializer, GroupSerializer, ProductSerializer, 
+        ProfileSerializer, PurchaseOrderReadSerializer, PurchaseOrderWriteSerializer,
+        ContactUsMessageSerializer)
 
 from rest_framework.fields import ImageField
 
@@ -105,10 +105,6 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
             return PurchaseOrderReadSerializer
 
     def get_permissions(self):
-        """
-        Instantiates and returns the list of permissions that this view requires.
-        """
-
         user_id = self.request.user.id
         user_parameter_url = self.request.POST.get('user')
         logged_user_url = f"http://localhost:8000/users/{user_id}/"
@@ -122,6 +118,61 @@ class PurchaseOrderViewSet(viewsets.ModelViewSet):
             permission_classes = [permissions.IsAdminUser]
         return [permission() for permission in permission_classes]
 
+
+class ContactUsMessageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows contact us messages to be viewed or edited.
+    """
+    queryset = ContactUsMessage.objects.all()
+    serializer_class = ContactUsMessageSerializer
+
+    def get_permissions(self):
+        if self.action in ['create']:
+            permission_classes = [permissions.AllowAny]
+        else:
+            permission_classes = [permissions.IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+
+
+
+
+
+#TEST TEST TEST
+import stripe
+stripe.api_key = 'sk_test_51I3nPqAHPQv4bwqa1xUWX0juTCXomLHPqywjhvWMuU62ehi4BvVKFSB2xkf8cLklugQBhuoMhafr98FkSaf9nhGL00WPuKZ7Xl'
+
+
+def payment_view(request):
+    key = 'pk_test_51I3nPqAHPQv4bwqaS2vvi7WXqZ3fSqRpokIGn2EXOr99RXKwL8FuwmQlj99UhdYV1eA3sSjNHfX8NyolJGr4gb7A00hsBy6BLx'
+
+    session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'brl',
+                    'product_data': {
+                        'name': 'Vaso de cerâmica',
+                       # "images": [
+                       #     'http://127.0.0.1:8000/media/product_images/vaso11.jpg'
+                       #     ],
+                    },
+                    'unit_amount': 6500,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://localhost:3000/success',
+            cancel_url='http://localhost:3000/cancel',
+    )
+
+    
+    data = {
+        'key': key,
+        'id': session.id
+    }
+      
+    return JsonResponse(data)
 
 
 
