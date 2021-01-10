@@ -79,17 +79,7 @@ class PurchaseOrders extends Component {
     }
 
     async componentDidMount() {
-        // let user_id = localStorage.getItem('user_id')
-        // let token = localStorage.getItem('Token')
-        // let URL = `http://localhost:8000/purchase_orders`
-        // let res = await fetch(URL, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Authorization': `Token ${token}`
-        //     }
-        // })
-        // let data = await res.json();
-        // console.log(data.products);
+        this.getKey()
     }
 
     async getKey() {
@@ -97,18 +87,23 @@ class PurchaseOrders extends Component {
             loading: true
         })
 
-        let res = await fetch('http://localhost:8000/payment/')
+        // let body = JSON.parse(localStorage.cart).map(item => item.id)
+
+        let res = await fetch('http://localhost:8000/payment/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: localStorage.cart
+        })
+
         let data = await res.json();
         console.log(data.key);
 
         const stripe = await this.stripePromise;
         await stripe.redirectToCheckout({
-            // sessionId: session.id,
             sessionId: data.id,
         });
-        // this.setState({
-        //     loading: false
-        // })
 
         // const stripePromise = loadStripe(data.key)
     }

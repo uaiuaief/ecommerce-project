@@ -118,6 +118,9 @@ class CartItem extends Component {
 }
 
 class ShoppingCartPage extends Component {
+    state = {
+        purchase_submited: false
+    }
 
     emptyCart(e) {
         let element = document.querySelector('.cart-items')
@@ -203,7 +206,10 @@ class ShoppingCartPage extends Component {
                                     <>
                                         {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Finalizar compra</Link> */}
                                         <Link className="primary-button"
-                                            to='/purchase_orders/1'>Finalizar Compra</Link>
+                                            target="blank"
+                                            to='/purchase_orders/1'>
+                                                Finalizar Compra
+                                        </Link>
                                     </>
                                     :
                                     <>
@@ -215,8 +221,7 @@ class ShoppingCartPage extends Component {
                                                 flash_message_type: 'warning',
                                                 next_page: `/shopping-cart`
                                             }
-                                        }}>
-                                            Finalizar Compra</Link>
+                                        }}> Finalizar Compra </Link>
                                     </>
 
                                 }

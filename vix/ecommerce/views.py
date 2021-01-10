@@ -64,15 +64,6 @@ class ProfileViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-#class GroupViewSet(viewsets.ModelViewSet):
-#    """
-#    API endpoint that allows groups to be viewed or edited.
-#    """
-#    queryset = Group.objects.all()
-#    serializer_class = GroupSerializer
-#    permission_classes = [permissions.IsAuthenticated]
-
-
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows products to be viewed or edited.
@@ -140,39 +131,53 @@ class ContactUsMessageViewSet(viewsets.ModelViewSet):
 
 #TEST TEST TEST
 import stripe
-stripe.api_key = 'sk_test_51I3nPqAHPQv4bwqa1xUWX0juTCXomLHPqywjhvWMuU62ehi4BvVKFSB2xkf8cLklugQBhuoMhafr98FkSaf9nhGL00WPuKZ7Xl'
+import os
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
+stripe.api_key = os.environ.get('STRIPE_SK')
+key = 'pk_test_51I3nPqAHPQv4bwqaS2vvi7WXqZ3fSqRpokIGn2EXOr99RXKwL8FuwmQlj99UhdYV1eA3sSjNHfX8NyolJGr4gb7A00hsBy6BLx'
+
+
+@csrf_exempt
 def payment_view(request):
-    key = 'pk_test_51I3nPqAHPQv4bwqaS2vvi7WXqZ3fSqRpokIGn2EXOr99RXKwL8FuwmQlj99UhdYV1eA3sSjNHfX8NyolJGr4gb7A00hsBy6BLx'
+    if(request.method == 'POST'):
+        purchase_items = json.loads(request.body)
 
-    session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[{
-                'price_data': {
+        items_info = [(item.get('id'), item.get('amount')) for item in purchase_items]
+
+        line_items = []
+        for each in items_info:
+            each_id = each[0]
+            each_quantity = each[1]
+
+            item = Product.objects.filter(id=each_id).first()
+            each_line_item = {
                     'currency': 'brl',
-                    'product_data': {
-                        'name': 'Vaso de cerâmica',
-                       # "images": [
-                       #     'http://127.0.0.1:8000/media/product_images/vaso11.jpg'
-                       #     ],
-                    },
-                    'unit_amount': 6500,
-                },
-                'quantity': 1,
-            }],
-            mode='payment',
-            success_url='http://localhost:3000/success',
-            cancel_url='http://localhost:3000/cancel',
-    )
+                    'name': item.name,
+                    'amount': item.price,
+                    #'images': [item.image],
+                    'quantity': each_quantity,
+            }
+            line_items.append(each_line_item)
 
+
+        session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=line_items,
+                mode='payment',
+                success_url='http://localhost:3000/success',
+                cancel_url='http://localhost:3000/cancel',
+        )
     
-    data = {
-        'key': key,
-        'id': session.id
-    }
+        data = {
+            'key': key,
+            'id': session.id
+        }
       
-    return JsonResponse(data)
+        return JsonResponse(data)
+    return JsonRespones({})
 
 
 

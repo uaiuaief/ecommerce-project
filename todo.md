@@ -42,17 +42,23 @@ Backend da página de contato
 Responsive Design - Contact Page
 Responsive Design - Footer
 
+09/01
+Stripe checkout
+
+10/01
+???
+
 
 ----------------------------------------------
 Coisas que faltam para terminar o projeto:   |
 ----------------------------------------------
 
-HOLD => Sistema de pagamento stripe 
 **FAZENDO** -> 
-
 
 _Front end_
 404 page
+Purchase success page
+Purchase cancel page
 Responsive design - Resto
 Design da profile page (Forms)
 Sistema de busca
@@ -61,6 +67,7 @@ Página de finalizar compra
 
 
 _Back end_
+Stripe webhooks (criar ordem de compra quando pagamento for efetuado)
 Sistema de mudança de senha (Esqueci a senha)
 Adicionar mais de um produto de cada na ordem de compra
 
