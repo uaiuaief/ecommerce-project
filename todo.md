@@ -46,30 +46,35 @@ Responsive Design - Footer
 Stripe checkout
 
 10/01
-???
+Stripe webhooks (criar ordem de compra quando pagamento for efetuado)
+Esvaziar carrinho quando compra for efetuada
 
 
 ----------------------------------------------
 Coisas que faltam para terminar o projeto:   |
 ----------------------------------------------
 
-**FAZENDO** -> 
+**FAZENDO** -> Adicionar mais de um produto de cada na ordem de compra
 
 _Front end_
+
 404 page
 Purchase success page
 Purchase cancel page
-Responsive design - Resto
 Design da profile page (Forms)
 Sistema de busca
 Diferença entre "ínicio" e "produtos"
 Página de finalizar compra
+Responsive design - Navbar
+Responsive design - Profile Page
+Responsive design - Minhas compras
+Responsive design - Login
+Responsive design - Cadastro
 
 
 _Back end_
-Stripe webhooks (criar ordem de compra quando pagamento for efetuado)
 Sistema de mudança de senha (Esqueci a senha)
-Adicionar mais de um produto de cada na ordem de compra
+
 
 
 ???

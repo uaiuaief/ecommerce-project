@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users.views import register, CustomAuthToken
-from ecommerce.views import payment_view
+from ecommerce.views import stripe_webhook, PaymentView
 from rest_framework.authtoken import views
 
 
@@ -33,8 +33,8 @@ urlpatterns = [
     #path('api-token-auth/', views.obtain_auth_token),
     path('api-token-auth/', CustomAuthToken.as_view()),
     
-
-    path('payment/', payment_view),
+    path('payment/', PaymentView.as_view()),
+    path('stripe_webhook/', stripe_webhook),
 
 ]
 

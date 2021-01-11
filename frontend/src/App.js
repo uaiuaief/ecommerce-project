@@ -1,23 +1,26 @@
 import './App.css';
 
 // PAGES
-import { ContactPage } from './Components/ContactPage';
+import { CreateProductPage } from './Components/Admin/CreateProductPage';
 
+import { ContactPage } from './Components/ContactPage';
+import { ProfilePage } from './Components/ProfilePage';
+import { Login } from './Components/Login';
+import { Register } from './Components/Register';
+import { ProductDetail } from './Components/ProductDetail';
+import { ShoppingCartPage } from './Components/ShoppingCartPage';
+import { PurchaseOrders } from './Components/PurchaseOrders';
+import { MyPurchases } from './Components/MyPurchases';
+import { About } from './Components/About';
+import { PurchaseSuccess } from './Components/PurchaseSuccess';
+
+// Not pages
 import { Banner } from './Components/Banner';
 import { Header } from './Components/Header';
 import { Showcase } from './Components/Showcase';
 import { Footer } from './Components/Footer';
-import { Login } from './Components/Login';
 import { Logout } from './Components/Logout';
-import { Register } from './Components/Register';
-import { About } from './Components/About';
-import { ProductDetail } from './Components/ProductDetail';
-import { ProfilePage } from './Components/ProfilePage';
-import { ShoppingCartPage } from './Components/ShoppingCartPage';
-import { PurchaseOrders } from './Components/PurchaseOrders';
-import { MyPurchases } from './Components/MyPurchases';
 
-import { CreateProductPage } from './Components/Admin/CreateProductPage';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Component } from 'react';
@@ -88,9 +91,9 @@ class App extends Component {
           <div id="filler" style={{ height: "65px" }}></div>
           {this.state.flash_message
             ?
-              <div style={{ height: "42px" }}></div>
+            <div style={{ height: "42px" }}></div>
             :
-              ''
+            ''
           }
 
           <div style={{ minHeight: '405px' }}>
@@ -122,13 +125,10 @@ class App extends Component {
             )} />
 
 
-
-
-
             <Route path="/about" exact component={About} />
             {/* <Route path="/contact" exact component={ContactPage} /> */}
             <Route path="/contact" exact render={(props) => (
-                <ContactPage appState={appState} />
+              <ContactPage appState={appState} />
             )} />
 
             <Route path="/product/:product_id" exact appState={appState} render={(props) => (
@@ -142,6 +142,11 @@ class App extends Component {
             <Route path="/shopping-cart" exact render={() => (
               <ShoppingCartPage
                 addToCart={(product) => this.addToCart(product, true)}
+                appState={appState} />
+            )} />
+
+            <Route path="/purchase-success" exact render={() => (
+              <PurchaseSuccess
                 appState={appState} />
             )} />
 

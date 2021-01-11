@@ -79,6 +79,10 @@ class PurchaseOrders extends Component {
     }
 
     async componentDidMount() {
+        const token = localStorage.getItem("Token");
+        if (!token) {
+            window.location.replace('http://localhost:3000/login')
+        }
         this.getKey()
     }
 
@@ -87,18 +91,19 @@ class PurchaseOrders extends Component {
             loading: true
         })
 
-        // let body = JSON.parse(localStorage.cart).map(item => item.id)
+        const token = localStorage.getItem("Token");
 
         let res = await fetch('http://localhost:8000/payment/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
             },
-            body: localStorage.cart
+            body: localStorage.getItem('cart')
+
         })
 
         let data = await res.json();
-        console.log(data.key);
 
         const stripe = await this.stripePromise;
         await stripe.redirectToCheckout({
