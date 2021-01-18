@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 const NavbarItem = (props) => {
@@ -18,20 +18,29 @@ const NavbarItem = (props) => {
 class Navbar extends Component {
     state = {
         input_text: '',
-        highlighted: 'home'
+        highlighted: 'home',
+        redirect: false
     }
 
     handleChange(e) {
         this.setState({
             input_text: e.target.value
         })
+
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.setState({
-            input_text: ''
+            input_text: '',
+            redirect: true
         })
+
+        const [appState, setAppState] = this.props.appState
+        setAppState({
+            search_bar: this.state.input_text
+        })
+
     }
 
     changeCurrentPage(e, page) {
@@ -49,6 +58,16 @@ class Navbar extends Component {
 
     render() {
         const [appState, setAppState] = this.props.appState
+        if (this.state.redirect){
+            this.setState({
+                redirect: false
+            })
+            return (
+                <>
+                    <Redirect to="/"></Redirect>
+                </>
+            )
+        }
         return (
             <nav>
                 <div className="navbar-links">
@@ -94,4 +113,4 @@ class Navbar extends Component {
 }
 
 
-export { Navbar, NavbarItem}
+export { Navbar, NavbarItem }

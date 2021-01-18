@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Product, PurchaseOrder, ContactUsMessage
+from .models import Product, PurchaseOrder, ContactUsMessage, Purchase
 from users.models import Profile 
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -39,6 +39,15 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
+class PurchaseSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    product = ProductSerializer()
+
+    class Meta:
+        model = Purchase
+        fields = "__all__"
+
+
 class PurchaseOrderWriteSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
 
@@ -49,11 +58,13 @@ class PurchaseOrderWriteSerializer(serializers.HyperlinkedModelSerializer):
 
 class PurchaseOrderReadSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
-    products = ProductSerializer(many=True)
+    #products = ProductSerializer(many=True)
+    purchased_products = PurchaseSerializer(many=True)
 
     class Meta:
         model = PurchaseOrder
         fields = "__all__"
+        #fields = ['id', 'user', 'status', 'value', 'purchased_products', 'date']
     
 
 class ContactUsMessageSerializer(serializers.HyperlinkedModelSerializer):

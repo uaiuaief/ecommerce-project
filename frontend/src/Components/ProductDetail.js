@@ -30,13 +30,22 @@ class ProductDetail extends Component {
         }
         else {
             this.setState({
-                product: null
+                product: '404'
             })
         }
 
     }
 
     render() {
+        if (this.state.product === '404'){
+            console.log('redirect');
+            return (
+                <>
+                    <Redirect to="/404"/>
+                </>
+            )
+        }
+
         return (
             <div className="product-detail">
                 {this.state.product
@@ -55,7 +64,7 @@ class ProductDetail extends Component {
                                 <Link to="/shopping-cart"
                                     className="add-button"
                                     onClick={e => this.addButton(e)}>
-                                        <img src="/images/add_shopping_cart.svg" />
+                                    <img src="/images/add_shopping_cart.svg" />
                                         Comprar
                                 </Link>
                             </div>
@@ -63,7 +72,14 @@ class ProductDetail extends Component {
                         </div>
                     </>
                     :
-                    <div style={{ height: "600px", width: "600px" }}>
+                    <div style={{
+                        height: "600px",
+                        width: "600px",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <h1>Carregando...</h1>
                     </div>
                 }
             </div>

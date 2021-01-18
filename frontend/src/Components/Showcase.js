@@ -20,12 +20,21 @@ class Showcase extends Component {
         })
         // console.log(data.results);
 
-        document.querySelector('body').scrollIntoView({behavior: 'smooth', block: 'start' });
+        document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     }
 
+    componentWillUnmount() {
+        const [appState, setAppState] = this.props.appState
+        setAppState({
+            search_bar: ''
+        })
+    }
+
     render() {
-        const {appState} = this.props
+        const [appState, setAppState] = this.props.appState
+        let searchStr = appState.search_bar.toLowerCase()
+
         return (
             <div className="showcase">
                 <div className="title-container">
@@ -34,19 +43,23 @@ class Showcase extends Component {
                 <div className="products">
                     {this.state.results
                         ?
-                        this.state.results.reverse().map(product => {
+                        this.state.results.reverse().filter(product => {
+                            let product_name = product.name.toLowerCase()
+                            return product_name.indexOf(searchStr) !== -1
+                        }).map(product => {
+                            // this.state.results.reverse().map(product => {
                             return (
                                 <Link to={`/product/${product.id}`}>
                                     <Product name={product.name}
                                         price={product.price / 100}
-                                        appState={appState}
+                                        appState={this.props.appState}
                                         addToCart={this.props.addToCart}
                                         image={`${product.image}`} />
                                 </Link>
                             )
                         })
                         :
-                        <div style={{height: '600px'}}></div>
+                        <div style={{ height: '600px' }}></div>
                     }
                 </div>
             </div>

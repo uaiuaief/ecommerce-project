@@ -49,22 +49,23 @@ Stripe checkout
 Stripe webhooks (criar ordem de compra quando pagamento for efetuado)
 Esvaziar carrinho quando compra for efetuada
 
+17/01
+Adicionar mais de um produto de cada na ordem de compra
+Purchase success page
+404 page
+Página de finalizar compra
+Sistema de busca
 
-----------------------------------------------
-Coisas que faltam para terminar o projeto:   |
-----------------------------------------------
 
-**FAZENDO** -> Adicionar mais de um produto de cada na ordem de compra
+------------------------------------------------------
+|     Coisas que faltam para terminar o projeto:     |
+------------------------------------------------------
+
+**FAZENDO** -> 
 
 _Front end_
-
-404 page
-Purchase success page
-Purchase cancel page
 Design da profile page (Forms)
-Sistema de busca
 Diferença entre "ínicio" e "produtos"
-Página de finalizar compra
 Responsive design - Navbar
 Responsive design - Profile Page
 Responsive design - Minhas compras

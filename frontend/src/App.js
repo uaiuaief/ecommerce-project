@@ -13,6 +13,7 @@ import { PurchaseOrders } from './Components/PurchaseOrders';
 import { MyPurchases } from './Components/MyPurchases';
 import { About } from './Components/About';
 import { PurchaseSuccess } from './Components/PurchaseSuccess';
+import { PageNotFound } from './Components/PageNotFound';
 
 // Not pages
 import { Banner } from './Components/Banner';
@@ -38,6 +39,8 @@ class App extends Component {
 
     flash_message: '',
     flash_message_type: '',
+
+    search_bar: ''
   }
 
   setState(dict) {
@@ -97,72 +100,72 @@ class App extends Component {
           }
 
           <div style={{ minHeight: '405px' }}>
-            {/* <Route path="/" exact component={Banner} /> */}
 
-            <Route path="/" exact render={() => (
-              <Showcase
-                appState={appState}
-                addToCart={(product) => this.addToCart(product)} />
-            )} />
+            <Switch>
 
-            <Route path="/login" exact render={props => (
-              <Login
-                location={props.location}
-                logged_in={this.state.logged_in}
-                setAppState={list => this.setState(list)} />
-            )} />
+              <Route path="/" exact render={() => (
+                <Showcase
+                  appState={appState}
+                  addToCart={(product) => this.addToCart(product)} />
+              )} />
 
-            <Route path="/logout" exact render={props => (
-              <Logout logged_in={this.state.logged_in}
-                setAppState={list => this.setState(list)} />
-            )} />
+              <Route path="/login" exact render={props => (
+                <Login
+                  location={props.location}
+                  logged_in={this.state.logged_in}
+                  setAppState={list => this.setState(list)} />
+              )} />
 
-            {/* <Route path="/register" exact component={Register} /> */}
-
-            <Route path="/register" exact render={() => (
-              <Register
-                appState={appState} />
-            )} />
+              <Route path="/logout" exact render={props => (
+                <Logout logged_in={this.state.logged_in}
+                  setAppState={list => this.setState(list)} />
+              )} />
 
 
-            <Route path="/about" exact component={About} />
-            {/* <Route path="/contact" exact component={ContactPage} /> */}
-            <Route path="/contact" exact render={(props) => (
-              <ContactPage appState={appState} />
-            )} />
+              <Route path="/register" exact render={() => (
+                <Register
+                  appState={appState} />
+              )} />
 
-            <Route path="/product/:product_id" exact appState={appState} render={(props) => (
-              <ProductDetail
-                props={props}
-                appState={appState}
-                addToCart={(product) => this.addToCart(product)} />
-            )} />
-            <Route path="/profile/:user_id" exact component={ProfilePage} />
 
-            <Route path="/shopping-cart" exact render={() => (
-              <ShoppingCartPage
-                addToCart={(product) => this.addToCart(product, true)}
-                appState={appState} />
-            )} />
+              <Route path="/about" exact component={About} />
+              <Route path="/contact" exact render={(props) => (
+                <ContactPage appState={appState} />
+              )} />
 
-            <Route path="/purchase-success" exact render={() => (
-              <PurchaseSuccess
-                appState={appState} />
-            )} />
+              <Route path="/product/:product_id" exact appState={appState} render={(props) => (
+                <ProductDetail
+                  props={props}
+                  appState={appState}
+                  addToCart={(product) => this.addToCart(product)} />
+              )} />
+              <Route path="/profile/:user_id" exact component={ProfilePage} />
 
-            <Route path="/my_purchases" exact component={MyPurchases} />
+              <Route path="/shopping-cart" exact render={() => (
+                <ShoppingCartPage
+                  addToCart={(product) => this.addToCart(product, true)}
+                  appState={appState} />
+              )} />
 
-            <Route path="/purchase_orders/:user_id" exact render={() =>
-              <PurchaseOrders
-                appState={appState} />
-            } />
+              <Route path="/purchase-success" exact render={() => (
+                <PurchaseSuccess
+                  appState={appState} />
+              )} />
 
-            <Route path="/create-product" exact component={CreateProductPage} />
+              <Route path="/my_purchases" exact component={MyPurchases} />
 
+              <Route path="/purchase_orders/:user_id" exact render={() =>
+                <PurchaseOrders
+                  appState={appState} />
+              } />
+
+              <Route path="/create-product" exact component={CreateProductPage} />
+
+              <Route path="/" component={PageNotFound} />
+
+            </Switch>
           </div>
-          {/* <Showcase /> */}
           <Footer />
-          {/* <div id="filler" style={{ height: "50px" }}></div> */}
         </div>
       </BrowserRouter>
     );

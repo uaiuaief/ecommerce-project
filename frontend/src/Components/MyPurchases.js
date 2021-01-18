@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import { LoginRequired } from "./LoginRequired"
+
 
 class PurchaseProduct extends Component {
     render() {
@@ -8,14 +10,14 @@ class PurchaseProduct extends Component {
             <div id={`item-${this.props.listID}`} className="purchase-item">
                 <div className="flex ">
                     <div className="cart-image-wrapper">
-                        <img src={product.image} alt='' />
+                        <img src={product.product.image} alt='' />
                     </div>
                     <div className="item-description">
                         <h1 className="item-title">
-                            {product.name}
+                            {product.product.name}
                         </h1>
                         <p>
-                            {product.description}
+                            {product.product.description}
                         </p>
                     </div>
                 </div>
@@ -24,16 +26,20 @@ class PurchaseProduct extends Component {
                         Quantidade
                     </div>
                     <div className="">
-                        <p className="info-text">1{this.props.product.amount}</p>
+                        <p className="info-text">{this.props.product.quantity}</p>
                     </div>
                     <small>Unidades</small>
+                    <div style={{ marginTop: ".5em", fontSize: '1.2em' }}>
+                        R$ {product.product.price / 100},00
+                    </div>
                 </div>
                 <div className="price-container">
                     <div className="">
                         Total:
                     </div>
                     <div className="price">
-                        R$ {product.price / 100},00
+                        R$ {this.props.product.quantity * product.product.price / 100},00
+
                     </div>
                 </div>
             </div>
@@ -75,7 +81,7 @@ class Purchase extends Component {
 
                 <div className="purchase-product-list">
                     {/* <h2>Produtos</h2> */}
-                    {purchase.products.map(product => {
+                    {purchase.purchased_products.map(product => {
                         return (
                             <PurchaseProduct
                                 listID={product.id}
@@ -115,13 +121,18 @@ class MyPurchases extends Component {
     render() {
         return (
             <section className="my-purchases-page">
+                <LoginRequired
+                    next_page="/my_purchases"
+                    flash_message="Faça login para visualizar seus pedidos"
+                    flash_message_type="warning" />
+
                 <h1>Últimas Compras</h1>
 
 
                 <div className="purchase-list">
                     {this.state.purchases == null
                         ?
-                        <p>Loading...</p>
+                        <p>Carregando...</p>
 
                         :
                         this.state.purchases.length

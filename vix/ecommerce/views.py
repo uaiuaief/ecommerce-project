@@ -5,13 +5,13 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, Group
-from .models import Product, PurchaseOrder, ContactUsMessage
+from .models import Product, Purchase, PurchaseOrder, ContactUsMessage
 from users.models import Profile
 from django.contrib.auth import authenticate, login
 from rest_framework import viewsets, authentication, permissions, renderers, views
 from .serializers import (UserSerializer, GroupSerializer, ProductSerializer, 
         ProfileSerializer, PurchaseOrderReadSerializer, PurchaseOrderWriteSerializer,
-        ContactUsMessageSerializer)
+        ContactUsMessageSerializer, PurchaseSerializer)
 
 from rest_framework.fields import ImageField
 from django.views.decorators.csrf import csrf_exempt
@@ -77,6 +77,11 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     #permission_classes = [permissions.AllowAny]
     #image = ImageField(write_only=True)
     
+
+class PurchaseViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Purchase.objects.all()
+    serializer_class = PurchaseSerializer
+
 
 class PurchaseOrderViewSet(viewsets.ModelViewSet):
     """
@@ -235,7 +240,11 @@ def fulfill_order(session):
 
     for each in products:
         product = Product.objects.filter(id=each[0]).first()
-        order.products.add(product)
+        purchase = Purchase(purchase_order=order, product=product, quantity=each[1])
+        purchase.save()
+        order.purchased_products.add(purchase)
+
+        #order.products.add(product)
 
     print("@@@@@@@@@@@@@@@@@@@")
     print(session)

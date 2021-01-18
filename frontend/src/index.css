@@ -1233,6 +1233,74 @@ p.info-text {
 
 
 
+
+/* PURCHASE SUCCESS PAGE */ 
+
+.purchase-success-page {
+    width: 70%;
+    margin: 2em auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-bg-2);
+    box-shadow: 0px 3px 20px 0px #999;
+    height: 405px;
+    border-radius: 4px;
+}
+
+.purchase-success-page .buttons {
+    /* display: flex; */
+    margin-top: 1em;
+
+}
+
+.purchase-success-page a {
+    margin-top: 1em !important;
+    margin-left: 1em;
+    display: block;
+    width: 240px;
+    font-size: 1.1em;
+    font-weight: 600;
+    /* color: var(--light-text); */
+}
+
+
+
+/* END PURCHASE SUCCESS PAGE*/
+
+
+
+
+/* 404 PAGE */
+.page-not-found {
+    width: 70%;
+    height: 500px;
+    margin: 2em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-not-found h1{
+    font-size: 8em;
+}
+
+.page-not-found p{
+    font-size: 2em;
+}
+
+.page-not-found .primary-button {
+    margin: 2.0em auto;
+    font-size: 1.2em;
+}
+
+/* END 404 PAGE */
+
+
+
+
+
 /* PROFILE PAGE */ 
 .profile-page {
     /* background-color: #ccc; */

@@ -131,7 +131,6 @@ class ChangeAddressForm extends Component {
 
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <form onSubmit={e => this.submitAddressForm(e)} name="address" className="change-address-form">

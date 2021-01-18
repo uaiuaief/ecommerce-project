@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const { Component } = require("react");
 
 class PurchaseSuccess extends Component {
@@ -11,11 +13,15 @@ class PurchaseSuccess extends Component {
 
     render() {
         return (
-            <div>
-                <h1> SEU PEDIDO FOI REALIZADO COM SUCESSO </h1>
+            <div className="purchase-success-page">
+                <h1>Seu pedido foi realizado com sucesso !</h1>
+                <div className="buttons">
+                    <Link className="primary-button" to="/">Continuar Comprando</Link>
+                    <Link className="muted-button-2" to="/my_purchases">Ver Pedido</Link>
+                </div>
             </div>
         )
     }
 }
 
-export {PurchaseSuccess}
+export { PurchaseSuccess }
