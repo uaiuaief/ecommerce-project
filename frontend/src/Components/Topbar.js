@@ -9,7 +9,7 @@ class Topbar extends Component {
         username: '',
         password: '',
         logged_in: false,
-        show_menu: false,
+        show_navbar: 'hidden',
     }
 
     dropMenu(e) {
@@ -24,20 +24,28 @@ class Topbar extends Component {
 
     }
 
+    toggleNavbar(e) {
+        // let element = document.querySelector('.mobile-navbar')
+        // console.log(this.state.show_navbar);
+        let visibility = this.state.show_navbar === 'visible' ? 'hidden' : 'visible'
+        this.setState({
+            show_navbar: visibility
+        })
+    }
+
     render() {
         const [appState, setAppState] = this.props.appState;
         return (
             <div className="topbar">
                 {appState.flash_message
                     ?
-                        <FlashMessage
-                            appState={this.props.appState} />
+                    <FlashMessage
+                        appState={this.props.appState} />
                     :
-                        ''
-
+                    ''
                 }
-                <div className="topbar-content">
 
+                <div id="default-topbar" className="topbar-content">
                     <div className="left-side">
                         <div className="logo">
                             <Link to="/">
@@ -89,24 +97,110 @@ class Topbar extends Component {
                             </div>
                         </Link>
                     </div>
-                    {/* <div className="right-side social-media-icons">
-                    <div className="">
-                        <Link to="">
-                            <img alt="whatsapp" className="social-media-icon" src="/images/whatsapp.svg" />
-                        </Link>
-                    </div>
-                    <div className="">
-                        <Link to="">
-                            <img alt="facebook" className="social-media-icon" src="/images/facebook.svg" />
-                        </Link>
-                    </div>
-                    <div className="">
-                        <Link to="">
-                            <img alt="instagram" className="social-media-icon" src="/images/instagram.svg" />
-                        </Link>
-                    </div>
-                </div> */}
                 </div>
+                <div id="mobile-topbar" className="topbar-content">
+                    <Link to="/">
+                        {/* <img src="/images/vixlogo.png" /> */}
+                        <h1>Logo</h1>
+                    </Link>
+                    <div>
+                        <button onClick={e => this.toggleNavbar(e)} id="mobile-navbar-button">
+                            {this.state.show_navbar === 'hidden'
+                                ?
+                                <img src="/images/menu-icon.svg" alt="menu-icon" />
+                                :
+                                <img src="/images/close.svg" alt="menu-icon" />
+                            }
+                        </button>
+                    </div>
+                </div>
+                <div className='mobile-navbar' style={{
+                    visibility: this.state.show_navbar
+                }}>
+                    {/* <Link to="/shopping-cart" className="topbar-item shopping-cart">
+                        <div className="cart-wrapper">
+                            <img src="/images/shopping_cart.svg" className="icon" />
+                            <small>{appState.cart_amount}</small>
+                        </div>
+                    </Link>
+                    {localStorage.getItem('Token')
+                        ?
+                        <div className="user-menu mobile-user-menu">
+                            <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg" /></Link>
+                            <div className="user-menu-box">
+                                <Link className="menu-option" to={`/profile/${localStorage.getItem('user_id')}`}>
+                                    <img alt="profile" className="icon" src="/images/account_circle.svg" />
+                                        Minha Conta
+                                    </Link>
+                                <Link className="menu-option" to="/my_purchases">
+                                    <img alt="my-purchases" className="icon" src="/images/shopping_bag.svg" />
+                                        Minhas Compras
+                                    </Link>
+                                <Link to='/logout' className="menu-option">
+                                    <img alt="logout" className="icon logout-icon" src="/images/logout.svg" />
+                                        Sair
+                                    </Link>
+                            </div>
+                        </div>
+
+                        :
+                        <div className="account-links">
+                            <Link onClick={e => this.toggleNavbar(e)} to="/login">Login</Link>
+                            <Link onClick={e => this.toggleNavbar(e)} to="/register">Cadastre-se</Link>
+                        </div>
+                    } */}
+
+
+
+
+                    <div className="right-side">
+                        {localStorage.getItem('Token')
+                            ?
+                            <div className="user-menu">
+                                {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Olá {localStorage.getItem('username')}</Link> */}
+                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg" /></Link>
+                                <div className="user-menu-box">
+                                    <Link className="menu-option" to={`/profile/${localStorage.getItem('user_id')}`}>
+                                        <img alt="profile" className="icon" src="/images/account_circle.svg" />
+                                        Minha Conta
+                                    </Link>
+                                    <Link className="menu-option" to="/my_purchases">
+                                        <img alt="my-purchases" className="icon" src="/images/shopping_bag.svg" />
+                                        Minhas Compras
+                                    </Link>
+                                    <Link to='/logout' className="menu-option">
+                                        <img alt="logout" className="icon logout-icon" src="/images/logout.svg" />
+                                        Sair
+                                    </Link>
+                                </div>
+                            </div>
+                            :
+                            <>
+                                <Link to="/login" className="topbar-item login link">
+                                    <img alt="login" className="icon" src="/images/account_circle.svg" />
+                                    Login
+                                </Link>
+                                <Link to="/register" className="topbar-item register link">
+                                    <img alt="register" className="icon" src="/images/sign-up.svg" />
+                                    Cadastre-se
+                                </Link>
+                            </>}
+                        <Link to="/shopping-cart" className="topbar-item shopping-cart">
+                            <div className="cart-wrapper">
+                                {/* <Link to="/shopping-cart"></Link> */}
+                                <img src="/images/shopping_cart.svg" className="icon" />
+                                <small>{appState.cart_amount}</small>
+                            </div>
+                        </Link>
+                    </div>
+
+                    <Link onClick={e => this.toggleNavbar(e)} to="/">Início</Link>
+                    <Link onClick={e => this.toggleNavbar(e)} to="/">Produtos</Link>
+                    <Link onClick={e => this.toggleNavbar(e)} to="/about">Sobre Nós</Link>
+                    <Link onClick={e => this.toggleNavbar(e)} to="/contact">Contato</Link>
+
+                </div>
+
             </div >
         )
     }

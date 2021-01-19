@@ -56,29 +56,30 @@ Purchase success page
 Página de finalizar compra
 Sistema de busca
 
+17/01
+Responsive design - Cadastro
+Responsive design - Login
+Responsive design - About Page
+
 
 ------------------------------------------------------
 |     Coisas que faltam para terminar o projeto:     |
 ------------------------------------------------------
 
-**FAZENDO** -> 
+**FAZENDO** -> Responsive design - Navbar
 
 _Front end_
+Responsive design - Profile Page
+Responsive design - Empty cart page
+Responsive design - Shopping cart page
+Responsive design - Minhas compras
 Design da profile page (Forms)
 Diferença entre "ínicio" e "produtos"
-Responsive design - Navbar
-Responsive design - Profile Page
-Responsive design - Minhas compras
-Responsive design - Login
-Responsive design - Cadastro
+Mensagem que aparece quando senha e confirmar senha são diferentes
 
 
 _Back end_
 Sistema de mudança de senha (Esqueci a senha)
-
-
-
-???
 
 
 

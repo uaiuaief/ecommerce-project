@@ -2,17 +2,18 @@ import { Component } from "react"
 
 class About extends Component {
     componentDidMount() {
-        document.querySelector('body').scrollIntoView({behavior: 'smooth', block: 'start' });
+        document.querySelector('body').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     render() {
         return (
-            <section style={{
-                backgroundImage: "url(/images/aboutus-background.jpg)",
-                backgroundPosition: "30% 40%",
-                backgroundSize: "cover"
-            }}
-                className="about">
+            <section
+                className="about"
+                style={{
+                    backgroundImage: "url(/images/aboutus-background.jpg)",
+                    backgroundPosition: "30% 40%",
+                    backgroundSize: "cover"
+                }}>
                 <div className="about-wrapper">
                     <div className="text-container">
                         <h1>Sobre Nós</h1>

@@ -262,11 +262,14 @@ header .content {
 
 /* NAV BAR */
 
-
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.mobile-navbar {
+    display: none;
 }
 
 .navbar-links {
@@ -364,6 +367,10 @@ nav {
 
 
 /* TOP BAR */
+#mobile-topbar{
+    display: none;
+}
+
 .topbar {
     background-color: var(--dark-bg);
     position: fixed;
@@ -1790,6 +1797,90 @@ button.highlighted-tab:hover {
         /* display: none; */
     }
 
+    #default-topbar {
+        display: none;
+    }
+
+    .topbar-content{
+        width: 100%;
+    }
+
+    #mobile-topbar {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: .6em 1em;
+    }
+
+    .mobile-navbar {
+        position: absolute;
+        right: 0;
+
+        display: flex;
+        flex-direction: column;
+        background-color: var(--dark-bg);
+        background-color: rgba(2, 1, 1, .9);
+        
+        width: 80%;
+        height: 100vh;
+        /* padding: 1em 1em; */
+    }
+
+    .mobile-navbar a {
+        font-size: 1.0em;
+        /* margin-top: 1em; */
+        text-align: left;
+        color: var(--light-bg-2);
+        border-bottom: 1px solid #444;
+        padding: .7em 1em
+    }
+
+    .mobile-navbar a:hover {
+        color: var(--primary-color);
+    }
+
+    .mobile-navbar .account-links {
+        margin-top: 1em;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .mobile-navbar .account-links a {
+        color: #0d76ee ;
+        border: none;
+    }
+
+    .mobile-navbar .right-side {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #444;
+        padding: .7em 0em;
+    }
+
+    .mobile-navbar .right-side a{
+        margin: 0;
+        font-size: .6em;
+        border: none;
+    }
+
+    #mobile-navbar-button {
+        /* position: absolute; */
+        top: 1em;
+        right: 1.5em;
+
+        background-color: unset;
+        border: none;
+    }
+
+    #mobile-navbar-button:hover {
+        cursor: pointer;
+    }
+    
+    #mobile-navbar-button img{
+        width: 2.8em;
+    }
+
    .navbar-links {
        display: none
    } 
@@ -1833,7 +1924,8 @@ button.highlighted-tab:hover {
    }
 
    .product-detail .add-button {
-       margin: 1em auto;
+       margin: 1.6em auto;
+       /* margin-bottom: 2em; */
        width: 95%;
        display: flex;
        justify-content: center;
@@ -1841,6 +1933,14 @@ button.highlighted-tab:hover {
 
    .shopping-cart-section {
        width: 100%;
+   }
+
+   .empty-cart {
+       height: 480px;
+       box-shadow: none;
+       padding: 0 2em;
+       margin: 0;
+       font-size: .8em;
    }
 
    .shopping-cart-section .heading {
@@ -1887,7 +1987,8 @@ button.highlighted-tab:hover {
    .purchase-summary {
        flex-direction: column;
        font-size: 1em;
-       margin-top: 1em;
+       /* margin-top: 1em; */
+       margin: 2em 0;
 
    }
 
@@ -1904,7 +2005,7 @@ button.highlighted-tab:hover {
        width: 100%;
        display: block;
        margin: 0;
-       margin-top: .7em;
+       margin-top: 1em;
        /* padding: 0; */
        text-align: center;
    }
@@ -1912,6 +2013,40 @@ button.highlighted-tab:hover {
    .remove-product-button {
        /* display: none; */
        /* position: absolute; */
+   }
+
+   .login-page, .register-page {
+       background-image: none !important;
+   }
+
+   .login-area, .register-area {
+       margin: 0;
+       box-shadow: none;
+   }
+
+   .about {
+       height: fit-content;
+       padding: 2.8em 1.3em;
+       background-image: none !important;
+   }
+
+   .about h1 {
+       /* margin: 0; */
+       font-size: 3em;
+       text-align: center;
+   }
+
+   .about-wrapper {
+       display: block;
+       margin: 0;
+       /* padding: 1em; */
+       width: 100%;
+   }
+
+   .about .text-container {
+       all: initial;
+       line-height: 1.7em;
+
    }
 
    .contact-container {
@@ -1936,6 +2071,7 @@ button.highlighted-tab:hover {
    footer .useful-links {
        flex-direction: column;
        justify-content: center;
+       font-size: .8em;
        /* align-items: center; */
 
    }
@@ -1947,7 +2083,7 @@ button.highlighted-tab:hover {
 
    .copyright {
        width: 100%;
-       font-size: .8em;
+       font-size: .65em;
        margin-top: 1em;
    }
 

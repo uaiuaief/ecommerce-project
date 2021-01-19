@@ -24,7 +24,10 @@ class FlashMessage extends Component {
                     {/* <p>{this.state.message}</p> */}
                     <p>{appState.flash_message}</p>
                     <button onClick={(e) => this.hideError(e)}>
-                        <img src="/images/close.svg" />
+                        <img src="/images/close.svg" alt='close'
+                        style={{
+                            filter: 'invert(100%)'
+                        }} />
                     </button>
                 </div>
                 :

@@ -58,7 +58,7 @@ class Navbar extends Component {
 
     render() {
         const [appState, setAppState] = this.props.appState
-        if (this.state.redirect){
+        if (this.state.redirect) {
             this.setState({
                 redirect: false
             })
@@ -69,45 +69,47 @@ class Navbar extends Component {
             )
         }
         return (
-            <nav>
-                <div className="navbar-links">
-                    <NavbarItem to="/"
-                        func={(e, page) => this.changeCurrentPage(e, page)}
-                        name='home'
-                        highlighted={this.state.highlighted}
-                        text="Início" />
+            <>
+                <nav id="default-navbar">
+                    <div className="navbar-links">
+                        <NavbarItem to="/"
+                            func={(e, page) => this.changeCurrentPage(e, page)}
+                            name='home'
+                            highlighted={this.state.highlighted}
+                            text="Início" />
 
-                    <NavbarItem to="/"
-                        func={(e, page) => this.changeCurrentPage(e, page)}
-                        name='product'
-                        highlighted={this.state.highlighted}
-                        text="Produtos" />
+                        <NavbarItem to="/"
+                            func={(e, page) => this.changeCurrentPage(e, page)}
+                            name='product'
+                            highlighted={this.state.highlighted}
+                            text="Produtos" />
 
-                    <NavbarItem to="/about"
-                        func={(e, page) => this.changeCurrentPage(e, page)}
-                        name='about'
-                        highlighted={this.state.highlighted}
-                        text="Sobre nós" />
+                        <NavbarItem to="/about"
+                            func={(e, page) => this.changeCurrentPage(e, page)}
+                            name='about'
+                            highlighted={this.state.highlighted}
+                            text="Sobre nós" />
 
-                    <NavbarItem to="/contact"
-                        func={(e, page) => this.changeCurrentPage(e, page)}
-                        name='contact'
-                        highlighted={this.state.highlighted}
-                        text="Contato" />
-                </div>
-                <div className="search-bar-container">
-                    <form className="search-bar" onSubmit={e => this.handleSubmit(e)}>
-                        <input
-                            onChange={e => this.handleChange(e)}
-                            placeholder="O que você está procurando?"
-                            value={this.state.input_text}>
-                        </input>
-                        <button type="button" onClick={(e) => this.showSearchBar(e)}>
-                            <img className="icon" src="/images/search-icon.svg" />
-                        </button>
-                    </form>
-                </div>
-            </nav>
+                        <NavbarItem to="/contact"
+                            func={(e, page) => this.changeCurrentPage(e, page)}
+                            name='contact'
+                            highlighted={this.state.highlighted}
+                            text="Contato" />
+                    </div>
+                    <div className="search-bar-container">
+                        <form className="search-bar" onSubmit={e => this.handleSubmit(e)}>
+                            <input
+                                onChange={e => this.handleChange(e)}
+                                placeholder="O que você está procurando?"
+                                value={this.state.input_text}>
+                            </input>
+                            <button type="button" onClick={(e) => this.showSearchBar(e)}>
+                                <img className="icon" src="/images/search-icon.svg" />
+                            </button>
+                        </form>
+                    </div>
+                </nav>
+            </>
         )
     }
 }
