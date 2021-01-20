@@ -29,7 +29,7 @@ class PurchaseProduct extends Component {
                         <p className="info-text">{this.props.product.quantity}</p>
                     </div>
                     <small>Unidades</small>
-                    <div style={{ marginTop: ".5em", fontSize: '1.2em' }}>
+                    <div className="unit-price" style={{ marginTop: ".5em", fontSize: '1.2em' }}>
                         R$ {product.product.price / 100},00
                     </div>
                 </div>
@@ -64,12 +64,27 @@ class Purchase extends Component {
     render() {
         const { purchase } = this.props;
         let img_src = this.state.collapsed ? "/images/expand.svg" : "/images/collapse.svg"
+
+        let status = purchase.status;
+        switch (status) {
+            case 'waiting payment':
+                status = 'Aguardando pagamento' 
+                break;
+        
+            case 'payment confirmed':
+                status = 'Pagamento confirmado'; 
+                break;
+            
+            default:
+                return
+        }
+
         return (
             <div id={`purchase-${purchase.id}`} className="purchase" >
                 <div className="purchase-info">
                     <p><strong>Data:</strong> {purchase.date} </p>
                     <p><strong>Valor da compra:</strong>  R$ {purchase.value / 100},00 </p>
-                    <p><strong>Status:</strong> {purchase.status == "waiting payment" ? "Aguardando pagamento" : ""} </p>
+                    <p><strong>Status:</strong> {status} </p>
                 </div>
                 <div className="heading">
                     <h1 className="page-title">Produtos</h1>

@@ -41,24 +41,26 @@ class UserProfileForm extends Component {
                 <form onSubmit={e => this.submitUserProfileForm(e)}
                     name="user-profile"
                     className="user-profile-form">
-                    <div>
-                        <label className="required" htmlFor="nome">Nome completo</label>
-                        <input id="nome"
-                            onChange={e => this.setState({ full_name: e.target.value })}
-                            maxLength="60"
-                            value={this.state.full_name}
-                            required ></input>
-                    </div>
-                    <div className="gender">
-                        <label className="required" htmlFor="sexo">Sexo</label>
-                        <select onChange={e => this.setState({ gender: e.target.value })}
-                            value={this.state.gender}
-                            required
-                            id="sexo"
-                            type="selection">
-                            <option>Masculino</option>
-                            <option>Feminino</option>
-                        </select>
+                    <div className="field-group">
+                        <div className="name-input">
+                            <label className="required" htmlFor="nome">Nome completo</label>
+                            <input id="nome"
+                                onChange={e => this.setState({ full_name: e.target.value })}
+                                maxLength="60"
+                                value={this.state.full_name}
+                                required ></input>
+                        </div>
+                        <div className="gender">
+                            <label className="required" htmlFor="sexo">Sexo</label>
+                            <select onChange={e => this.setState({ gender: e.target.value })}
+                                value={this.state.gender}
+                                required
+                                id="sexo"
+                                type="selection">
+                                <option>Masculino</option>
+                                <option>Feminino</option>
+                            </select>
+                        </div>
                     </div>
                     <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
@@ -134,8 +136,8 @@ class ChangeAddressForm extends Component {
         return (
             <div>
                 <form onSubmit={e => this.submitAddressForm(e)} name="address" className="change-address-form">
-                    <div className="zipcode">
-                        <div className="">
+                    <div className="zipcode field-group">
+                        <div className="zipcode-input">
                             <label htmlFor="cep">Insira o CEP</label>
                             <input id="cep"
                                 onChange={e => this.setState({ zip_code: e.target.value })}
@@ -146,8 +148,8 @@ class ChangeAddressForm extends Component {
                             </input>
                         </div>
                         <div className="" >
-                            <button className="zipcode-button"
-                                onClick={(e) => this.searchCode(e)} type="button">Consultar meu CEP</button>
+                            <button className="primary-button zipcode-button"
+                                onClick={(e) => this.searchCode(e)} type="button">Consultar CEP</button>
                         </div>
                     </div>
 
@@ -257,7 +259,7 @@ class ChangeAddressForm extends Component {
 
                     </div>
 
-                    <button className="form-submit secondary-button" type="submit">Salvar Alterações</button>
+                    <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
         )

@@ -78,11 +78,11 @@ class Navbar extends Component {
                             highlighted={this.state.highlighted}
                             text="Início" />
 
-                        <NavbarItem to="/"
+                        {/* <NavbarItem to="/"
                             func={(e, page) => this.changeCurrentPage(e, page)}
                             name='product'
                             highlighted={this.state.highlighted}
-                            text="Produtos" />
+                            text="Produtos" /> */}
 
                         <NavbarItem to="/about"
                             func={(e, page) => this.changeCurrentPage(e, page)}

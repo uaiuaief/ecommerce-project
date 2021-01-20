@@ -99,7 +99,7 @@ class App extends Component {
             ''
           }
 
-          <div style={{ minHeight: '405px' }}>
+          <div style={{ minHeight: '420px' }}>
 
             <Switch>
 

@@ -30,7 +30,7 @@ class Register extends Component {
         e.preventDefault();
         let element = document.querySelector('.password-errors')
         if (!this.passwordsMatch()) {
-            element.innerHTML = 'passwords must match'
+            element.innerHTML = 'As senhas precisam ser iguais'
             return
         }
         element.innerHTML = ''

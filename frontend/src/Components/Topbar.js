@@ -153,52 +153,37 @@ class Topbar extends Component {
 
 
 
-                    <div className="right-side">
-                        {localStorage.getItem('Token')
-                            ?
-                            <div className="user-menu">
-                                {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Olá {localStorage.getItem('username')}</Link> */}
-                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg" /></Link>
-                                <div className="user-menu-box">
-                                    <Link className="menu-option" to={`/profile/${localStorage.getItem('user_id')}`}>
-                                        <img alt="profile" className="icon" src="/images/account_circle.svg" />
-                                        Minha Conta
-                                    </Link>
-                                    <Link className="menu-option" to="/my_purchases">
-                                        <img alt="my-purchases" className="icon" src="/images/shopping_bag.svg" />
-                                        Minhas Compras
-                                    </Link>
-                                    <Link to='/logout' className="menu-option">
-                                        <img alt="logout" className="icon logout-icon" src="/images/logout.svg" />
-                                        Sair
-                                    </Link>
-                                </div>
-                            </div>
-                            :
-                            <>
-                                <Link to="/login" className="topbar-item login link">
-                                    <img alt="login" className="icon" src="/images/account_circle.svg" />
-                                    Login
+                    {localStorage.getItem('Token')
+                        ?
+                        <>
+                            <div className="flex">
+                                <p className="user-menu">
+                                    Olá {localStorage.getItem('username')}
+                                </p>
+                                <Link onClick={e => this.toggleNavbar(e)} to="/shopping-cart" className="topbar-item shopping-cart">
+                                    <div className="cart-wrapper">
+                                        <img src="/images/shopping_cart.svg" className="icon" />
+                                        <small>{appState.cart_amount}</small>
+                                    </div>
                                 </Link>
-                                <Link to="/register" className="topbar-item register link">
-                                    <img alt="register" className="icon" src="/images/sign-up.svg" />
-                                    Cadastre-se
-                                </Link>
-                            </>}
-                        <Link to="/shopping-cart" className="topbar-item shopping-cart">
-                            <div className="cart-wrapper">
-                                {/* <Link to="/shopping-cart"></Link> */}
-                                <img src="/images/shopping_cart.svg" className="icon" />
-                                <small>{appState.cart_amount}</small>
-                            </div>
-                        </Link>
-                    </div>
 
+
+                            </div>
+                            <div className="login-options">
+                                <Link onClick={e => this.toggleNavbar(e)} to={`/profile/${localStorage.getItem('user_id')}`}> Minha Conta </Link>
+                                <Link onClick={e => this.toggleNavbar(e)} to="/my_purchases"> Minhas Compras </Link>
+                                <Link onClick={e => this.toggleNavbar(e)} to="/logout">Sair</Link>
+                            </div>
+                        </>
+                        :
+                        <div className="login-options">
+                            <Link onClick={e => this.toggleNavbar(e)} to="/login"> Login </Link>
+                            <Link onClick={e => this.toggleNavbar(e)} to="/register"> Cadastre-se </Link>
+                        </div>}
                     <Link onClick={e => this.toggleNavbar(e)} to="/">Início</Link>
-                    <Link onClick={e => this.toggleNavbar(e)} to="/">Produtos</Link>
                     <Link onClick={e => this.toggleNavbar(e)} to="/about">Sobre Nós</Link>
                     <Link onClick={e => this.toggleNavbar(e)} to="/contact">Contato</Link>
-
+                    
                 </div>
 
             </div >

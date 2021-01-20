@@ -37,11 +37,11 @@ class ProductDetail extends Component {
     }
 
     render() {
-        if (this.state.product === '404'){
+        if (this.state.product === '404') {
             console.log('redirect');
             return (
                 <>
-                    <Redirect to="/404"/>
+                    <Redirect to="/404" />
                 </>
             )
         }
@@ -52,7 +52,7 @@ class ProductDetail extends Component {
                     ?
                     <>
                         <div className="image-container">
-                            <img src={`${this.state.product.image}`}></img>
+                            <img src={`${this.state.product.image}`} alt='product'></img>
                         </div>
                         <div className="description">
                             <div>
@@ -64,7 +64,7 @@ class ProductDetail extends Component {
                                 <Link to="/shopping-cart"
                                     className="add-button"
                                     onClick={e => this.addButton(e)}>
-                                    <img src="/images/add_shopping_cart.svg" />
+                                    <img src="/images/add_shopping_cart.svg" alt="add-button" />
                                         Comprar
                                 </Link>
                             </div>
@@ -72,13 +72,14 @@ class ProductDetail extends Component {
                         </div>
                     </>
                     :
-                    <div style={{
-                        height: "600px",
-                        width: "600px",
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
+                    <div className="product-detail-loading"
+                        style={{
+                            height: "600px",
+                            width: "600px",
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
                         <h1>Carregando...</h1>
                     </div>
                 }

@@ -56,27 +56,30 @@ Purchase success page
 Página de finalizar compra
 Sistema de busca
 
-17/01
+18/01
 Responsive design - Cadastro
 Responsive design - Login
 Responsive design - About Page
+Responsive design - Empty cart page
+
+19/01
+Mensagem que aparece quando senha e confirmar senha são diferentes
+Responsive design - Shopping cart page, esvaziar carrinho
+Responsive design - Minhas compras
+Minhas compras status não aparece
+Responsive design - Profile Page
+Design da profile page (Forms)
+Responsive design - Navbar
 
 
 ------------------------------------------------------
 |     Coisas que faltam para terminar o projeto:     |
 ------------------------------------------------------
 
-**FAZENDO** -> Responsive design - Navbar
+**FAZENDO** -> 
 
 _Front end_
-Responsive design - Profile Page
-Responsive design - Empty cart page
-Responsive design - Shopping cart page
-Responsive design - Minhas compras
-Design da profile page (Forms)
-Diferença entre "ínicio" e "produtos"
-Mensagem que aparece quando senha e confirmar senha são diferentes
-
+End ???
 
 _Back end_
 Sistema de mudança de senha (Esqueci a senha)
