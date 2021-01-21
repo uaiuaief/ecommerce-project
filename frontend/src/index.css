@@ -1365,6 +1365,22 @@ p.info-text {
     justify-content: space-between;
 }
 
+#confirm-new-password{
+    /* margin-bottom: 0 !important; */
+}
+
+.old-password-errors {
+    color: #e02030;
+    margin-top: -.6em !important;
+    margin-bottom: 1.0em;
+    font-size: .9em;
+}
+
+#password-form .password-errors {
+    margin-top: -.6em !important;
+
+}
+
 .big-input {
     width: 420px;
 }

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import { LoginRequired } from "./LoginRequired"
 
 
 class UserProfileForm extends Component {
@@ -268,31 +269,99 @@ class ChangeAddressForm extends Component {
 
 
 class ChangePasswordForm extends Component {
+    state = {
+        old_password: '',
+        new_password: '',
+        confirm_new_password: '',
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+
+        if (this.state.new_password != this.state.confirm_new_password){
+            let element = document.querySelector('.password-errors')
+            element.innerHTML = 'As senhas precisam ser iguais'
+            return
+        }
+
+
+        let token = localStorage.getItem('Token');
+
+        let url = 'http://localhost:8000/change-password/'
+
+        let body = ''
+        body += `old_password=${this.state.old_password}`
+        body += `&new_password=${this.state.new_password}`
+
+
+        let res = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Token ${token}`
+            },
+            body: body
+        })
+
+        let data = await res.json();
+        console.log(res);
+        console.log(data);
+
+        if (res.status === 200) {
+            alert('Sua senha foi atualizada com sucesso')
+            this.setState({
+                old_password: '',
+                new_password: '',
+                confirm_new_password: '',
+            })
+            document.getElementById('password-form').reset()
+        }
+        else if (res.status === 400){
+            if (data.old_password[0] === 'Wrong password.'){
+                let element = document.querySelector('.old-password-errors')
+                element.innerHTML = 'A senha que você digitou está incorreta'
+            }
+        }
+
+
+
+    }
+
     render() {
         return (
             <div>
-                <form>
+                <form id="password-form" onSubmit={e => this.handleSubmit(e)}>
                     <div>
                         <label className="required" htmlFor="current-password">Senha atual</label>
                         <input id="current-password"
+                            onChange={e => this.setState({ old_password: e.target.value })}
+                            value={this.state.old_password}
                             type="password"
                             required
                             placeholder=""></input>
                     </div>
+                    <div className="old-password-errors"></div>
                     <div>
                         <label className="required" htmlFor="new-password">Nova senha</label>
                         <input id="new-password"
+                            onChange={e => this.setState({ new_password: e.target.value })}
+                            value={this.state.new_password}
                             type="password"
+                            minLength='8'
                             required
                             placeholder=""></input>
                     </div>
                     <div>
                         <label className="required" htmlFor="confirm-new-password">Confirme a nova senha</label>
                         <input id="confirm-new-password"
+                            onChange={e => this.setState({ confirm_new_password: e.target.value })}
+                            value={this.state.confirm_new_password}
                             type="password"
+                            minLength='8'
                             required
                             placeholder=""></input>
                     </div>
+                    <div className="password-errors"></div>
                     <button className="secondary-button" type="submit">Salvar Alterações</button>
                 </form>
             </div>
@@ -401,7 +470,7 @@ class ProfilePage extends Component {
         }
     }
 
-    async fetchData(current_form = 'address') {
+    async fetchData(current_form = 'user') {
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
         let USER_URL = `http://localhost:8000/users/${user_id}/`;
@@ -474,6 +543,7 @@ class ProfilePage extends Component {
     render() {
         return (
             <section className="profile-page">
+                <LoginRequired />
                 <div className="profile-container">
                     {/* <h1>Informações Pessoais</h1>
                     <h1>{localStorage.getItem('username')}</h1> */}

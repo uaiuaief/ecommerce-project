@@ -132,7 +132,6 @@ class Register extends Component {
                 {this.state.redirect ? <Redirect to={{
                     pathname: '/login',
                     state: {
-
                         flash_message: "Seu cadastro foi realizado com sucesso.",
                         flash_message_type: 'success',
                     }

@@ -62,7 +62,7 @@ class Login extends Component {
             let redirect = location.state.next_page ? location.state.next_page : '/'
             return redirect;
         } catch (TypeError) {
-            return '/';    
+            return '/';
         }
 
     }
@@ -133,22 +133,22 @@ class Login extends Component {
                             <div className="input-block">
                                 <span className="label-line">
                                     <label htmlFor="password">Senha</label>
-                                    <a href="#">Esqueceu a senha?</a>
+                                    <Link to="/password-reset"> Esqueceu a senha? </Link>
                                 </span>
-                                <input onChange={e => this.setState({ password: e.target.value })}
-                                    id='password'
-                                    required
-                                    type='password'
-                                    value={this.state.password}></input>
+                            <input onChange={e => this.setState({ password: e.target.value })}
+                                id='password'
+                                required
+                                type='password'
+                                value={this.state.password}></input>
                             </div>
-                            <button className="primary-button" type="submit">Entrar</button>
+                        <button className="primary-button" type="submit">Entrar</button>
                         </form>
-                        <div className="login-area-footer">
-                            Não é cadastrado?
+                    <div className="login-area-footer">
+                        Não é cadastrado?
                             <Link to="/register"> Crie a sua conta</Link>
-                        </div>
                     </div>
-                </section>
+                    </div>
+                </section >
         )
     }
 

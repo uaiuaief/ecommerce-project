@@ -7,6 +7,7 @@ import { ContactPage } from './Components/ContactPage';
 import { ProfilePage } from './Components/ProfilePage';
 import { Login } from './Components/Login';
 import { Register } from './Components/Register';
+import { PasswordResetPage } from './Components/PasswordResetPage';
 import { ProductDetail } from './Components/ProductDetail';
 import { ShoppingCartPage } from './Components/ShoppingCartPage';
 import { PurchaseOrders } from './Components/PurchaseOrders';
@@ -94,7 +95,7 @@ class App extends Component {
           <div id="filler" style={{ height: "65px" }}></div>
           {this.state.flash_message
             ?
-            <div style={{ height: "42px" }}></div>
+            <div style={{ height: "40px" }}></div>
             :
             ''
           }
@@ -127,6 +128,7 @@ class App extends Component {
                   appState={appState} />
               )} />
 
+              <Route path="/password-reset" exact component={PasswordResetPage} />
 
               <Route path="/about" exact component={About} />
               <Route path="/contact" exact render={(props) => (

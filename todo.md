@@ -72,6 +72,10 @@ Design da profile page (Forms)
 Responsive design - Navbar
 
 
+20/01
+Sistema de mudança de senha (Esqueci a senha)
+
+
 ------------------------------------------------------
 |     Coisas que faltam para terminar o projeto:     |
 ------------------------------------------------------
@@ -79,10 +83,12 @@ Responsive design - Navbar
 **FAZENDO** -> 
 
 _Front end_
-End ???
+DONE
 
 _Back end_
-Sistema de mudança de senha (Esqueci a senha)
+DONE
+
+
 
 
 
