@@ -11,7 +11,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'profile', 'purchases', 'password']
+        fields = ['url', 'username', 'email', 'profile', 'purchases']
         #fields = "__all__"
 
 
@@ -75,4 +75,19 @@ class ContactUsMessageSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
  
     
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        print('@@@@@@@@@@@@@@@@@@', value)
+        if len(value) < 8:
+            raise serializers.ValidationError("Password must be at least 8 characters long")
+        return value
+
 

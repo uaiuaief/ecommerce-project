@@ -19,8 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
-from users.views import register, CustomAuthToken
-from ecommerce.views import stripe_webhook, PaymentView
+from users.views import register, CustomAuthToken, reset_password_view
+from ecommerce.views import stripe_webhook, PaymentView, ChangePasswordView
 from rest_framework.authtoken import views
 
 
@@ -30,8 +30,10 @@ urlpatterns = [
     path('', include('ecommerce.urls')),
     path('admin/', admin.site.urls),
     path('register/', register),
+    path('reset-password/', reset_password_view),
     #path('api-token-auth/', views.obtain_auth_token),
     path('api-token-auth/', CustomAuthToken.as_view()),
+    path('change-password/', ChangePasswordView.as_view()),
     
     path('payment/', PaymentView.as_view()),
     path('stripe_webhook/', stripe_webhook),

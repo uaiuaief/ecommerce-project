@@ -43,6 +43,23 @@ def register(request):
     return JsonResponse(data)
  
 
+@csrf_exempt
+def reset_password_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        email_exists = User.objects.filter(email=email).first()
+        if email_exists:
+            data = {"code": '200'}
+            return JsonResponse(data)
+        else:
+            data = {"message": "E-mail not found"}
+            return JsonResponse(data, status=status.HTTP_400_BAD_REQUEST)
+
+    else:
+        data = {"req_method": "GET"}
+        return JsonResponse(data)
+
+
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
