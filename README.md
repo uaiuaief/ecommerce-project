@@ -1,6 +1,7 @@
 # ecommerce-project
 
-eCommerce com backend feito em django + django rest framework, e frontend feito com React js
+eCommerce com backend feito em django + django rest framework, e frontend feito com React js.
+
 Sistema de pagamentos integrados utilizando a API da Stripe
 
 
