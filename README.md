@@ -2,7 +2,7 @@
 
 eCommerce com backend feito em django + django rest framework, e frontend feito com React js.
 
-Sistema de pagamentos integrados utilizando a API da Stripe
+Sistema de pagamentos integrado utilizando a API da Stripe
 
 
 ![Screenshot_2021-01-23 React App](https://user-images.githubusercontent.com/22801048/105926889-a302f780-6021-11eb-931e-c18ef4e8256c.jpg)
