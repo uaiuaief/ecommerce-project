@@ -10,15 +10,15 @@ class Footer extends Component {
                         {/* <h1>Informações</h1> */}
                         <div className="footer-row">
                             <img alt="email" className="icon" src="/images/email.svg" />
-                            <p>test@vix.com</p>
+                            <p>vendas@pellington.com</p>
                         </div>
                         <div className="footer-row" >
                             <img alt="phone" className="icon" src="/images/phone.svg" />
-                            <p>27 99999-9999</p>
+                            <p>41 99945-0056</p>
                         </div>
                         <div className="footer-row" >
                             <img alt="address" className="icon" src="/images/location.svg" />
-                            <p>Rua um nº60 - Vila Velha ES</p>
+                            <p>Rua Acácias nº60 - Curitiba PR</p>
                         </div>
                     </div>
                     <div className="footer-block">
@@ -44,7 +44,7 @@ class Footer extends Component {
 
                 </div>
                 <div className="footer-row copyright">
-                    © 2020 Vix Decoração . All Rights Reserved | Design by John
+                    © 2020 Pellington Orgânicos . All Rights Reserved | Design by John
                 </div>
             </footer >
         )

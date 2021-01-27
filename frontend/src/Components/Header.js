@@ -1,7 +1,5 @@
 import { Component } from "react"
-import { Navbar } from './Navbar'
 import { Topbar } from './Topbar'
-import { FlashMessage } from './FlashMessage.js'
 
 class Header extends Component {
 

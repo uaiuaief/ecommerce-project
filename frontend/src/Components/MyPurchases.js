@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
 import { LoginRequired } from "./LoginRequired"
 
 
@@ -90,7 +89,7 @@ class Purchase extends Component {
                     <h1 className="page-title">Produtos</h1>
                     <button className="expand-button"
                         onClick={(e) => this.toggleCollapse(e, purchase.id)}>
-                        <img src={img_src} />
+                        <img src={img_src} alt="expand" />
                     </button>
                 </div>
 
@@ -126,7 +125,7 @@ class MyPurchases extends Component {
         });
         let data = await res.json();
 
-        let purchases = data.results
+        // let purchases = data.results
 
         this.setState({
             purchases: data.results

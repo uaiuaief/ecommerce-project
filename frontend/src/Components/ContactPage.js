@@ -37,7 +37,7 @@ class ContactPage extends Component {
             body: form_data
         })
 
-        if (res.status == 201) {
+        if (res.status === 201) {
             console.log('success');
             setAppState({
                 flash_message: 'Mensagem enviada com sucesso',

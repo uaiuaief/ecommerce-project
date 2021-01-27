@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class CartItem extends Component {
@@ -20,7 +20,7 @@ class CartItem extends Component {
             const [appState, setAppState] = this.props.appState;
 
             setAppState({
-                cart_items: [...appState.cart_items.filter((each) => each != item)],
+                cart_items: [...appState.cart_items.filter((each) => each !== item)],
                 cart_amount: appState.cart_amount - item.amount
             })
         })
@@ -144,7 +144,7 @@ class ShoppingCartPage extends Component {
 
         if (appState.last_added_item) {
             cart_items.sort((a, b) => {
-                if (b.id == appState.last_added_item.id) {
+                if (b.id === appState.last_added_item.id) {
                     return 1
                 }
                 else {
@@ -154,7 +154,7 @@ class ShoppingCartPage extends Component {
         }
 
         let items = cart_items.map(item => {
-            let last_added_item = appState.last_added_item ? appState.last_added_item.id == item.id : false;
+            let last_added_item = appState.last_added_item ? appState.last_added_item.id === item.id : false;
             return (
                 <CartItem
                     last_added_item={last_added_item}

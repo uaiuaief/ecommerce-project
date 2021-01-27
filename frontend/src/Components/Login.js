@@ -28,7 +28,7 @@ class Login extends Component {
         })
 
         if (flash_message) {
-            let element = document.getElementById('username');
+            // let element = document.getElementById('username');
 
         }
 
@@ -117,7 +117,7 @@ class Login extends Component {
                         <div id="login-error">
                             Usuário ou senha incorretos.
                             <button onClick={(e) => this.hideError(e)}>
-                                <img src="/images/close.svg" />
+                                <img src="/images/close.svg" alt="close-icon"/>
                             </button>
                         </div>
                         <form onSubmit={e => this.handleSubmit(e)} method="POST" action="http://127.0.0.1:8000/login/">

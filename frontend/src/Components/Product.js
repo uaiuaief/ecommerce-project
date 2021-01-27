@@ -13,7 +13,7 @@ class Product extends Component {
                     <h1>Ver Produto</h1>
                 </div>
                 <div className="image-wrapper">
-                    <img src={this.props.image} loading="lazy" />
+                    <img src={this.props.image} alt="product" loading="lazy" />
                 </div>
                 <div className="product-info">
                     <p className="product-title">{this.props.name}</p>

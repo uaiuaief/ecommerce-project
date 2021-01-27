@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { Link } from 'react-router-dom';
-import { Navbar, NavbarItem } from './Navbar.js';
+import { Navbar } from './Navbar.js';
 import { FlashMessage } from './FlashMessage.js'
 
 class Topbar extends Component {
@@ -49,8 +49,8 @@ class Topbar extends Component {
                     <div className="left-side">
                         <div className="logo">
                             <Link to="/">
-                                {/* <img src="/images/vixlogo.png" /> */}
-                                <h1>Logo</h1>
+                                {/* <img src="/images/ecommerce-logo.png" /> */}
+                                <h1>Pellinton Organicos</h1>
                             </Link>
                         </div>
                     </div>
@@ -62,7 +62,7 @@ class Topbar extends Component {
                             ?
                             <div className="user-menu">
                                 {/* <Link to={`/profile/${localStorage.getItem('user_id')}`}>Olá {localStorage.getItem('username')}</Link> */}
-                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg" /></Link>
+                                <Link className="user-menu" onClick={e => this.dropMenu(e)}>Olá {localStorage.getItem('username')} <img src="/images/expand.svg" alt="expand" /></Link>
                                 <div className="user-menu-box">
                                     <Link className="menu-option" to={`/profile/${localStorage.getItem('user_id')}`}>
                                         <img alt="profile" className="icon" src="/images/account_circle.svg" />
@@ -92,17 +92,23 @@ class Topbar extends Component {
                         <Link to="/shopping-cart" className="topbar-item shopping-cart">
                             <div className="cart-wrapper">
                                 {/* <Link to="/shopping-cart"></Link> */}
-                                <img src="/images/shopping_cart.svg" className="icon" />
+                                <img src="/images/shopping_cart.svg" className="icon" alt="cart-icon"/>
                                 <small>{appState.cart_amount}</small>
                             </div>
                         </Link>
                     </div>
                 </div>
                 <div id="mobile-topbar" className="topbar-content">
-                    <Link to="/">
+                    {/* <Link to="/"> */}
                         {/* <img src="/images/vixlogo.png" /> */}
-                        <h1>Logo</h1>
-                    </Link>
+                        {/* <h1>Logo</h1> */}
+                    {/* </Link> */}
+                        <div className="logo">
+                            <Link to="/">
+                                {/* <img src="/images/ecommerce-logo.png" /> */}
+                                <h1>Pellinton Organicos</h1>
+                            </Link>
+                        </div>
                     <div>
                         <button onClick={e => this.toggleNavbar(e)} id="mobile-navbar-button">
                             {this.state.show_navbar === 'hidden'
@@ -162,7 +168,7 @@ class Topbar extends Component {
                                 </p>
                                 <Link onClick={e => this.toggleNavbar(e)} to="/shopping-cart" className="topbar-item shopping-cart">
                                     <div className="cart-wrapper">
-                                        <img src="/images/shopping_cart.svg" className="icon" />
+                                        <img src="/images/shopping_cart.svg" className="icon" alt="cart-icon" />
                                         <small>{appState.cart_amount}</small>
                                     </div>
                                 </Link>

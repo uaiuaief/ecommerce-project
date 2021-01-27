@@ -1,5 +1,4 @@
 import { Component } from "react"
-import { Link, Redirect } from "react-router-dom"
 
 
 class CreateProductPage extends Component {

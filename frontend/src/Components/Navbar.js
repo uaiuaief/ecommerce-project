@@ -104,7 +104,7 @@ class Navbar extends Component {
                                 value={this.state.input_text}>
                             </input>
                             <button type="button" onClick={(e) => this.showSearchBar(e)}>
-                                <img className="icon" src="/images/search-icon.svg" />
+                                <img className="icon" src="/images/search-icon.svg" alt="search-icon" />
                             </button>
                         </form>
                     </div>

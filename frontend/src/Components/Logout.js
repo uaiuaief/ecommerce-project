@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Link, Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 class Logout extends Component {
     render() {

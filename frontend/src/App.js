@@ -17,14 +17,13 @@ import { PurchaseSuccess } from './Components/PurchaseSuccess';
 import { PageNotFound } from './Components/PageNotFound';
 
 // Not pages
-import { Banner } from './Components/Banner';
 import { Header } from './Components/Header';
 import { Showcase } from './Components/Showcase';
 import { Footer } from './Components/Footer';
 import { Logout } from './Components/Logout';
 
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import { Component } from 'react';
 
 
@@ -54,7 +53,7 @@ class App extends Component {
 
   addToCart(product, increase = false) {
     let hasID = this.state.cart_items.some(each => {
-      if (each.id == product.id) {
+      if (each.id === product.id) {
         let newcart = [...this.state.cart_items];
         let index = newcart.indexOf(each);
         newcart[index].amount += 1
@@ -87,7 +86,7 @@ class App extends Component {
     const appState = [this.state, (dict) => this.setState(dict)]
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div>
           <Header appState={appState}
             flash_message={this.state.flash_message} />
@@ -169,7 +168,7 @@ class App extends Component {
           </div>
           <Footer />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }

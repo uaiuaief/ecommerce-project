@@ -6,7 +6,7 @@ class Banner extends Component {
     render() {
         return (
             <div className="banner">
-                <img src="/images/banner3.jpg" />
+                <img src="/images/banner3.jpg" alt='banner'/>
                 <div className="text">
                     <h1> Big Text Inside Banner </h1>
                     <p>

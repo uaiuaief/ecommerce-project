@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Link, Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 class PasswordResetPage extends Component {
     state = {
@@ -64,7 +64,7 @@ class PasswordResetPage extends Component {
                         <div id="login-error" style={{ padding: "1em 1.5em" }}>
                             Esse e-mail não pertence a uma conta.
                             <button onClick={(e) => this.hideError(e)}>
-                                <img src="/images/close.svg" />
+                                <img src="/images/close.svg" alt="close-icon"/>
                             </button>
                         </div>
                         <form onSubmit={e => this.handleSubmit(e)} method="POST">

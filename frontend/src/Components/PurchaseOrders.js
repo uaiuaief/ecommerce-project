@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 import { loadStripe } from '@stripe/stripe-js';
 
 
@@ -22,7 +22,7 @@ class PurchaseOrders extends Component {
     }
 
     async getStripePromise() {
-        const token = localStorage.getItem("Token");
+        // const token = localStorage.getItem("Token");
         let res = await fetch('http://localhost:8000/payment/')
         let data = await res.json();
 

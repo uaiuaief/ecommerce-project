@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { LoginRequired } from "./LoginRequired"
 
 
@@ -29,7 +29,7 @@ class UserProfileForm extends Component {
             console.log(res);
             this.props.fetchData()
             let response_status_type = res.status.toString().charAt(0);
-            if (response_status_type == '2') {
+            if (response_status_type === '2') {
                 alert('Seus dados foram atualizados com sucesso')
             }
         }))
@@ -278,7 +278,7 @@ class ChangePasswordForm extends Component {
     async handleSubmit(e) {
         e.preventDefault();
 
-        if (this.state.new_password != this.state.confirm_new_password){
+        if (this.state.new_password !== this.state.confirm_new_password){
             let element = document.querySelector('.password-errors')
             element.innerHTML = 'As senhas precisam ser iguais'
             return
