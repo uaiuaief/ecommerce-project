@@ -19,7 +19,7 @@ class CreateProductPage extends Component {
         data.append('price', price);
         data.append('image', image);
 
-        fetch("http://127.0.0.1:8000/products/", {
+        fetch(`${window.ROOT_URL}/products/`, {
             method: 'POST',
             headers: {
                 // 'Content-Type': 'multipart/form-data;boundary=&',

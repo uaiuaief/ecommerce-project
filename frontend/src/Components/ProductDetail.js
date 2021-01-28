@@ -16,7 +16,7 @@ class ProductDetail extends Component {
         const { props } = this.props
         // document.querySelector('.image-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
         let product_id = props.match.params.product_id
-        let response = await fetch(`http://127.0.0.1:8000/products/${product_id}`, {
+        let response = await fetch(`${window.ROOT_URL}/products/${product_id}`, {
             method: 'GET',
         })
 

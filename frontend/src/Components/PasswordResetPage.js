@@ -14,7 +14,7 @@ class PasswordResetPage extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        fetch("http://127.0.0.1:8000/reset-password/", {
+        fetch(`${window.ROOT_URL}/reset-password/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

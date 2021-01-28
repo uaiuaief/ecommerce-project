@@ -69,7 +69,7 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch("http://127.0.0.1:8000/api-token-auth/", {
+        fetch(`${window.ROOT_URL}/api-token-auth/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -120,7 +120,7 @@ class Login extends Component {
                                 <img src="/images/close.svg" alt="close-icon"/>
                             </button>
                         </div>
-                        <form onSubmit={e => this.handleSubmit(e)} method="POST" action="http://127.0.0.1:8000/login/">
+                        <form onSubmit={e => this.handleSubmit(e)} method="POST" action={`${window.ROOT_URL}/login/`}>
                             <div className="input-block">
                                 <span className="label-line">
                                     <label htmlFor="username">Usuário</label>

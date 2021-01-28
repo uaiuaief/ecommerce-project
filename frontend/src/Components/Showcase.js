@@ -8,7 +8,7 @@ class Showcase extends Component {
     }
 
     async componentDidMount() {
-        let response = await fetch("http://127.0.0.1:8000/products/", {
+        let response = await fetch(`${window.ROOT_URL}/products/`, {
             method: 'GET',
             headers: {
             },
