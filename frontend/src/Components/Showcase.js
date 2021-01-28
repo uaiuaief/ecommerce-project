@@ -43,6 +43,7 @@ class Showcase extends Component {
                 </div>
                 <div className="products">
                     {this.state.results
+                    // {this.state.results === '123'
                         ?
                         this.state.results.reverse().filter(product => {
                             let product_name = product.name.toLowerCase()

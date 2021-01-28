@@ -99,7 +99,7 @@ class App extends Component {
             ''
           }
 
-          <div style={{ minHeight: '420px' }}>
+          <div id="page-content">
 
             <Switch>
 

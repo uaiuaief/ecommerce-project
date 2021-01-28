@@ -43,6 +43,10 @@ body {
 
 }
 
+#page-content {
+    min-height: 468px;
+}
+
 a {
     text-decoration: none;
     /* color: #fdefef; */
@@ -388,6 +392,7 @@ nav {
 }
 
 .topbar-content {
+    max-width: 1430px;
     width: 70%;
     margin: auto;
     display: flex;
@@ -594,6 +599,7 @@ footer .social-media-icons {
     display: flex;
     justify-content: space-around;
     width: 70%;
+    max-width: 1430px;
     margin: auto;
     /* padding-top: 4em; */
     color: var(--light-text);
@@ -652,6 +658,7 @@ footer .social-media-icons {
 }
 
 .products {
+    max-width: 1430px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     /* align-items: flex-start; */
@@ -677,12 +684,17 @@ footer .social-media-icons {
     pointer-events: none;
     height: 340px;
     margin: auto;
+    width: 100%;
+}
+
+.product-skeleton .image-wrapper {
+    width: 100%;
 }
 
 .product-skeleton .image-skeleton {
     background-color: #ccc;
     height: 250px;
-    width: 250px;
+    width: 100%;
 }
 
 .product-skeleton .product-info {
@@ -966,12 +978,14 @@ p.product-price {
     font-size: large;
     height: 100vh;
     background-color: #ebebeb;
+    margin: auto;
 }
 
 .about-wrapper {
     width: 70%;
     /* height: 100vh; */
     margin: auto;
+    max-width: 1430px;
 }
 
 .text-container h1 {
@@ -1016,6 +1030,7 @@ p.product-price {
     border-radius: 8px;
     overflow: hidden;
     animation: fade-in .5s linear;
+    max-width: 1430px;
 }
 
 .product-detail h2,
@@ -1096,6 +1111,7 @@ p.product-price {
 .shopping-cart-section {
     width: 70%;
     margin: auto;
+    max-width: 1430px;
 }
 
 .shopping-cart-section .heading {
@@ -1382,6 +1398,7 @@ p.info-text {
 
 .profile-container {
     /* width: 70%; */
+    max-width: 1430px;
     width: 38%;
     margin: 2em auto;
     background-color: var(--light-bg);
@@ -1548,6 +1565,11 @@ button.highlighted-tab:hover {
 
 
 /* CONTACT PAGE */
+section.contact {
+    width: 100%;
+    max-width: 1430px;
+    margin:auto;
+}
 
 .contact-container {
     display: flex;
@@ -1558,6 +1580,7 @@ button.highlighted-tab:hover {
     background-color: #f3f3f3;
     box-shadow: 0px 3px 20px 0px #999;
     border-radius: 10px;
+    max-width: 1430px;
 }
 
 .contact-container input, .contact-container textarea {
@@ -1669,6 +1692,7 @@ button.highlighted-tab:hover {
 .my-purchases-page {
     /* width: 70%; */
     margin: auto;
+    max-width: 1430px;
     /* background-color: var(--light-bg-2); */
 }
 
@@ -2284,7 +2308,6 @@ button.highlighted-tab:hover {
        display: none;
    }
 
-
    footer {
     padding-top: 2.0em;
     padding-bottom: .0em;
@@ -2308,7 +2331,14 @@ button.highlighted-tab:hover {
        font-size: .65em;
        margin-top: 1em;
    }
+}
 
-
+@media (min-height: 768px) {
+    #page-content {
+        min-height: calc(100vh - 340px) !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
 }
