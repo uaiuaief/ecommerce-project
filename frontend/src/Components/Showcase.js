@@ -1,6 +1,7 @@
 import { Component } from "react"
 import { Link } from "react-router-dom"
 import { Product } from "./Product"
+import {ProductSkeleton} from "./Product"
 
 class Showcase extends Component {
     state = {
@@ -59,7 +60,17 @@ class Showcase extends Component {
                             )
                         })
                         :
-                        <div style={{ height: '600px' }}></div>
+                        <>
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        <ProductSkeleton />
+                        </>
+                        // {/* <div style={{ height: '600px' }}></div> */}
                     }
                 </div>
             </div>

@@ -16,6 +16,7 @@ window.addEventListener('click', e => {
 })
 
 window.ROOT_URL = 'https://uaiuaief.pythonanywhere.com'
+// window.ROOT_URL = 'http://localhost:8000'
 
 ReactDOM.render(
   <React.StrictMode>

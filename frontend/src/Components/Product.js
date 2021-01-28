@@ -2,7 +2,7 @@ import { Component } from "react"
 
 class Product extends Component {
     addButton(e) {
-        const {...product} = this.props
+        const { ...product } = this.props
         this.props.addToCart(product)
     }
 
@@ -26,5 +26,23 @@ class Product extends Component {
 
 }
 
+class ProductSkeleton extends Component {
+    render() {
+        return (
+            <div className="product-skeleton product">
+                <div className="image-wrapper">
+                    <div className="image-skeleton">
 
-export { Product }
+                    </div>
+                </div>
+                <div className="product-info">
+                    <p className="product-title"></p>
+                    <p className="product-price price"></p>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+export { Product, ProductSkeleton }

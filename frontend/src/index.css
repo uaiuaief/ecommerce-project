@@ -670,7 +670,47 @@ footer .social-media-icons {
 
     background-color: var(--light-background-color);
     box-shadow: 0px 3px 10px 0px #949494;
+}
 
+.product-skeleton {
+    background-color: #eee;
+    pointer-events: none;
+    height: 340px;
+    margin: auto;
+}
+
+.product-skeleton .image-skeleton {
+    background-color: #ccc;
+    height: 250px;
+    width: 250px;
+}
+
+.product-skeleton .product-info {
+    display: block;
+}
+
+.product-skeleton .product-title {
+    margin: auto;
+    margin-top: 15px;
+    width: 90%;
+    height: 1.0rem;
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.product-skeleton .product-price {
+    padding: 0;
+    margin: auto;
+    margin-top: 15px;
+    width: 50%;
+    height: 1.0rem;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.product-skeleton.product {
+    box-shadow: none;
 }
 
 .product-info {
