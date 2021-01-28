@@ -34,7 +34,7 @@ class Register extends Component {
             return
         }
         element.innerHTML = ''
-        fetch("http://localhost:8000/register/", {
+        fetch(`${window.ROOT_URL}/register/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

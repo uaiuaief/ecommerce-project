@@ -117,7 +117,8 @@ class MyPurchases extends Component {
 
     async componentDidMount() {
         let token = localStorage.getItem('Token')
-        let url = `http://localhost:8000/purchase_orders/`;
+        let url = `${window.ROOT_URL}/purchase_orders/`;
+
         let res = await fetch(url, {
             headers: {
                 'Authorization': `Token ${token}`

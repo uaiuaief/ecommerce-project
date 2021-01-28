@@ -16,14 +16,14 @@ class PurchaseOrders extends Component {
     async componentDidMount() {
         const token = localStorage.getItem("Token");
         if (!token) {
-            window.location.replace('http://localhost:3000/login')
+            window.location.replace(`${window.ROOT_URL}/login`)
         }
         this.goToCheckout()
     }
 
     async getStripePromise() {
         // const token = localStorage.getItem("Token");
-        let res = await fetch('http://localhost:8000/payment/')
+        let res = await fetch(`${window.ROOT_URL}/payment/`)
         let data = await res.json();
 
         const stripePromise = await loadStripe(data.key)
@@ -37,7 +37,7 @@ class PurchaseOrders extends Component {
 
         const token = localStorage.getItem("Token");
 
-        let res = await fetch('http://localhost:8000/payment/', {
+        let res = await fetch(`${window.ROOT_URL}/payment/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

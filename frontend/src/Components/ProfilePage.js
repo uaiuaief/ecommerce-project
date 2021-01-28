@@ -287,7 +287,7 @@ class ChangePasswordForm extends Component {
 
         let token = localStorage.getItem('Token');
 
-        let url = 'http://localhost:8000/change-password/'
+        let url = `${window.ROOT_URL}/change-password/`
 
         let body = ''
         body += `old_password=${this.state.old_password}`
@@ -385,7 +385,7 @@ class ChangeEmailForm extends Component {
 
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
-        let URL = `http://localhost:8000/users/${user_id}/`;
+        let URL = `${window.ROOT_URL}/users/${user_id}/`;
 
         let body = ""
         body += `email=${this.state.new_email}`
@@ -473,7 +473,7 @@ class ProfilePage extends Component {
     async fetchData(current_form = 'user') {
         const token = localStorage.getItem("Token");
         const user_id = localStorage.getItem("user_id");
-        let USER_URL = `http://localhost:8000/users/${user_id}/`;
+        let USER_URL = `${window.ROOT_URL}/users/${user_id}/`;
         let user_res = await fetch(USER_URL, { headers: { 'Authorization': `Token ${token}` } });
         let user_data = await user_res.json();
         let { email } = user_data;

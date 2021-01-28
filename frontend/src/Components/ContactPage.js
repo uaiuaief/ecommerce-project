@@ -31,7 +31,7 @@ class ContactPage extends Component {
         form_data.append('subject', this.state.subject);
         form_data.append('message', this.state.message);
 
-        let url = 'http://localhost:8000/send_message/';
+        let url = `${window.ROOT_URL}/send_message`;
         let res = await fetch(url, {
             method: 'POST',
             body: form_data
