@@ -23,7 +23,7 @@ import { Footer } from './Components/Footer';
 import { Logout } from './Components/Logout';
 
 
-import { Switch, Route, HashRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Component } from 'react';
 
 
