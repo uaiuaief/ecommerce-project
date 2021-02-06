@@ -86,7 +86,7 @@ class App extends Component {
     const appState = [this.state, (dict) => this.setState(dict)]
 
     return (
-      <HashRouter>
+      <BrowserRouter>
         <div>
           <Header appState={appState}
             flash_message={this.state.flash_message} />
@@ -168,7 +168,7 @@ class App extends Component {
           </div>
           <Footer />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }

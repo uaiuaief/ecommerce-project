@@ -50,6 +50,7 @@ class PurchaseOrders extends Component {
         let data = await res.json();
 
         const stripe = await this.getStripePromise();
+        console.log(data);
         await stripe.redirectToCheckout({
             sessionId: data.id,
         });
